@@ -1,0 +1,1099 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Definisi Crawling &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PPWA/TUGAS_1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Content with notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPPWA/TUGAS_1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/PPWA/TUGAS_1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Definisi Crawling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. <strong>Definisi Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-crawling">2. <strong>Tujuan Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja-crawling">3. <strong>Cara Kerja Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#komponen-utama-crawling">4. <strong>Komponen Utama Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-jenis-crawling">5. <strong>Jenis-Jenis Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-crawling">6. <strong>Manfaat Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tantangan-dalam-crawling">7. <strong>Tantangan dalam Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#peran-crawling-dalam-seo">8. <strong>Peran Crawling dalam SEO</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teknologi-yang-mendukung-crawling">9. <strong>Teknologi yang Mendukung Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/hasan8676/PPWA/blob/main/TUGAS_1.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p><strong>Fungsi Crawling</strong> adalah proses otomatis yang dilakukan oleh sebuah program atau bot untuk menelusuri dan mengumpulkan data dari situs web secara sistematis. Crawling adalah bagian penting dari mesin pencari, sistem data mining, dan aplikasi berbasis web lainnya yang memerlukan pengumpulan informasi dari berbagai sumber.</p>
+<p>Berikut adalah penjelasan lengkap mengenai fungsi crawling:</p>
+<section id="definisi-crawling">
+<h1>1. <strong>Definisi Crawling</strong><a class="headerlink" href="#definisi-crawling" title="Link to this heading">#</a></h1>
+<p>Crawling atau perayapan adalah proses yang dilakukan oleh web crawler, juga dikenal sebagai spider atau bot, untuk mengakses dan membaca konten dari halaman web yang dapat diakses publik. Crawler akan mengikuti tautan di setiap halaman yang dikunjungi untuk menemukan halaman baru yang belum diindeks. Proses ini mirip dengan cara manusia menavigasi situs web, tetapi dilakukan secara otomatis dan pada skala yang sangat besar.</p>
+</section>
+<section id="tujuan-crawling">
+<h1>2. <strong>Tujuan Crawling</strong><a class="headerlink" href="#tujuan-crawling" title="Link to this heading">#</a></h1>
+<p>Tujuan utama dari crawling adalah untuk menemukan dan mengumpulkan informasi dari halaman web untuk tujuan tertentu, seperti:</p>
+<ul class="simple">
+<li><p><strong>Mengindeks halaman web</strong>: Mesin pencari seperti Google menggunakan crawling untuk mengindeks halaman-halaman baru di internet, sehingga halaman tersebut dapat ditemukan dan ditampilkan dalam hasil pencarian.</p></li>
+<li><p><strong>Mengumpulkan data</strong>: Organisasi menggunakan crawling untuk mengumpulkan data yang dapat digunakan dalam analisis, penelitian, atau pembuatan dataset besar.</p></li>
+<li><p><strong>Memantau perubahan halaman</strong>: Beberapa crawler memantau situs web untuk mendeteksi perubahan konten atau struktur, yang berguna untuk situs berita, e-commerce, atau aplikasi yang memerlukan data terbaru.</p></li>
+<li><p><strong>Scraping konten</strong>: Dalam kasus tertentu, crawling digunakan bersamaan dengan scraping untuk mengekstrak data spesifik dari halaman web, seperti harga produk, ulasan, atau informasi kontak.</p></li>
+</ul>
+</section>
+<section id="cara-kerja-crawling">
+<h1>3. <strong>Cara Kerja Crawling</strong><a class="headerlink" href="#cara-kerja-crawling" title="Link to this heading">#</a></h1>
+<p>Crawling bekerja dengan mengikuti struktur hypertext dari sebuah halaman web. Langkah-langkah umumnya meliputi:</p>
+<ul class="simple">
+<li><p><strong>Memulai dari URL awal</strong>: Crawler dimulai dari satu atau lebih URL awal (biasanya disebut sebagai “seed URLs”).</p></li>
+<li><p><strong>Mengambil konten halaman</strong>: Crawler mengambil atau mendownload halaman web dari URL yang diberikan.</p></li>
+<li><p><strong>Menganalisis tautan</strong>: Crawler kemudian menganalisis halaman tersebut untuk menemukan tautan (hyperlink) ke halaman lain, yang kemudian dimasukkan ke dalam daftar URL yang akan dijelajahi lebih lanjut.</p></li>
+<li><p><strong>Mengulangi proses</strong>: Proses ini berulang hingga crawler mengunjungi semua halaman yang dapat diakses atau hingga batas tertentu tercapai, seperti batas waktu atau jumlah halaman yang di-crawl.</p></li>
+</ul>
+</section>
+<section id="komponen-utama-crawling">
+<h1>4. <strong>Komponen Utama Crawling</strong><a class="headerlink" href="#komponen-utama-crawling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Web Crawler/Spider</strong>: Ini adalah perangkat lunak atau bot yang menjalankan proses crawling.</p></li>
+<li><p><strong>Frontier</strong>: Daftar URL yang akan dikunjungi crawler. Frontier sering diperbarui dengan URL baru yang ditemukan saat crawling berlangsung.</p></li>
+<li><p><strong>Politeness</strong>: Aturan yang mengatur seberapa sering crawler dapat mengunjungi halaman dari domain yang sama agar tidak membebani server.</p></li>
+<li><p><strong>Robots.txt</strong>: File konfigurasi pada server web yang menginstruksikan crawler halaman mana yang boleh atau tidak boleh di-crawl.</p></li>
+</ul>
+</section>
+<section id="jenis-jenis-crawling">
+<h1>5. <strong>Jenis-Jenis Crawling</strong><a class="headerlink" href="#jenis-jenis-crawling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Focused Crawling</strong>: Crawler difokuskan untuk mengumpulkan informasi spesifik dari halaman yang memenuhi kriteria tertentu. Contohnya adalah crawler yang hanya menelusuri halaman yang berisi data ilmiah.</p></li>
+<li><p><strong>Incremental Crawling</strong>: Proses di mana hanya halaman yang berubah sejak kunjungan terakhir crawler yang di-crawl lagi untuk menghemat sumber daya.</p></li>
+<li><p><strong>Deep Web Crawling</strong>: Crawling yang ditujukan untuk menemukan dan mengakses halaman yang tidak terindeks oleh mesin pencari tradisional (deep web), seperti konten di balik formulir login atau database.</p></li>
+</ul>
+</section>
+<section id="manfaat-crawling">
+<h1>6. <strong>Manfaat Crawling</strong><a class="headerlink" href="#manfaat-crawling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Mengindeks situs web dengan cepat</strong>: Mesin pencari dapat mengindeks jutaan halaman web setiap hari menggunakan crawler, membuat informasi dapat diakses oleh pengguna secara cepat.</p></li>
+<li><p><strong>Data mining</strong>: Crawling memungkinkan penambangan data dari berbagai situs web untuk tujuan analisis, penelitian pasar, atau pelatihan model machine learning.</p></li>
+<li><p><strong>Pemantauan konten</strong>: Perusahaan e-commerce, agensi berita, dan platform lain menggunakan crawling untuk melacak perubahan harga, berita terbaru, atau tren konten di internet.</p></li>
+</ul>
+</section>
+<section id="tantangan-dalam-crawling">
+<h1>7. <strong>Tantangan dalam Crawling</strong><a class="headerlink" href="#tantangan-dalam-crawling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Keterbatasan akses</strong>: Beberapa situs web memblokir crawler menggunakan file <code class="docutils literal notranslate"><span class="pre">robots.txt</span></code> atau metode lain seperti CAPTCHA.</p></li>
+<li><p><strong>Konsumsi sumber daya</strong>: Crawling dapat memakan bandwidth dan sumber daya server, terutama jika dilakukan tanpa batas atau dengan frekuensi tinggi.</p></li>
+<li><p><strong>Duplicated content</strong>: Beberapa halaman mungkin memiliki konten yang serupa atau sama, dan crawler harus dapat mengatasi masalah konten duplikat untuk menjaga efisiensi dan akurasi data yang dikumpulkan.</p></li>
+<li><p><strong>Etika dan legalitas</strong>: Scraping dan crawling pada beberapa situs web dapat menimbulkan masalah etika atau hukum, terutama jika digunakan tanpa izin.</p></li>
+</ul>
+</section>
+<section id="peran-crawling-dalam-seo">
+<h1>8. <strong>Peran Crawling dalam SEO</strong><a class="headerlink" href="#peran-crawling-dalam-seo" title="Link to this heading">#</a></h1>
+<p>Dalam SEO (Search Engine Optimization), crawling sangat penting karena mesin pencari seperti Google menggunakan crawler untuk menentukan apakah sebuah halaman layak diindeks. Faktor-faktor seperti struktur internal link, kecepatan loading halaman, dan ketersediaan sitemap XML dapat mempengaruhi seberapa efektif halaman di-crawl dan diindeks oleh mesin pencari.</p>
+</section>
+<section id="teknologi-yang-mendukung-crawling">
+<h1>9. <strong>Teknologi yang Mendukung Crawling</strong><a class="headerlink" href="#teknologi-yang-mendukung-crawling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Apache Nutch</strong>: Sebuah framework open-source yang mendukung crawling dalam skala besar.</p></li>
+<li><p><strong>Scrapy</strong>: Library Python populer untuk melakukan crawling dan scraping data dari situs web.</p></li>
+<li><p><strong>Heritrix</strong>: Web crawler yang banyak digunakan untuk arsip digital.</p></li>
+</ul>
+</section>
+<section id="kesimpulan">
+<h1>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h1>
+<p>Fungsi crawling adalah langkah mendasar dalam pengumpulan dan pengindeksan informasi dari web. Dengan adanya crawler, informasi dari situs web dapat diakses dan diproses untuk berbagai kebutuhan, seperti pencarian informasi, pemantauan konten, dan pengumpulan data besar untuk analisis lebih lanjut. Meskipun crawling memiliki tantangan, penggunaannya tetap sangat esensial dalam ekosistem web modern.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
+        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
+
+        <span class="c1"># Menambahkan data ke dalam list</span>
+        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>  <span class="c1"># Menambahkan kategori ke dalam list</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+
+<span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://www.detik.com/pilkada/indeks&quot;</span><span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pilkada&quot;</span><span class="p">]</span>
+
+<span class="c1"># Inisialisasi list untuk menyimpan data</span>
+<span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
+<span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
+            <span class="k">break</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+
+<span class="c1"># Membuat dataframe dari list data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
+    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span>
+    <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
+    <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span>
+<span class="p">})</span>
+
+<span class="c1"># Menyimpan dataframe ke file CSV</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KPUD Minta 3 Bakal Cagub-Cawagub Jakarta Perbaiki Syarat Administrasi
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Demokrat: Usulan Pilkada Ulang Jika Kotak Kosong Menang Lebih Masuk Akal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anies Belum Ambil Keputusan tapi Ada Pendukung Sudah Siapkan Parpol
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Janji RK Beri Tempat Tinggal Nyaman untuk Warga Kampung Bayam
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Momen Warga Asahan Bawa Kotak Kosong Daftar Pemilihan Bupati
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sowan ke Ponpes, Risma-Gus Hans Dapat Doa Restu dari Ribuan Santri
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MK Prediksi 324 Perkara Diregistrasi pada Sengketa Pilkada 2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Momen Risma-Gus Hans Nyekar ke Makam Bung Karno &amp; Tokoh Ulama
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 Hari Berturut 2 Cagub Jakarta Sowan ke Foke
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Airin Tekankan Urgensi Pembangunan Jalan Poros Desa &amp; Wisata Banten Selatan
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-644032645122&gt;</span> in <span class="ni">&lt;cell line: 58&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> 
+<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">64</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> 
+
+<span class="nn">&lt;ipython-input-1-644032645122&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> 
+<span class="g g-Whitespace">     </span><span class="mi">44</span>         <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> 
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-128d7b1f-c49f-4425-b380-681b6fdb6f26" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>isi</th>
+      <th>tanggal</th>
+      <th>kategori</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sowan ke Ponpes, Risma-Gus Hans Dapat Doa Rest...</td>
+      <td>Jakarta - Bakal Calon Gubernur Tri Rismaharini...</td>
+      <td>Kamis, 05 Sep 2024 00:05 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>MK Prediksi 324 Perkara Diregistrasi pada Seng...</td>
+      <td>Jakarta - Sekretaris Jenderal (Sekjen) Mahkama...</td>
+      <td>Rabu, 04 Sep 2024 23:16 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Momen Risma-Gus Hans Nyekar ke Makam Bung Karn...</td>
+      <td>Jakarta - Pasangan Calon Gubernur Jawa Timur, ...</td>
+      <td>Rabu, 04 Sep 2024 23:06 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2 Hari Berturut 2 Cagub Jakarta Sowan ke Foke</td>
+      <td>Jakarta -  Bakal calon Gubernur DKI Jakarta Pr...</td>
+      <td>Rabu, 04 Sep 2024 21:07 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Airin Tekankan Urgensi Pembangunan Jalan Poros...</td>
+      <td>Jakarta - Bakal Calon Gubernur Banten, Airin R...</td>
+      <td>Rabu, 04 Sep 2024 20:57 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Kaesang Muncul di DPP PSI Hari Ini, Bahas Pilk...</td>
+      <td>Ketum Partai Solidaritas Indonesia (PSI) Kaesa...</td>
+      <td>5,822 Views  |  Rabu, 04 Sep 2024 19:09 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Zulhas: Ahmad Luthfi Mundur dari Irjen Kemenda...</td>
+      <td>Jakarta - Menteri Perdagangan Zulkifli Hasan (...</td>
+      <td>Rabu, 04 Sep 2024 16:29 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Jokowi Minta KPU Hati-hati Soal Konflik-Politi...</td>
+      <td>Jakarta - KPU RI mengungkap ada instruksi khus...</td>
+      <td>Rabu, 04 Sep 2024 16:18 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Jajaran KPU RI Menghadap Jokowi di Istana, Lap...</td>
+      <td>Jakarta - Jajaran pengurus KPU RI menghadap Pr...</td>
+      <td>Rabu, 04 Sep 2024 16:05 WIB</td>
+      <td>pilkada</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>KPU Usul Pilkada Ulang Tahun Depan Jika Kotak ...</td>
+      <td>Jakarta - Komisi Pemilihan Umum (KPU) RI mengu...</td>
+      <td>Rabu, 04 Sep 2024 14:47 WIB</td>
+      <td>pilkada</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-128d7b1f-c49f-4425-b380-681b6fdb6f26')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-128d7b1f-c49f-4425-b380-681b6fdb6f26 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-128d7b1f-c49f-4425-b380-681b6fdb6f26');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8b13c4c4-96e6-4c45-aa22-6269bc4e744b">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8b13c4c4-96e6-4c45-aa22-6269bc4e744b')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8b13c4c4-96e6-4c45-aa22-6269bc4e744b button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_630bfe74-3dc2-44fe-952d-071575df2b48">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_630bfe74-3dc2-44fe-952d-071575df2b48 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. <strong>Definisi Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-crawling">2. <strong>Tujuan Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cara-kerja-crawling">3. <strong>Cara Kerja Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#komponen-utama-crawling">4. <strong>Komponen Utama Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-jenis-crawling">5. <strong>Jenis-Jenis Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-crawling">6. <strong>Manfaat Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tantangan-dalam-crawling">7. <strong>Tantangan dalam Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#peran-crawling-dalam-seo">8. <strong>Peran Crawling dalam SEO</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teknologi-yang-mendukung-crawling">9. <strong>Teknologi yang Mendukung Crawling</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
