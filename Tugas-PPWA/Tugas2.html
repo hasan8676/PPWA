@@ -180,6 +180,14 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Tugas1.html">Membuat sebuah : Webstatis</a></li>
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas Pertemuan 2 - Pre-Processing Data Berita detik.com</a></li>
@@ -435,11 +443,11 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>   <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">133</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
 <span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
@@ -462,14 +470,14 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/repository/Crawl-berita.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/Crawl-berita-pariwisata&amp;keislaman.csv&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-9c778dbf-e9be-456c-9cc9-438cc7ec1f32" class="colab-df-container">
+  <div id="df-e92d20a9-7c33-4a3f-adcd-f59e9b6c6eb8" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -489,53 +497,53 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Tentang Ichsan Taufiq, Juara Dunia FM 2024 Asa...</td>
-      <td>Jakarta - Indonesia baru saja memenangi "Piala...</td>
-      <td>Kamis, 05 Sep 2024 06:15 WIB</td>
-      <td>sport</td>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PBFI Jakarta Bertekad Bawa Pulang Medali Emas ...</td>
-      <td>Jakarta - Pengurus Provinsi Persatuan Binaraga...</td>
-      <td>Kamis, 05 Sep 2024 02:15 WIB</td>
-      <td>sport</td>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tim Balap Indonesia Ini Tuntaskan Race di Sirk...</td>
-      <td>Jakarta - Tim balap Bendix X KDRT menjadi waki...</td>
-      <td>Rabu, 04 Sep 2024 23:40 WIB</td>
-      <td>sport</td>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tiga Binaragawati Indonesia Tampil di Kejuaraa...</td>
-      <td>Manila - Tiga atlet wanita binaan Persatuan Bi...</td>
-      <td>Rabu, 04 Sep 2024 22:45 WIB</td>
-      <td>sport</td>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Klasemen Medali Paralimpiade 2024: Indonesia d...</td>
-      <td>Jakarta - China masih kokoh di posisinya pada ...</td>
-      <td>Rabu, 04 Sep 2024 12:57 WIB</td>
-      <td>sport</td>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Atlet Perbafi Sabet Tujuh Medali di Singapore ...</td>
-      <td>Singapura - Catatan gemilang baru saja diraih ...</td>
-      <td>Rabu, 04 Sep 2024 02:30 WIB</td>
-      <td>sport</td>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
     </tr>
   </tbody>
 </table>
@@ -543,7 +551,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9c778dbf-e9be-456c-9cc9-438cc7ec1f32')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e92d20a9-7c33-4a3f-adcd-f59e9b6c6eb8')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -595,12 +603,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-9c778dbf-e9be-456c-9cc9-438cc7ec1f32 button.colab-df-convert');
+        document.querySelector('#df-e92d20a9-7c33-4a3f-adcd-f59e9b6c6eb8 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9c778dbf-e9be-456c-9cc9-438cc7ec1f32');
+        const element = document.querySelector('#df-e92d20a9-7c33-4a3f-adcd-f59e9b6c6eb8');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -620,8 +628,8 @@ document.write(`
   </div>
 
 
-<div id="df-6642b819-f76d-417b-8938-a14b2d454f08">
-  <button class="colab-df-quickchart" onclick="quickchart('df-6642b819-f76d-417b-8938-a14b2d454f08')"
+<div id="df-066db394-463d-4888-b8cc-36cf681eab93">
+  <button class="colab-df-quickchart" onclick="quickchart('df-066db394-463d-4888-b8cc-36cf681eab93')"
             title="Suggest charts"
             style="display:none;">
 
@@ -740,7 +748,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-6642b819-f76d-417b-8938-a14b2d454f08 button');
+        document.querySelector('#df-066db394-463d-4888-b8cc-36cf681eab93 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -805,7 +813,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-655b3af8-a447-4f24-83e4-3b9f7f5a5152" class="colab-df-container">
+  <div id="df-5a222511-dfce-460d-ae2e-6ef0eb8d6e3b" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -825,8 +833,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
     </tr>
@@ -834,51 +842,51 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Tentang Ichsan Taufiq, Juara Dunia FM 2024 Asa...</td>
-      <td>Jakarta - Indonesia baru saja memenangi "Piala...</td>
-      <td>Kamis, 05 Sep 2024 06:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Indonesia baru saja memenangi Piala D...</td>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Labuan Bajo Manggarai Barat Nusa Teng...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PBFI Jakarta Bertekad Bawa Pulang Medali Emas ...</td>
-      <td>Jakarta - Pengurus Provinsi Persatuan Binaraga...</td>
-      <td>Kamis, 05 Sep 2024 02:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Pengurus Provinsi Persatuan Binaraga ...</td>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Harta karun tak hanya benda saja tapi...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tim Balap Indonesia Ini Tuntaskan Race di Sirk...</td>
-      <td>Jakarta - Tim balap Bendix X KDRT menjadi waki...</td>
-      <td>Rabu, 04 Sep 2024 23:40 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Tim balap Bendix X KDRT menjadi wakil...</td>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Ibu kota Prancis Paris menjadi perhat...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tiga Binaragawati Indonesia Tampil di Kejuaraa...</td>
-      <td>Manila - Tiga atlet wanita binaan Persatuan Bi...</td>
-      <td>Rabu, 04 Sep 2024 22:45 WIB</td>
-      <td>sport</td>
-      <td>Manila  Tiga atlet wanita binaan Persatuan Bin...</td>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Kapibara kabur dari kandangnya di The...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Klasemen Medali Paralimpiade 2024: Indonesia d...</td>
-      <td>Jakarta - China masih kokoh di posisinya pada ...</td>
-      <td>Rabu, 04 Sep 2024 12:57 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  China masih kokoh di posisinya pada p...</td>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Pasar Loak Jatinegara atau Jembatan I...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Atlet Perbafi Sabet Tujuh Medali di Singapore ...</td>
-      <td>Singapura - Catatan gemilang baru saja diraih ...</td>
-      <td>Rabu, 04 Sep 2024 02:30 WIB</td>
-      <td>sport</td>
-      <td>Singapura  Catatan gemilang baru saja diraih a...</td>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Gunung Semeru telah ditutup bertahunt...</td>
     </tr>
   </tbody>
 </table>
@@ -886,7 +894,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-655b3af8-a447-4f24-83e4-3b9f7f5a5152')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-5a222511-dfce-460d-ae2e-6ef0eb8d6e3b')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -938,12 +946,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-655b3af8-a447-4f24-83e4-3b9f7f5a5152 button.colab-df-convert');
+        document.querySelector('#df-5a222511-dfce-460d-ae2e-6ef0eb8d6e3b button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-655b3af8-a447-4f24-83e4-3b9f7f5a5152');
+        const element = document.querySelector('#df-5a222511-dfce-460d-ae2e-6ef0eb8d6e3b');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -963,8 +971,8 @@ document.write(`
   </div>
 
 
-<div id="df-4eb90524-922c-494d-ae9a-46c2b9f30edb">
-  <button class="colab-df-quickchart" onclick="quickchart('df-4eb90524-922c-494d-ae9a-46c2b9f30edb')"
+<div id="df-0616049f-09a8-4845-a570-d3be5f5e6ff3">
+  <button class="colab-df-quickchart" onclick="quickchart('df-0616049f-09a8-4845-a570-d3be5f5e6ff3')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1083,7 +1091,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-4eb90524-922c-494d-ae9a-46c2b9f30edb button');
+        document.querySelector('#df-0616049f-09a8-4845-a570-d3be5f5e6ff3 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1116,7 +1124,7 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-69aae080-331f-4949-b816-802d19fe531c" class="colab-df-container">
+  <div id="df-d30eee7e-6b40-4211-bc58-fed49e13337d" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1136,8 +1144,8 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1146,57 +1154,57 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
   <tbody>
     <tr>
       <th>0</th>
-      <td>Tentang Ichsan Taufiq, Juara Dunia FM 2024 Asa...</td>
-      <td>Jakarta - Indonesia baru saja memenangi "Piala...</td>
-      <td>Kamis, 05 Sep 2024 06:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Indonesia baru saja memenangi Piala D...</td>
-      <td>jakarta  indonesia baru saja memenangi piala d...</td>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Labuan Bajo Manggarai Barat Nusa Teng...</td>
+      <td>jakarta  labuan bajo manggarai barat nusa teng...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PBFI Jakarta Bertekad Bawa Pulang Medali Emas ...</td>
-      <td>Jakarta - Pengurus Provinsi Persatuan Binaraga...</td>
-      <td>Kamis, 05 Sep 2024 02:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Pengurus Provinsi Persatuan Binaraga ...</td>
-      <td>jakarta  pengurus provinsi persatuan binaraga ...</td>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Harta karun tak hanya benda saja tapi...</td>
+      <td>jakarta  harta karun tak hanya benda saja tapi...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tim Balap Indonesia Ini Tuntaskan Race di Sirk...</td>
-      <td>Jakarta - Tim balap Bendix X KDRT menjadi waki...</td>
-      <td>Rabu, 04 Sep 2024 23:40 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Tim balap Bendix X KDRT menjadi wakil...</td>
-      <td>jakarta  tim balap bendix x kdrt menjadi wakil...</td>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Ibu kota Prancis Paris menjadi perhat...</td>
+      <td>jakarta  ibu kota prancis paris menjadi perhat...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tiga Binaragawati Indonesia Tampil di Kejuaraa...</td>
-      <td>Manila - Tiga atlet wanita binaan Persatuan Bi...</td>
-      <td>Rabu, 04 Sep 2024 22:45 WIB</td>
-      <td>sport</td>
-      <td>Manila  Tiga atlet wanita binaan Persatuan Bin...</td>
-      <td>manila  tiga atlet wanita binaan persatuan bin...</td>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Kapibara kabur dari kandangnya di The...</td>
+      <td>jakarta  kapibara kabur dari kandangnya di the...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Klasemen Medali Paralimpiade 2024: Indonesia d...</td>
-      <td>Jakarta - China masih kokoh di posisinya pada ...</td>
-      <td>Rabu, 04 Sep 2024 12:57 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  China masih kokoh di posisinya pada p...</td>
-      <td>jakarta  china masih kokoh di posisinya pada p...</td>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Pasar Loak Jatinegara atau Jembatan I...</td>
+      <td>jakarta  pasar loak jatinegara atau jembatan i...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Atlet Perbafi Sabet Tujuh Medali di Singapore ...</td>
-      <td>Singapura - Catatan gemilang baru saja diraih ...</td>
-      <td>Rabu, 04 Sep 2024 02:30 WIB</td>
-      <td>sport</td>
-      <td>Singapura  Catatan gemilang baru saja diraih a...</td>
-      <td>singapura  catatan gemilang baru saja diraih a...</td>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Gunung Semeru telah ditutup bertahunt...</td>
+      <td>jakarta  gunung semeru telah ditutup bertahunt...</td>
     </tr>
   </tbody>
 </table>
@@ -1204,7 +1212,7 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-69aae080-331f-4949-b816-802d19fe531c')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-d30eee7e-6b40-4211-bc58-fed49e13337d')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1256,12 +1264,12 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
 
     <script>
       const buttonEl =
-        document.querySelector('#df-69aae080-331f-4949-b816-802d19fe531c button.colab-df-convert');
+        document.querySelector('#df-d30eee7e-6b40-4211-bc58-fed49e13337d button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-69aae080-331f-4949-b816-802d19fe531c');
+        const element = document.querySelector('#df-d30eee7e-6b40-4211-bc58-fed49e13337d');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1281,8 +1289,8 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
   </div>
 
 
-<div id="df-fcfc073f-6965-43f1-94ee-94d0aa728264">
-  <button class="colab-df-quickchart" onclick="quickchart('df-fcfc073f-6965-43f1-94ee-94d0aa728264')"
+<div id="df-86d7fd9f-c6e8-4b40-9bab-d7d4d70d0339">
+  <button class="colab-df-quickchart" onclick="quickchart('df-86d7fd9f-c6e8-4b40-9bab-d7d4d70d0339')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1401,7 +1409,7 @@ Misalnya, kata yang sama tetapi ditulis dengan huruf besar atau kecil akan  dian
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-fcfc073f-6965-43f1-94ee-94d0aa728264 button');
+        document.querySelector('#df-86d7fd9f-c6e8-4b40-9bab-d7d4d70d0339 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1432,7 +1440,7 @@ berupa kata,frasa atau karakter terpisah.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-c85ccc79-02be-4eec-b9d3-e1f761491996" class="colab-df-container">
+  <div id="df-e48f3e6f-f0e0-437a-b8b1-855c672786fd" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1452,8 +1460,8 @@ berupa kata,frasa atau karakter terpisah.</p>
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1463,63 +1471,63 @@ berupa kata,frasa atau karakter terpisah.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Tentang Ichsan Taufiq, Juara Dunia FM 2024 Asa...</td>
-      <td>Jakarta - Indonesia baru saja memenangi "Piala...</td>
-      <td>Kamis, 05 Sep 2024 06:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Indonesia baru saja memenangi Piala D...</td>
-      <td>jakarta  indonesia baru saja memenangi piala d...</td>
-      <td>[jakarta, indonesia, baru, saja, memenangi, pi...</td>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Labuan Bajo Manggarai Barat Nusa Teng...</td>
+      <td>jakarta  labuan bajo manggarai barat nusa teng...</td>
+      <td>[jakarta, labuan, bajo, manggarai, barat, nusa...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PBFI Jakarta Bertekad Bawa Pulang Medali Emas ...</td>
-      <td>Jakarta - Pengurus Provinsi Persatuan Binaraga...</td>
-      <td>Kamis, 05 Sep 2024 02:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Pengurus Provinsi Persatuan Binaraga ...</td>
-      <td>jakarta  pengurus provinsi persatuan binaraga ...</td>
-      <td>[jakarta, pengurus, provinsi, persatuan, binar...</td>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Harta karun tak hanya benda saja tapi...</td>
+      <td>jakarta  harta karun tak hanya benda saja tapi...</td>
+      <td>[jakarta, harta, karun, tak, hanya, benda, saj...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tim Balap Indonesia Ini Tuntaskan Race di Sirk...</td>
-      <td>Jakarta - Tim balap Bendix X KDRT menjadi waki...</td>
-      <td>Rabu, 04 Sep 2024 23:40 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Tim balap Bendix X KDRT menjadi wakil...</td>
-      <td>jakarta  tim balap bendix x kdrt menjadi wakil...</td>
-      <td>[jakarta, tim, balap, bendix, x, kdrt, menjadi...</td>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Ibu kota Prancis Paris menjadi perhat...</td>
+      <td>jakarta  ibu kota prancis paris menjadi perhat...</td>
+      <td>[jakarta, ibu, kota, prancis, paris, menjadi, ...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tiga Binaragawati Indonesia Tampil di Kejuaraa...</td>
-      <td>Manila - Tiga atlet wanita binaan Persatuan Bi...</td>
-      <td>Rabu, 04 Sep 2024 22:45 WIB</td>
-      <td>sport</td>
-      <td>Manila  Tiga atlet wanita binaan Persatuan Bin...</td>
-      <td>manila  tiga atlet wanita binaan persatuan bin...</td>
-      <td>[manila, tiga, atlet, wanita, binaan, persatua...</td>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Kapibara kabur dari kandangnya di The...</td>
+      <td>jakarta  kapibara kabur dari kandangnya di the...</td>
+      <td>[jakarta, kapibara, kabur, dari, kandangnya, d...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Klasemen Medali Paralimpiade 2024: Indonesia d...</td>
-      <td>Jakarta - China masih kokoh di posisinya pada ...</td>
-      <td>Rabu, 04 Sep 2024 12:57 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  China masih kokoh di posisinya pada p...</td>
-      <td>jakarta  china masih kokoh di posisinya pada p...</td>
-      <td>[jakarta, china, masih, kokoh, di, posisinya, ...</td>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Pasar Loak Jatinegara atau Jembatan I...</td>
+      <td>jakarta  pasar loak jatinegara atau jembatan i...</td>
+      <td>[jakarta, pasar, loak, jatinegara, atau, jemba...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Atlet Perbafi Sabet Tujuh Medali di Singapore ...</td>
-      <td>Singapura - Catatan gemilang baru saja diraih ...</td>
-      <td>Rabu, 04 Sep 2024 02:30 WIB</td>
-      <td>sport</td>
-      <td>Singapura  Catatan gemilang baru saja diraih a...</td>
-      <td>singapura  catatan gemilang baru saja diraih a...</td>
-      <td>[singapura, catatan, gemilang, baru, saja, dir...</td>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Gunung Semeru telah ditutup bertahunt...</td>
+      <td>jakarta  gunung semeru telah ditutup bertahunt...</td>
+      <td>[jakarta, gunung, semeru, telah, ditutup, bert...</td>
     </tr>
   </tbody>
 </table>
@@ -1527,7 +1535,7 @@ berupa kata,frasa atau karakter terpisah.</p>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-c85ccc79-02be-4eec-b9d3-e1f761491996')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e48f3e6f-f0e0-437a-b8b1-855c672786fd')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1579,12 +1587,12 @@ berupa kata,frasa atau karakter terpisah.</p>
 
     <script>
       const buttonEl =
-        document.querySelector('#df-c85ccc79-02be-4eec-b9d3-e1f761491996 button.colab-df-convert');
+        document.querySelector('#df-e48f3e6f-f0e0-437a-b8b1-855c672786fd button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-c85ccc79-02be-4eec-b9d3-e1f761491996');
+        const element = document.querySelector('#df-e48f3e6f-f0e0-437a-b8b1-855c672786fd');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1604,8 +1612,8 @@ berupa kata,frasa atau karakter terpisah.</p>
   </div>
 
 
-<div id="df-205fa27b-cb38-4e86-a1b2-efd881e5e0cb">
-  <button class="colab-df-quickchart" onclick="quickchart('df-205fa27b-cb38-4e86-a1b2-efd881e5e0cb')"
+<div id="df-19af452d-314c-4c4e-b83a-9ac682101974">
+  <button class="colab-df-quickchart" onclick="quickchart('df-19af452d-314c-4c4e-b83a-9ac682101974')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1724,7 +1732,7 @@ berupa kata,frasa atau karakter terpisah.</p>
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-205fa27b-cb38-4e86-a1b2-efd881e5e0cb button');
+        document.querySelector('#df-19af452d-314c-4c4e-b83a-9ac682101974 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1767,7 +1775,7 @@ berupa kata,frasa atau karakter terpisah.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-5acd02c9-f905-48a2-a0fd-85739d63f027" class="colab-df-container">
+  <div id="df-06ae3497-3e56-465e-832d-34a44c757092" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1787,8 +1795,8 @@ berupa kata,frasa atau karakter terpisah.</p>
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1799,69 +1807,69 @@ berupa kata,frasa atau karakter terpisah.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Tentang Ichsan Taufiq, Juara Dunia FM 2024 Asa...</td>
-      <td>Jakarta - Indonesia baru saja memenangi "Piala...</td>
-      <td>Kamis, 05 Sep 2024 06:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Indonesia baru saja memenangi Piala D...</td>
-      <td>jakarta  indonesia baru saja memenangi piala d...</td>
-      <td>[jakarta, indonesia, baru, saja, memenangi, pi...</td>
-      <td>jakarta indonesia memenangi piala dunia footba...</td>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Labuan Bajo Manggarai Barat Nusa Teng...</td>
+      <td>jakarta  labuan bajo manggarai barat nusa teng...</td>
+      <td>[jakarta, labuan, bajo, manggarai, barat, nusa...</td>
+      <td>jakarta labuan bajo manggarai barat nusa tengg...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>PBFI Jakarta Bertekad Bawa Pulang Medali Emas ...</td>
-      <td>Jakarta - Pengurus Provinsi Persatuan Binaraga...</td>
-      <td>Kamis, 05 Sep 2024 02:15 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Pengurus Provinsi Persatuan Binaraga ...</td>
-      <td>jakarta  pengurus provinsi persatuan binaraga ...</td>
-      <td>[jakarta, pengurus, provinsi, persatuan, binar...</td>
-      <td>jakarta pengurus provinsi persatuan binaraga f...</td>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Harta karun tak hanya benda saja tapi...</td>
+      <td>jakarta  harta karun tak hanya benda saja tapi...</td>
+      <td>[jakarta, harta, karun, tak, hanya, benda, saj...</td>
+      <td>jakarta harta karun benda catatan arkeolog lam...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tim Balap Indonesia Ini Tuntaskan Race di Sirk...</td>
-      <td>Jakarta - Tim balap Bendix X KDRT menjadi waki...</td>
-      <td>Rabu, 04 Sep 2024 23:40 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  Tim balap Bendix X KDRT menjadi wakil...</td>
-      <td>jakarta  tim balap bendix x kdrt menjadi wakil...</td>
-      <td>[jakarta, tim, balap, bendix, x, kdrt, menjadi...</td>
-      <td>jakarta tim balap bendix x kdrt wakil indonesi...</td>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Ibu kota Prancis Paris menjadi perhat...</td>
+      <td>jakarta  ibu kota prancis paris menjadi perhat...</td>
+      <td>[jakarta, ibu, kota, prancis, paris, menjadi, ...</td>
+      <td>jakarta kota prancis paris perhatian dunia men...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Tiga Binaragawati Indonesia Tampil di Kejuaraa...</td>
-      <td>Manila - Tiga atlet wanita binaan Persatuan Bi...</td>
-      <td>Rabu, 04 Sep 2024 22:45 WIB</td>
-      <td>sport</td>
-      <td>Manila  Tiga atlet wanita binaan Persatuan Bin...</td>
-      <td>manila  tiga atlet wanita binaan persatuan bin...</td>
-      <td>[manila, tiga, atlet, wanita, binaan, persatua...</td>
-      <td>manila atlet wanita binaan persatuan binaraga ...</td>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Kapibara kabur dari kandangnya di The...</td>
+      <td>jakarta  kapibara kabur dari kandangnya di the...</td>
+      <td>[jakarta, kapibara, kabur, dari, kandangnya, d...</td>
+      <td>jakarta kapibara kabur kandangnya the hoo zoo ...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Klasemen Medali Paralimpiade 2024: Indonesia d...</td>
-      <td>Jakarta - China masih kokoh di posisinya pada ...</td>
-      <td>Rabu, 04 Sep 2024 12:57 WIB</td>
-      <td>sport</td>
-      <td>Jakarta  China masih kokoh di posisinya pada p...</td>
-      <td>jakarta  china masih kokoh di posisinya pada p...</td>
-      <td>[jakarta, china, masih, kokoh, di, posisinya, ...</td>
-      <td>jakarta china kokoh posisinya puncak klasemen ...</td>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Pasar Loak Jatinegara atau Jembatan I...</td>
+      <td>jakarta  pasar loak jatinegara atau jembatan i...</td>
+      <td>[jakarta, pasar, loak, jatinegara, atau, jemba...</td>
+      <td>jakarta pasar loak jatinegara jembatan item pi...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Atlet Perbafi Sabet Tujuh Medali di Singapore ...</td>
-      <td>Singapura - Catatan gemilang baru saja diraih ...</td>
-      <td>Rabu, 04 Sep 2024 02:30 WIB</td>
-      <td>sport</td>
-      <td>Singapura  Catatan gemilang baru saja diraih a...</td>
-      <td>singapura  catatan gemilang baru saja diraih a...</td>
-      <td>[singapura, catatan, gemilang, baru, saja, dir...</td>
-      <td>singapura catatan gemilang diraih atletatlet b...</td>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+      <td>Jakarta  Gunung Semeru telah ditutup bertahunt...</td>
+      <td>jakarta  gunung semeru telah ditutup bertahunt...</td>
+      <td>[jakarta, gunung, semeru, telah, ditutup, bert...</td>
+      <td>jakarta gunung semeru ditutup bertahuntahun pa...</td>
     </tr>
   </tbody>
 </table>
@@ -1869,7 +1877,7 @@ berupa kata,frasa atau karakter terpisah.</p>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-5acd02c9-f905-48a2-a0fd-85739d63f027')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-06ae3497-3e56-465e-832d-34a44c757092')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1921,12 +1929,12 @@ berupa kata,frasa atau karakter terpisah.</p>
 
     <script>
       const buttonEl =
-        document.querySelector('#df-5acd02c9-f905-48a2-a0fd-85739d63f027 button.colab-df-convert');
+        document.querySelector('#df-06ae3497-3e56-465e-832d-34a44c757092 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-5acd02c9-f905-48a2-a0fd-85739d63f027');
+        const element = document.querySelector('#df-06ae3497-3e56-465e-832d-34a44c757092');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1946,8 +1954,8 @@ berupa kata,frasa atau karakter terpisah.</p>
   </div>
 
 
-<div id="df-5bd21ac1-761e-45b4-b623-54f65724ccc8">
-  <button class="colab-df-quickchart" onclick="quickchart('df-5bd21ac1-761e-45b4-b623-54f65724ccc8')"
+<div id="df-103a1bdf-9c4c-4d9a-98d3-1b50dad88b56">
+  <button class="colab-df-quickchart" onclick="quickchart('df-103a1bdf-9c4c-4d9a-98d3-1b50dad88b56')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2066,7 +2074,7 @@ berupa kata,frasa atau karakter terpisah.</p>
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-5bd21ac1-761e-45b4-b623-54f65724ccc8 button');
+        document.querySelector('#df-103a1bdf-9c4c-4d9a-98d3-1b50dad88b56 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -2079,7 +2087,10 @@ berupa kata,frasa atau karakter terpisah.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/repository/hasil_preprocesing.csv&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/hasil_preprocesing.csv&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Provide a link for manual download</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;hasil_preprocesing.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2095,7 +2106,7 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/repository/hasil_preprocesing.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/tugasPPWA/hasil_preprocesing.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2130,7 +2141,7 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-b527ffdd-a1e1-443e-897a-e8a9692b4765" class="colab-df-container">
+  <div id="df-93c8a415-b8e5-471c-b023-9598d8457f51" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2149,278 +2160,278 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>abai</th>
-      <th>acara</th>
-      <th>aceh</th>
-      <th>acehdiharapkan</th>
-      <th>acehsumatera</th>
-      <th>administrasi</th>
-      <th>adminstrasi</th>
-      <th>adrenalin</th>
-      <th>advertisement</th>
-      <th>afrika</th>
+      <th>aadimmirrusulih</th>
+      <th>aailan</th>
+      <th>aainkalkauar</th>
+      <th>aajilan</th>
+      <th>aajilin</th>
+      <th>aakaami</th>
+      <th>aalam</th>
+      <th>aan</th>
+      <th>aawaa</th>
+      <th>abad</th>
       <th>...</th>
-      <th>workshop</th>
-      <th>world</th>
-      <th>xavi</th>
-      <th>xxi</th>
-      <th>ynaaff</th>
-      <th>ynabay</th>
-      <th>yordan</th>
-      <th>yuniarto</th>
-      <th>zambo</th>
-      <th>zcssejak</th>
+      <th>ziljalali</th>
+      <th>zina</th>
+      <th>zinah</th>
+      <th>zogba</th>
+      <th>zona</th>
+      <th>zone</th>
+      <th>zoo</th>
+      <th>zubaidi</th>
+      <th>zuleima</th>
+      <th>zulu</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.024087</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
-      <td>0.221529</td>
-      <td>0.032574</td>
-      <td>0.00000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.032574</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.045644</td>
-      <td>0.000000</td>
-      <td>0.053693</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.039703</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.036875</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.049869</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.051236</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.050982</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.027201</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.000000</td>
-      <td>0.049221</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.042814</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.023867</td>
-      <td>0.060866</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.023867</td>
-      <td>0.017648</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0716</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.023867</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.031493</td>
-      <td>0.037046</td>
-      <td>0.000000</td>
-      <td>0.037046</td>
-      <td>0.037046</td>
-      <td>0.000000</td>
-      <td>0.027393</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.18523</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.037046</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.023214</td>
-      <td>0.031395</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
-      <td>0.026688</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.219762</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.048674</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.0000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.065825</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 1118 columns</p>
+<p>10 rows × 6852 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-b527ffdd-a1e1-443e-897a-e8a9692b4765')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-93c8a415-b8e5-471c-b023-9598d8457f51')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2472,12 +2483,12 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
 
     <script>
       const buttonEl =
-        document.querySelector('#df-b527ffdd-a1e1-443e-897a-e8a9692b4765 button.colab-df-convert');
+        document.querySelector('#df-93c8a415-b8e5-471c-b023-9598d8457f51 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-b527ffdd-a1e1-443e-897a-e8a9692b4765');
+        const element = document.querySelector('#df-93c8a415-b8e5-471c-b023-9598d8457f51');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2497,8 +2508,8 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
   </div>
 
 
-<div id="df-deab1067-c77e-43d2-99fd-4745d96f38df">
-  <button class="colab-df-quickchart" onclick="quickchart('df-deab1067-c77e-43d2-99fd-4745d96f38df')"
+<div id="df-57328e7c-c85f-40fe-b4cd-7a7dedde7fba">
+  <button class="colab-df-quickchart" onclick="quickchart('df-57328e7c-c85f-40fe-b4cd-7a7dedde7fba')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2617,7 +2628,7 @@ Jika kata  sering muncul di dokumen, hasilnya akan bernilai kecil.</p>
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-deab1067-c77e-43d2-99fd-4745d96f38df button');
+        document.querySelector('#df-57328e7c-c85f-40fe-b4cd-7a7dedde7fba button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();

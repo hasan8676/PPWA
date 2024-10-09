@@ -181,6 +181,14 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Membuat sebuah : Webstatis</a></li>
+
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="Tugas01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="Tugas2.html">Tugas Pertemuan 2 - Pre-Processing Data Berita detik.com</a></li>
@@ -387,7 +395,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -403,6 +413,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Membuat sebuah : Webstatis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-01-crawling-berita">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-proses-crawling-berita-online">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -414,6 +441,1211 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="membuat-sebuah-webstatis">
 <h1>Membuat sebuah : Webstatis<a class="headerlink" href="#membuat-sebuah-webstatis" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas-01-crawling-berita">
+<h1>Tugas 01 : <strong>Crawling Berita</strong><a class="headerlink" href="#tugas-01-crawling-berita" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Iqbal Surya Ramadhan</p>
+<p>NIM  : 210411100002</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">
+<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online<a class="headerlink" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online" title="Link to this heading">#</a></h1>
+<p><strong>Pengertian Crawling</strong></p>
+<p>Crawling adalah proses otomatisasi yang dilakukan oleh program komputer untuk menjelajahi dan mengumpulkan data dari halaman-halaman web di internet. Proses ini sering kali dilakukan oleh bot yang dikenal sebagai web crawlers atau spiders. Web crawlers ini akan menelusuri (crawl) berbagai situs web, mengakses halaman-halaman yang ada, dan mengunduh atau mengekstraksi informasi yang dibutuhkan untuk kemudian disimpan atau diindeks dalam database.</p>
+<p><strong>Crawling website berita adalah</strong> <em>proses otomatis mengumpulkan data dari berbagai situs berita di internet. Proses ini dilakukan oleh program khusus yang disebut crawler atau spider. Crawler ini akan menjelajahi internet, mengunjungi berbagai situs berita, dan mengambil data seperti judul berita, isi berita, tanggal publikasi, dan tautan terkait.</em></p>
+<p><strong>Penjelasan Data</strong></p>
+<p><em>Data yang diambil berasal dari Website DetikOto, yang merupakan bagian dari portal berita <a class="reference external" href="http://Detik.com">Detik.com</a>, berfokus pada topik otomotif, termasuk ulasan kendaraan, berita terbaru, tips perawatan, dan tren otomotif terkini.</em></p>
+<p><em>Data diambil menggunakan metode web crawling atau scraping untuk pengumpulan data dengan mengarahkan crawler ke <a class="reference external" href="https://oto.detik.com/indeks">https://oto.detik.com/indeks</a> dan mengumpulkan data terkait otomotif.</em></p>
+<p><strong>contoh data :</strong></p>
+<ul class="simple">
+<li><p>judul : <em>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali</em></p></li>
+<li><p>tanggal : <em>Selasa, 03 Sep 2024 20:38 WIB</em></p></li>
+<li><p>isi/deskripsi : <em>Jakarta - Komunitas motor gede (moge) Harley-Davidson Owners Group (H.O.G.) Indo Jakarta Chapter telah menuntaskan touring ke Bali selama tiga hari. Sebanyak 232 rider dengan 92 pillion (istri yang ikut dibonceng naik motor) meramaikan touring moge Harley-Davidson ini.H.O.G. Indo Jakarta Chapter merupakan komunitas motor besar Harley-Davidson berskala international yang baru berdiri di Jakarta. Usia komunitas ini belum genap 1 tahun, tapi membernya sudah lebih dari 550 orang. Adapun acara ini merupakan touring ketiga yang dilakukan setelah Bandung dan Solo.</em></p></li>
+<li><p>Kategori Berita : <em>Otomotif</em></p></li>
+</ul>
+<p><strong>Beautiful Soup (Python)</strong></p>
+<p><strong>Kelebihan:</strong></p>
+<p><em>Mudah digunakan dan memiliki API yang intuitif.</em></p>
+<p><em>Cocok untuk proyek-proyek kecil hingga menengah.</em></p>
+<p><em>Fleksibel dalam parsing HTML dan XML.</em></p>
+<p><strong>Kekurangan:</strong></p>
+<p><em>Tidak sekuat Scrapy untuk proyek yang kompleks.</em></p>
+<p><em>Tidak memiliki fitur built-in untuk manajemen permintaan seperti Scrapy.</em></p>
+<p><strong>Fungsi Crawling</strong></p>
+<ol class="arabic simple">
+<li><p>Mengindeks Halaman Web:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Crawling adalah langkah pertama dalam proses pengindeksan halaman web oleh mesin pencari. Web crawler akan mengunjungi halaman-halaman web, membaca kontennya, dan menyimpannya ke dalam indeks mesin pencari. Ini memungkinkan mesin pencari untuk menemukan dan menampilkan halaman-halaman tersebut dalam hasil pencarian.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Pengumpulan Data:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Crawling memungkinkan pengumpulan data dari berbagai situs web untuk keperluan tertentu, seperti analisis bisnis, riset pasar, atau pengembangan model kecerdasan buatan. Dengan crawling, data dari berbagai sumber bisa dikumpulkan secara otomatis tanpa harus melakukannya secara manual.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Pemantauan Perubahan Konten:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Dengan crawling, perubahan atau pembaruan pada suatu situs web dapat dipantau secara berkala. Ini berguna untuk aplikasi yang memerlukan informasi terbaru, seperti agregator berita, alat pemantau harga, atau layanan notifikasi.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>SEO (Search Engine Optimization):</p></li>
+</ol>
+<ul class="simple">
+<li><p>Bagi pengelola situs web, memahami bagaimana proses crawling bekerja dapat membantu dalam optimasi mesin pencari (SEO). Dengan memastikan bahwa halaman-halaman web mereka mudah di-crawl dan diindeks, mereka bisa meningkatkan kemungkinan situs web mereka muncul di hasil pencarian mesin pencari.</p></li>
+</ul>
+<p><strong>Teknologi yang Digunakan :</strong></p>
+<ul class="simple">
+<li><p>Library Pemrograman: Python dengan library seperti BeautifulSoup4, Scrapy, dan Requests adalah pilihan populer karena fleksibel dan memiliki banyak fitur.</p></li>
+<li><p>Python dan Scrapy : Scrapy adalah framework open-source di Python yang banyak digunakan untuk crawling data, termasuk berita online. Scrapy memudahkan proses fetching, parsing, dan menyimpan data.</p></li>
+<li><p>BeautifulSoup: Library Python ini digunakan untuk mengurai dokumen HTML dan XML, membantu mengekstrak data yang diinginkan dari halaman web.</p></li>
+<li><p>Selenium: Selenium digunakan untuk melakukan crawling pada halaman web yang memerlukan interaksi dinamis, seperti login atau scroll.</p></li>
+<li><p>API Berita: Beberapa situs berita menyediakan API yang memudahkan akses data mereka tanpa perlu crawling. Ini adalah cara yang lebih legal dan stabil untuk mendapatkan data.</p></li>
+<li><p>Perangkat Lunak Khusus: Ada juga perangkat lunak khusus yang dirancang untuk crawling data, seperti Octoparse dan ParseHub.</p></li>
+</ul>
+<p><strong>Beautiful Soup: Perpustakaan Python untuk Parsing HTML dan XML</strong></p>
+<p><strong>Beautiful Soup</strong> <em>adalah sebuah perpustakaan Python yang sangat populer dan mudah digunakan untuk parsing dokumen HTML dan XML. Dengan menggunakan Beautiful Soup, kita dapat mengekstrak data dari halaman web dengan cara yang efisien dan elegan. Bayangkan BeautifulSoup sebagai sebuah parser yang dapat mengubah dokumen HTML atau XML yang berantakan menjadi struktur data yang mudah dipahami oleh Python.</em></p>
+<p><strong>Mengapa Menggunakan BeautifulSoup?</strong></p>
+<ul class="simple">
+<li><p>Sederhana: BeautifulSoup memiliki API yang sangat intuitif dan mudah dipelajari, bahkan bagi pemula.</p></li>
+<li><p>Fleksibel: BeautifulSoup dapat digunakan untuk berbagai jenis parsing, mulai dari tugas sederhana hingga yang kompleks.</p></li>
+<li><p>Pythonic: BeautifulSoup terintegrasi dengan baik dengan ekosistem Python, sehingga Anda dapat dengan mudah menggabungkan BeautifulSoup dengan perpustakaan Python lainnya.</p></li>
+<li><p>Komunitas yang Besar: BeautifulSoup memiliki komunitas yang sangat aktif, sehingga Anda dapat dengan mudah menemukan dokumentasi, tutorial, dan bantuan jika Anda mengalami kesulitan.</p></li>
+</ul>
+<p><strong>Kegunaan BeautifulSoup</strong></p>
+<p><strong>Web Scraping:</strong> <em>Mengambil data dari halaman web untuk berbagai tujuan, seperti analisis sentimen, riset pasar, dan pengembangan aplikasi.</em></p>
+<p><strong>Parsing Data:</strong> <em>Mengubah data yang tidak terstruktur menjadi format yang terstruktur.</em></p>
+<p><strong>Automasi:</strong> <em>Mengotomatiskan tugas-tugas yang berulang, seperti mengunduh data dari banyak halaman web.</em></p>
+<p><strong>Contoh Penggunaan Crawling Data :</strong></p>
+<p><strong>E-commerce:</strong> <em>Untuk membandingkan harga produk dari berbagai toko online.</em></p>
+<p><strong>Riset Pasar:</strong> <em>Untuk mengumpulkan data tentang tren pasar, opini konsumen, atau perilaku kompetitor.</em></p>
+<p><strong>Jurnalisme :</strong> <em>Untuk mengumpulkan data dari berbagai sumber berita untuk membuat laporan yang komprehensif.</em></p>
+<p><strong>Pengembangan Produk:</strong> <em>Untuk mengumpulkan data yang dapat digunakan untuk melatih model machine learning dan mengembangkan produk baru.</em></p>
+<p><strong>Akademik:</strong> <em>Untuk mengumpulkan data untuk penelitian ilmiah.</em></p>
+<p><strong>Cara Crawling Data :</strong></p>
+<p><em>pertama kita tentukan terlebih dahulu ingin mengambil data berita dari sumber mana, jika sudah menentukan data yang akan diambil dan di crawling, kemudian kita lakukan crawling data menggunakan code.</em></p>
+<ol class="arabic simple">
+<li><p>langkah pertama melakukan import Library yang akan mempermudah saat melakukan crawling data.</p></li>
+</ol>
+<ul class="simple">
+<li><p><em>import requests (digunakan untuk melakukan permintaan HTTP ke web server, seperti GET atau POST, dan mendapatkan tanggapan, termasuk HTML dari halaman web yang akan discrape.)</em></p></li>
+<li><p><em>from bs4 import BeautifulSoup (digunakan untuk parsing dokumen HTML yang didapatkan dari permintaan HTTP, membuatnya lebih mudah untuk bergerak melalui struktur HTML, mencari elemen, dan mengubah data.)</em></p></li>
+<li><p><em>import pandas as pd (library ini mengorganisir data dalam bentuk tabel, seperti dataframe, yang memudahkan analisis dan penyimpanan data kedalam format seperti CSV.)</em></p></li>
+<li><p><em>import time (library  ini menambahkan jeda waktu, atau tidur, antara satu operasi dan operasi berikutnya, yang penting untuk proses crawling agar tidak terlalu banyak permintaan dalam waktu singkat.)</em></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>langkah kedua code mengambil data dari sebuah halaman web, memprosesnya, dan mengekstrak artikel-artikel yang relevan.</p></li>
+<li><p>langkah ketiga code melakukan pengecekan, dengan memeriksa satu per satu artikel yang ditemukan di halaman web. Jika sudah berhasil mengambil 10 artikel, prosesnya akan berhenti.
+Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halaman detail artikel tersebut. Jika ada masalah seperti link rusak atau halaman tidak bisa dibuka, kode ini akan mencatat kesalahan tersebut dan langsung melanjutkan ke artikel berikutnya tanpa menghentikan keseluruhan proses pengambilan data.</p></li>
+<li><p>langkah keempat code mengambil judul, tanggal publikasi, dan isi dari setiap artikel yang ada di halaman web. Pertama, kode memproses halaman artikel dengan menggunakan BeautifulSoup untuk memudahkan pencarian elemen HTML yang berisi informasi tersebut. Jika elemen seperti judul, tanggal, atau isi ditemukan, data diambil dan disimpan dalam daftar; jika tidak ditemukan, elemen tersebut akan ditandai sebagai “Tidak ditemukan”. Setiap judul artikel yang berhasil ditemukan akan dicetak di layar.</p></li>
+<li><p>langkah kelima code membuat dua daftar, atau list, yang digunakan dalam proses crawling data. Daftar pertama, base_urls, yang berisi URL halaman web yang akan diambil datanya,  halaman indeks DetikFood. Daftar kedua, categories, berisi kategori yang terkait dengan data yang ingin diambil, yaitu “Makanan”. Keduanya akan digunakan bersama dalam proses crawling untuk menentukan halaman web mana yang harus diakses dan kategori mana yang relevan dengan pencarian.</p></li>
+<li><p>langkah keenam code membuat tiga daftar kosong, judul, tanggal, dan isi, yang akan digunakan untuk menyimpan data hasil crawling. Judul, tanggal, dan isi menyimpan judul dan konten utama artikel, dan daftar tanggal menyimpan tanggal publikasi setiap artikel. Ini mempersiapkan tempat untuk menyimpan data yang akan diambil dari halaman web di masa mendatang.</p></li>
+<li><p>langkah ketujuh membuat code Untuk setiap kombinasi URL dan kategori yang telah dibuat sebelumnya, kode ini melakukan proses iterasi, atau perulangan. Kode akan mengambil data dari beberapa halaman untuk setiap URL, mulai dari halaman 1 hingga 3. Jika jumlah artikel mencapai sepuluh, proses akan dihentikan. Setelah membuat URL baru yang sesuai untuk setiap halaman, fungsi get_data digunakan untuk mengambil data dari halaman tersebut. Untuk mencegah data diambil terlalu cepat, kode menunggu selama dua detik setelah mengambil data dari satu halaman sebelum melanjutkan ke halaman berikutnya.</p></li>
+<li><p>langkah terakhir membuat code untuk mengumpulkan data yang disimpan dalam bentuk daftar judul, tanggal, dan isi, lalu menyusunnya ke dalam bentuk tabel DataFrame menggunakan pustaka pandas. “Judul”, “tanggal”, dan “isi” adalah nama kolom dalam tabel DataFrame. Kode menyimpan tabel ke dalam file CSV dengan nama “Crawl-berita.csv” tanpa index. Setelah itu, Anda dapat membuka dan menganalisis file CSV ini menggunakan aplikasi spreadsheet atau perangkat lunak lain yang mendukung format CSV.</p></li>
+</ol>
+<p><strong>Tujuan Crawling Berita Online :</strong></p>
+<p><strong>Mengumpulkan Informasi :</strong> <em>Tujuan utama crawling berita adalah untuk mengumpulkan informasi terbaru dari berbagai sumber berita. Informasi ini bisa digunakan untuk membuat agregasi berita, analisis sentimen, atau membangun basis data untuk penelitian.</em></p>
+<p><strong>Pemantauan Berita:</strong> <em>Crawling dapat digunakan untuk memantau berita secara real-time, membantu perusahaan atau individu untuk tetap up-to-date dengan perkembangan terbaru.</em></p>
+<p><strong>Pengindeksan untuk Mesin Pencari:</strong> <em>Beberapa perusahaan melakukan crawling untuk mengindeks konten berita sehingga dapat ditampilkan dalam hasil pencarian.</em></p>
+<p><strong>Membangun Agregator Berita:</strong> <em>Data yang dikumpulkan oleh crawler dapat digunakan untuk membuat agregator berita, yaitu platform yang mengumpulkan berita dari berbagai sumber dan menyajikannya dalam satu tempat. Contohnya adalah Google News.</em></p>
+<p><strong>Analisis Sentimen:</strong> <em>Dengan mengumpulkan berita dalam jumlah besar, kita dapat menganalisis sentimen publik terhadap suatu topik tertentu. Misalnya, kita dapat mengetahui apakah opini publik terhadap suatu produk baru cenderung positif atau negatif.</em></p>
+<p><strong>Riset Jurnalistik:</strong> <em>Wartawan dapat menggunakan data yang dikumpulkan oleh crawler untuk melakukan investigasi atau membuat laporan yang lebih mendalam.</em></p>
+<p><strong>Pengembangan AI:</strong> <em>Data berita dapat digunakan untuk melatih model machine learning, misalnya untuk membuat sistem rekomendasi berita atau untuk menghasilkan berita secara otomatis.</em></p>
+<p><strong>Manfaat dan Penggunaan Data Hasil Crawling :</strong></p>
+<p><strong>Agregasi Berita :</strong> <em>Data yang dikumpulkan dapat digunakan untuk membuat platform agregasi berita yang menyajikan berita dari berbagai sumber.</em></p>
+<p><strong>Analisis Sentimen :</strong> <em>Data berita dapat digunakan untuk analisis sentimen, membantu perusahaan memahami opini publik terhadap topik tertentu.</em></p>
+<p><strong>Pemantauan Media :</strong> Data dapat dimanfaatkan oleh agensi untuk memantau media dan menyusun laporan tentang tren berita.</p>
+<p><strong>Penelitian :</strong> <em>Peneliti dapat menggunakan data hasil crawling untuk studi terkait jurnalisme, media, atau fenomena sosial lainnya.</em></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="code-program-proses-crawling-berita-online">
+<h1>Code Program Proses <strong>Crawling Berita Online :</strong><a class="headerlink" href="#code-program-proses-crawling-berita-online" title="Link to this heading">#</a></h1>
+<p>Dalam proses crawling ini saya menggunakan beberapa library dan diantara library yang penting di import adalah <em>BeautifulSoup</em> yang berfungsi sebagai library crawler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi filter konten
+Berfungsi untuk Mem-filter dari elemen-elemen HTML pada berita yang tidak diinginkan , Contoh kasus seperti iklan, daftar isi, gambar , link sisipan, dll</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk membersihkan konten dari elemen-elemen yang tidak diinginkan</span>
+<span class="k">def</span> <span class="nf">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">content_element</span><span class="p">:</span>
+        <span class="c1"># Hapus elemen yang berisi daftar isi</span>
+        <span class="k">for</span> <span class="n">daftar_isi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;collapsible&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">daftar_isi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">unwanted</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi tag</span>
+        <span class="k">for</span> <span class="n">tag_class</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aevp&quot;</span><span class="p">,</span> <span class="s2">&quot;detail__body-tag mgt-16&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="n">tag_class</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi link sisipan</span>
+        <span class="n">link_sisip</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;linksisip&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">link_sisip</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen paragraf dan span dengan class &#39;para_caption&#39;</span>
+        <span class="n">unwanted_paragraphs</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;span&quot;</span><span class="p">],</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;para_caption&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">unwanted_paragraphs</span><span class="p">:</span>
+            <span class="n">para</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Kembalikan teks yang tersisa</span>
+        <span class="k">return</span> <span class="n">content_element</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Content Not Found&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi untuk melakukan crawling data pada situs web <a class="reference external" href="http://Detik.com">Detik.com</a>.
+Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan kategori berita yang terdapat di halaman tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">kategori</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Menghentikan proses jika jumlah artikel sudah mencapai minimum yang diinginkan</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
+        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
+
+        <span class="c1"># Bersihkan konten menggunakan fungsi clean_content</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">)</span>
+
+        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://finance.detik.com/indeks&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Otomotif&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Keuangan&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Inisialisasi list untuk menyimpan data</span>
+<span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Batas minimal artikel per kategori</span>
+<span class="n">min_articles_per_category</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
+<span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Membuat dataframe dari list data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span> <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span> <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span><span class="p">})</span>
+
+<span class="c1"># Menyimpan dataframe ke file csv</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-Otomotif&amp;Finance.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Isi Garasi Tersangka Kasus Suap yang Seret Gubernur Kalsel
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kenapa Kendaraan Bekas Harus di Balik Nama?
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chery Tiggo 8 Dijual Rp 300 Jutaan, Segini Beda Harganya dengan Pajero-Fortuner Cs
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mobil Lebih Kuat Lewat Tanjakan Jika Berjalan Mundur, Mitos atau Fakta?
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ternyata Segini Pajak Tahunan Honda HR-V Tipe Termurah Keluaran 2024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inikah Motor Baru Honda yang Meluncur Hari Ini?
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">&lt;cell line: 65&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">69</span>         <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>         <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nn">&lt;ipython-input-3-7ab36c1f35b8&gt;</span> in <span class="ni">get_data</span><span class="nt">(url, kategori, min_articles_per_category)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>             <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">43</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> 
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Tugas 01 : <strong>Crawling Berita</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Iqbal Surya Ramadhan</p>
+<p>NIM  : 210411100002</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<p><strong>Pengertian Crawling</strong></p>
+<p>Crawling adalah proses otomatisasi yang dilakukan oleh program komputer untuk menjelajahi dan mengumpulkan data dari halaman-halaman web di internet. Proses ini sering kali dilakukan oleh bot yang dikenal sebagai web crawlers atau spiders. Web crawlers ini akan menelusuri (crawl) berbagai situs web, mengakses halaman-halaman yang ada, dan mengunduh atau mengekstraksi informasi yang dibutuhkan untuk kemudian disimpan atau diindeks dalam database.</p>
+<p><strong>Crawling website berita adalah</strong> <em>proses otomatis mengumpulkan data dari berbagai situs berita di internet. Proses ini dilakukan oleh program khusus yang disebut crawler atau spider. Crawler ini akan menjelajahi internet, mengunjungi berbagai situs berita, dan mengambil data seperti judul berita, isi berita, tanggal publikasi, dan tautan terkait.</em></p>
+<p><strong>Penjelasan Data</strong></p>
+<p><em>Data yang diambil berasal dari Website DetikOto, yang merupakan bagian dari portal berita <a class="reference external" href="http://Detik.com">Detik.com</a>, berfokus pada topik otomotif, termasuk ulasan kendaraan, berita terbaru, tips perawatan, dan tren otomotif terkini.</em></p>
+<p><em>Data diambil menggunakan metode web crawling atau scraping untuk pengumpulan data dengan mengarahkan crawler ke <a class="reference external" href="https://oto.detik.com/indeks">https://oto.detik.com/indeks</a> dan mengumpulkan data terkait otomotif.</em></p>
+<p><strong>contoh data :</strong></p>
+<ul class="simple">
+<li><p>judul : <em>Komunitas Moge HOG Indo Jakarta Chapter Tuntaskan Touring ke Bali</em></p></li>
+<li><p>tanggal : <em>Selasa, 03 Sep 2024 20:38 WIB</em></p></li>
+<li><p>isi/deskripsi : <em>Jakarta - Komunitas motor gede (moge) Harley-Davidson Owners Group (H.O.G.) Indo Jakarta Chapter telah menuntaskan touring ke Bali selama tiga hari. Sebanyak 232 rider dengan 92 pillion (istri yang ikut dibonceng naik motor) meramaikan touring moge Harley-Davidson ini.H.O.G. Indo Jakarta Chapter merupakan komunitas motor besar Harley-Davidson berskala international yang baru berdiri di Jakarta. Usia komunitas ini belum genap 1 tahun, tapi membernya sudah lebih dari 550 orang. Adapun acara ini merupakan touring ketiga yang dilakukan setelah Bandung dan Solo.</em></p></li>
+<li><p>Kategori Berita : <em>Otomotif</em></p></li>
+</ul>
+<p><strong>Beautiful Soup (Python)</strong></p>
+<p><strong>Kelebihan:</strong></p>
+<p><em>Mudah digunakan dan memiliki API yang intuitif.</em></p>
+<p><em>Cocok untuk proyek-proyek kecil hingga menengah.</em></p>
+<p><em>Fleksibel dalam parsing HTML dan XML.</em></p>
+<p><strong>Kekurangan:</strong></p>
+<p><em>Tidak sekuat Scrapy untuk proyek yang kompleks.</em></p>
+<p><em>Tidak memiliki fitur built-in untuk manajemen permintaan seperti Scrapy.</em></p>
+<p><strong>Fungsi Crawling</strong></p>
+<ol class="arabic simple">
+<li><p>Mengindeks Halaman Web:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Crawling adalah langkah pertama dalam proses pengindeksan halaman web oleh mesin pencari. Web crawler akan mengunjungi halaman-halaman web, membaca kontennya, dan menyimpannya ke dalam indeks mesin pencari. Ini memungkinkan mesin pencari untuk menemukan dan menampilkan halaman-halaman tersebut dalam hasil pencarian.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Pengumpulan Data:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Crawling memungkinkan pengumpulan data dari berbagai situs web untuk keperluan tertentu, seperti analisis bisnis, riset pasar, atau pengembangan model kecerdasan buatan. Dengan crawling, data dari berbagai sumber bisa dikumpulkan secara otomatis tanpa harus melakukannya secara manual.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Pemantauan Perubahan Konten:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Dengan crawling, perubahan atau pembaruan pada suatu situs web dapat dipantau secara berkala. Ini berguna untuk aplikasi yang memerlukan informasi terbaru, seperti agregator berita, alat pemantau harga, atau layanan notifikasi.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>SEO (Search Engine Optimization):</p></li>
+</ol>
+<ul class="simple">
+<li><p>Bagi pengelola situs web, memahami bagaimana proses crawling bekerja dapat membantu dalam optimasi mesin pencari (SEO). Dengan memastikan bahwa halaman-halaman web mereka mudah di-crawl dan diindeks, mereka bisa meningkatkan kemungkinan situs web mereka muncul di hasil pencarian mesin pencari.</p></li>
+</ul>
+<p><strong>Teknologi yang Digunakan :</strong></p>
+<ul class="simple">
+<li><p>Library Pemrograman: Python dengan library seperti BeautifulSoup4, Scrapy, dan Requests adalah pilihan populer karena fleksibel dan memiliki banyak fitur.</p></li>
+<li><p>Python dan Scrapy : Scrapy adalah framework open-source di Python yang banyak digunakan untuk crawling data, termasuk berita online. Scrapy memudahkan proses fetching, parsing, dan menyimpan data.</p></li>
+<li><p>BeautifulSoup: Library Python ini digunakan untuk mengurai dokumen HTML dan XML, membantu mengekstrak data yang diinginkan dari halaman web.</p></li>
+<li><p>Selenium: Selenium digunakan untuk melakukan crawling pada halaman web yang memerlukan interaksi dinamis, seperti login atau scroll.</p></li>
+<li><p>API Berita: Beberapa situs berita menyediakan API yang memudahkan akses data mereka tanpa perlu crawling. Ini adalah cara yang lebih legal dan stabil untuk mendapatkan data.</p></li>
+<li><p>Perangkat Lunak Khusus: Ada juga perangkat lunak khusus yang dirancang untuk crawling data, seperti Octoparse dan ParseHub.</p></li>
+</ul>
+<p><strong>Beautiful Soup: Perpustakaan Python untuk Parsing HTML dan XML</strong></p>
+<p><strong>Beautiful Soup</strong> <em>adalah sebuah perpustakaan Python yang sangat populer dan mudah digunakan untuk parsing dokumen HTML dan XML. Dengan menggunakan Beautiful Soup, kita dapat mengekstrak data dari halaman web dengan cara yang efisien dan elegan. Bayangkan BeautifulSoup sebagai sebuah parser yang dapat mengubah dokumen HTML atau XML yang berantakan menjadi struktur data yang mudah dipahami oleh Python.</em></p>
+<p><strong>Mengapa Menggunakan BeautifulSoup?</strong></p>
+<ul class="simple">
+<li><p>Sederhana: BeautifulSoup memiliki API yang sangat intuitif dan mudah dipelajari, bahkan bagi pemula.</p></li>
+<li><p>Fleksibel: BeautifulSoup dapat digunakan untuk berbagai jenis parsing, mulai dari tugas sederhana hingga yang kompleks.</p></li>
+<li><p>Pythonic: BeautifulSoup terintegrasi dengan baik dengan ekosistem Python, sehingga Anda dapat dengan mudah menggabungkan BeautifulSoup dengan perpustakaan Python lainnya.</p></li>
+<li><p>Komunitas yang Besar: BeautifulSoup memiliki komunitas yang sangat aktif, sehingga Anda dapat dengan mudah menemukan dokumentasi, tutorial, dan bantuan jika Anda mengalami kesulitan.</p></li>
+</ul>
+<p><strong>Kegunaan BeautifulSoup</strong></p>
+<p><strong>Web Scraping:</strong> <em>Mengambil data dari halaman web untuk berbagai tujuan, seperti analisis sentimen, riset pasar, dan pengembangan aplikasi.</em></p>
+<p><strong>Parsing Data:</strong> <em>Mengubah data yang tidak terstruktur menjadi format yang terstruktur.</em></p>
+<p><strong>Automasi:</strong> <em>Mengotomatiskan tugas-tugas yang berulang, seperti mengunduh data dari banyak halaman web.</em></p>
+<p><strong>Contoh Penggunaan Crawling Data :</strong></p>
+<p><strong>E-commerce:</strong> <em>Untuk membandingkan harga produk dari berbagai toko online.</em></p>
+<p><strong>Riset Pasar:</strong> <em>Untuk mengumpulkan data tentang tren pasar, opini konsumen, atau perilaku kompetitor.</em></p>
+<p><strong>Jurnalisme :</strong> <em>Untuk mengumpulkan data dari berbagai sumber berita untuk membuat laporan yang komprehensif.</em></p>
+<p><strong>Pengembangan Produk:</strong> <em>Untuk mengumpulkan data yang dapat digunakan untuk melatih model machine learning dan mengembangkan produk baru.</em></p>
+<p><strong>Akademik:</strong> <em>Untuk mengumpulkan data untuk penelitian ilmiah.</em></p>
+<p><strong>Cara Crawling Data :</strong></p>
+<p><em>pertama kita tentukan terlebih dahulu ingin mengambil data berita dari sumber mana, jika sudah menentukan data yang akan diambil dan di crawling, kemudian kita lakukan crawling data menggunakan code.</em></p>
+<ol class="arabic simple">
+<li><p>langkah pertama melakukan import Library yang akan mempermudah saat melakukan crawling data.</p></li>
+</ol>
+<ul class="simple">
+<li><p><em>import requests (digunakan untuk melakukan permintaan HTTP ke web server, seperti GET atau POST, dan mendapatkan tanggapan, termasuk HTML dari halaman web yang akan discrape.)</em></p></li>
+<li><p><em>from bs4 import BeautifulSoup (digunakan untuk parsing dokumen HTML yang didapatkan dari permintaan HTTP, membuatnya lebih mudah untuk bergerak melalui struktur HTML, mencari elemen, dan mengubah data.)</em></p></li>
+<li><p><em>import pandas as pd (library ini mengorganisir data dalam bentuk tabel, seperti dataframe, yang memudahkan analisis dan penyimpanan data kedalam format seperti CSV.)</em></p></li>
+<li><p><em>import time (library  ini menambahkan jeda waktu, atau tidur, antara satu operasi dan operasi berikutnya, yang penting untuk proses crawling agar tidak terlalu banyak permintaan dalam waktu singkat.)</em></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>langkah kedua code mengambil data dari sebuah halaman web, memprosesnya, dan mengekstrak artikel-artikel yang relevan.</p></li>
+<li><p>langkah ketiga code melakukan pengecekan, dengan memeriksa satu per satu artikel yang ditemukan di halaman web. Jika sudah berhasil mengambil 10 artikel, prosesnya akan berhenti.
+Untuk setiap artikel, kode akan mencari dan membuka link yang mengarah ke halaman detail artikel tersebut. Jika ada masalah seperti link rusak atau halaman tidak bisa dibuka, kode ini akan mencatat kesalahan tersebut dan langsung melanjutkan ke artikel berikutnya tanpa menghentikan keseluruhan proses pengambilan data.</p></li>
+<li><p>langkah keempat code mengambil judul, tanggal publikasi, dan isi dari setiap artikel yang ada di halaman web. Pertama, kode memproses halaman artikel dengan menggunakan BeautifulSoup untuk memudahkan pencarian elemen HTML yang berisi informasi tersebut. Jika elemen seperti judul, tanggal, atau isi ditemukan, data diambil dan disimpan dalam daftar; jika tidak ditemukan, elemen tersebut akan ditandai sebagai “Tidak ditemukan”. Setiap judul artikel yang berhasil ditemukan akan dicetak di layar.</p></li>
+<li><p>langkah kelima code membuat dua daftar, atau list, yang digunakan dalam proses crawling data. Daftar pertama, base_urls, yang berisi URL halaman web yang akan diambil datanya,  halaman indeks DetikFood. Daftar kedua, categories, berisi kategori yang terkait dengan data yang ingin diambil, yaitu “Makanan”. Keduanya akan digunakan bersama dalam proses crawling untuk menentukan halaman web mana yang harus diakses dan kategori mana yang relevan dengan pencarian.</p></li>
+<li><p>langkah keenam code membuat tiga daftar kosong, judul, tanggal, dan isi, yang akan digunakan untuk menyimpan data hasil crawling. Judul, tanggal, dan isi menyimpan judul dan konten utama artikel, dan daftar tanggal menyimpan tanggal publikasi setiap artikel. Ini mempersiapkan tempat untuk menyimpan data yang akan diambil dari halaman web di masa mendatang.</p></li>
+<li><p>langkah ketujuh membuat code Untuk setiap kombinasi URL dan kategori yang telah dibuat sebelumnya, kode ini melakukan proses iterasi, atau perulangan. Kode akan mengambil data dari beberapa halaman untuk setiap URL, mulai dari halaman 1 hingga 3. Jika jumlah artikel mencapai sepuluh, proses akan dihentikan. Setelah membuat URL baru yang sesuai untuk setiap halaman, fungsi get_data digunakan untuk mengambil data dari halaman tersebut. Untuk mencegah data diambil terlalu cepat, kode menunggu selama dua detik setelah mengambil data dari satu halaman sebelum melanjutkan ke halaman berikutnya.</p></li>
+<li><p>langkah terakhir membuat code untuk mengumpulkan data yang disimpan dalam bentuk daftar judul, tanggal, dan isi, lalu menyusunnya ke dalam bentuk tabel DataFrame menggunakan pustaka pandas. “Judul”, “tanggal”, dan “isi” adalah nama kolom dalam tabel DataFrame. Kode menyimpan tabel ke dalam file CSV dengan nama “Crawl-berita.csv” tanpa index. Setelah itu, Anda dapat membuka dan menganalisis file CSV ini menggunakan aplikasi spreadsheet atau perangkat lunak lain yang mendukung format CSV.</p></li>
+</ol>
+<p><strong>Tujuan Crawling Berita Online :</strong></p>
+<p><strong>Mengumpulkan Informasi :</strong> <em>Tujuan utama crawling berita adalah untuk mengumpulkan informasi terbaru dari berbagai sumber berita. Informasi ini bisa digunakan untuk membuat agregasi berita, analisis sentimen, atau membangun basis data untuk penelitian.</em></p>
+<p><strong>Pemantauan Berita:</strong> <em>Crawling dapat digunakan untuk memantau berita secara real-time, membantu perusahaan atau individu untuk tetap up-to-date dengan perkembangan terbaru.</em></p>
+<p><strong>Pengindeksan untuk Mesin Pencari:</strong> <em>Beberapa perusahaan melakukan crawling untuk mengindeks konten berita sehingga dapat ditampilkan dalam hasil pencarian.</em></p>
+<p><strong>Membangun Agregator Berita:</strong> <em>Data yang dikumpulkan oleh crawler dapat digunakan untuk membuat agregator berita, yaitu platform yang mengumpulkan berita dari berbagai sumber dan menyajikannya dalam satu tempat. Contohnya adalah Google News.</em></p>
+<p><strong>Analisis Sentimen:</strong> <em>Dengan mengumpulkan berita dalam jumlah besar, kita dapat menganalisis sentimen publik terhadap suatu topik tertentu. Misalnya, kita dapat mengetahui apakah opini publik terhadap suatu produk baru cenderung positif atau negatif.</em></p>
+<p><strong>Riset Jurnalistik:</strong> <em>Wartawan dapat menggunakan data yang dikumpulkan oleh crawler untuk melakukan investigasi atau membuat laporan yang lebih mendalam.</em></p>
+<p><strong>Pengembangan AI:</strong> <em>Data berita dapat digunakan untuk melatih model machine learning, misalnya untuk membuat sistem rekomendasi berita atau untuk menghasilkan berita secara otomatis.</em></p>
+<p><strong>Manfaat dan Penggunaan Data Hasil Crawling :</strong></p>
+<p><strong>Agregasi Berita :</strong> <em>Data yang dikumpulkan dapat digunakan untuk membuat platform agregasi berita yang menyajikan berita dari berbagai sumber.</em></p>
+<p><strong>Analisis Sentimen :</strong> <em>Data berita dapat digunakan untuk analisis sentimen, membantu perusahaan memahami opini publik terhadap topik tertentu.</em></p>
+<p><strong>Pemantauan Media :</strong> Data dapat dimanfaatkan oleh agensi untuk memantau media dan menyusun laporan tentang tren berita.</p>
+<p><strong>Penelitian :</strong> <em>Peneliti dapat menggunakan data hasil crawling untuk studi terkait jurnalisme, media, atau fenomena sosial lainnya.</em></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>Code Program Proses <strong>Crawling Berita Online :</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h1>
+<p>Dalam proses crawling ini saya menggunakan beberapa library dan diantara library yang penting di import adalah <em>BeautifulSoup</em> yang berfungsi sebagai library crawler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi filter konten
+Berfungsi untuk Mem-filter dari elemen-elemen HTML pada berita yang tidak diinginkan , Contoh kasus seperti iklan, daftar isi, gambar , link sisipan, dll</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk membersihkan konten dari elemen-elemen yang tidak diinginkan</span>
+<span class="k">def</span> <span class="nf">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">content_element</span><span class="p">:</span>
+        <span class="c1"># Hapus elemen yang berisi daftar isi</span>
+        <span class="k">for</span> <span class="n">daftar_isi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;collapsible&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">daftar_isi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">unwanted</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi tag</span>
+        <span class="k">for</span> <span class="n">tag_class</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aevp&quot;</span><span class="p">,</span> <span class="s2">&quot;detail__body-tag mgt-16&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="n">tag_class</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi link sisipan</span>
+        <span class="n">link_sisip</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;linksisip&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">link_sisip</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen paragraf dan span dengan class &#39;para_caption&#39;</span>
+        <span class="n">unwanted_paragraphs</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;span&quot;</span><span class="p">],</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;para_caption&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">unwanted_paragraphs</span><span class="p">:</span>
+            <span class="n">para</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Kembalikan teks yang tersisa</span>
+        <span class="k">return</span> <span class="n">content_element</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Content Not Found&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membuat fungsi untuk melakukan crawling data pada situs web <a class="reference external" href="http://Detik.com">Detik.com</a>.
+Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan kategori berita yang terdapat di halaman tersebut.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">kategori</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Menghentikan proses jika jumlah artikel sudah mencapai minimum yang diinginkan</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">article_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+            <span class="n">article_response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request for article failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">article_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">article_response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+        <span class="n">title_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;h1&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__title&quot;</span><span class="p">)</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">title_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">title_element</span> <span class="k">else</span> <span class="s2">&quot;Title Not Found&quot;</span>
+        <span class="n">date_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__date&quot;</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">date_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">date_element</span> <span class="k">else</span> <span class="s2">&quot;Date Not Found&quot;</span>
+        <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
+
+        <span class="c1"># Bersihkan konten menggunakan fungsi clean_content</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">)</span>
+
+        <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+        <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://travel.detik.com/indeks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://www.detik.com/hikmah/indeks&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;pariwisata&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Keislaman&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Inisialisasi list untuk menyimpan data</span>
+<span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tanggal</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Batas minimal artikel per kategori</span>
+<span class="n">min_articles_per_category</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
+<span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Membuat dataframe dari list data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span> <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span> <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span><span class="p">})</span>
+
+<span class="c1"># Menyimpan dataframe ke file csv</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-pariwisata&amp;keislaman.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNPB Memperingati
+Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu Ditemukan di Dalam Botol
+Jembatan Ikonik Kota Dunia Ini Kini Hanya Boleh Dilalui Pejalan Kaki
+Pencarian Kapibara Kabur Dihentikan karena Terlihat Nyaman dan Bahagia
+Berburu &#39;Harta Karun&#39; di Pasar Loak Jatinegara
+Gunung Semeru Ditutup Menahun, Lalu Muncul 38.000 Pohon Ganja
+Healing Bisa di Jakarta, Bikin Keramik di Museum Seni Rupa dan Keramik
+MGTO Luncurkan Video Promosi &amp; MV &#39;Experience Macao Limited Edition&#39;
+Bernostalgia Melihat Museum Kereta Api Ambarawa
+Citilink Bikin PayDay Festival, Diskon Mulai Rp 500 Ribu dan 3 Keuntungan Lain
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-pariwisata&amp;keislaman.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c98808b5-f7e0-447c-9f83-c1a249bcb0a8" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Healing Bisa di Jakarta, Bikin Keramik di Muse...</td>
+      <td>Rabu, 25 Sep 2024 18:07 WIB</td>
+      <td>Jakarta - Andai tak punya waktu panjang untuk ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>MGTO Luncurkan Video Promosi &amp; MV 'Experience ...</td>
+      <td>Rabu, 25 Sep 2024 17:51 WIB</td>
+      <td>Jakarta - Untuk memperluas jangkauan kepada wi...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Bernostalgia Melihat Museum Kereta Api Ambarawa</td>
+      <td>Rabu, 25 Sep 2024 17:35 WIB</td>
+      <td>Semarang - Museum Kereta Api Ambarawa dulunya ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Citilink Bikin PayDay Festival, Diskon Mulai R...</td>
+      <td>Rabu, 25 Sep 2024 17:31 WIB</td>
+      <td>Jakarta - Citilink menghadirkan program PayDay...</td>
+      <td>pariwisata</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c98808b5-f7e0-447c-9f83-c1a249bcb0a8')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-c98808b5-f7e0-447c-9f83-c1a249bcb0a8 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-c98808b5-f7e0-447c-9f83-c1a249bcb0a8');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-f5356b5e-ab03-4a01-89de-7b095f6d40f4">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f5356b5e-ab03-4a01-89de-7b095f6d40f4')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-f5356b5e-ab03-4a01-89de-7b095f6d40f4 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="penjelasan-code-program-crawling-data-berita-online">
+<h1>PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong><a class="headerlink" href="#penjelasan-code-program-crawling-data-berita-online" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crawl-berita-pariwisata&amp;keislaman.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-bb826fe9-05d0-4b6e-9714-241f230dc25e" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Labuan Bajo Tak Lepas dari Bahaya Tsunami, BNP...</td>
+      <td>Rabu, 25 Sep 2024 20:31 WIB</td>
+      <td>Jakarta - Labuan Bajo, Manggarai Barat, Nusa T...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kapsul Waktu! Catatan Arkeolog 200 Tahun Lalu ...</td>
+      <td>Rabu, 25 Sep 2024 20:05 WIB</td>
+      <td>Jakarta - Harta karun tak hanya benda saja, ta...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Jembatan Ikonik Kota Dunia Ini Kini Hanya Bole...</td>
+      <td>Rabu, 25 Sep 2024 19:31 WIB</td>
+      <td>Jakarta - Ibu kota Prancis, Paris, menjadi per...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pencarian Kapibara Kabur Dihentikan karena Ter...</td>
+      <td>Rabu, 25 Sep 2024 19:05 WIB</td>
+      <td>Jakarta - Kapibara kabur dari kandangnya di Th...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Berburu 'Harta Karun' di Pasar Loak Jatinegara</td>
+      <td>Rabu, 25 Sep 2024 19:00 WIB</td>
+      <td>Jakarta - Pasar Loak Jatinegara atau Jembatan ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Gunung Semeru Ditutup Menahun, Lalu Muncul 38....</td>
+      <td>Rabu, 25 Sep 2024 18:31 WIB</td>
+      <td>Jakarta - Gunung Semeru telah ditutup bertahun...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Healing Bisa di Jakarta, Bikin Keramik di Muse...</td>
+      <td>Rabu, 25 Sep 2024 18:07 WIB</td>
+      <td>Jakarta - Andai tak punya waktu panjang untuk ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>MGTO Luncurkan Video Promosi &amp; MV 'Experience ...</td>
+      <td>Rabu, 25 Sep 2024 17:51 WIB</td>
+      <td>Jakarta - Untuk memperluas jangkauan kepada wi...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Bernostalgia Melihat Museum Kereta Api Ambarawa</td>
+      <td>Rabu, 25 Sep 2024 17:35 WIB</td>
+      <td>Semarang - Museum Kereta Api Ambarawa dulunya ...</td>
+      <td>pariwisata</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Citilink Bikin PayDay Festival, Diskon Mulai R...</td>
+      <td>Rabu, 25 Sep 2024 17:31 WIB</td>
+      <td>Jakarta - Citilink menghadirkan program PayDay...</td>
+      <td>pariwisata</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bb826fe9-05d0-4b6e-9714-241f230dc25e')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-bb826fe9-05d0-4b6e-9714-241f230dc25e button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-bb826fe9-05d0-4b6e-9714-241f230dc25e');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8c5b5004-b824-41a5-adaa-1b55c7e569b3">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8c5b5004-b824-41a5-adaa-1b55c7e569b3')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8c5b5004-b824-41a5-adaa-1b55c7e569b3 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong><a class="headerlink" href="#id4" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -470,6 +1702,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Membuat sebuah : Webstatis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-01-crawling-berita">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-crawling-berita-online-untuk-mendapatkan-judul-tanggal-isi-dan-kategori-berita-dari-sebuah-halaman-website-berita-online">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-program-proses-crawling-berita-online">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tugas Crawling Berita Online Untuk Mendapatkan <strong>Judul</strong>, <strong>Tanggal</strong>, <strong>Isi</strong> dan <strong>Kategori Berita</strong> dari sebuah halaman website berita online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Code Program Proses <strong>Crawling Berita Online :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-code-program-crawling-data-berita-online">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PENJELASAN CODE PROGRAM <strong>CRAWLING DATA BERITA ONLINE :</strong></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
