@@ -1,0 +1,2090 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas 6 : Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD) &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas_PPWA/Tugas-06';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita" href="Tugas-07.html" />
+    <link rel="prev" title="Tugas 05 : keyword extraction" href="Tugas-05.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas-02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-04.html">Tugas 04 : <strong>Centrality</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-05.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-07.html">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-08.html">Tugas - 8 Clustering menggunakan Fuzzy C Means</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/hasan8676/PPWA/blob/gh-pages/_sources/Tugas_PPWA/Tugas-06.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/hasan8676/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/hasan8676/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas_PPWA/Tugas-06.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas_PPWA/Tugas-06.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-6-membuat-pencarian-query-dengan-kalimat-dalam-dokumen-dengan-penerapan-singular-value-decomposition-svd">
+<h1>Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)<a class="headerlink" href="#tugas-6-membuat-pencarian-query-dengan-kalimat-dalam-dokumen-dengan-penerapan-singular-value-decomposition-svd" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Hasan Basri</p>
+<p>NIM  : 210411100169</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+<p>mencari 100 dokumen itu (masukkan 1 kalimat, ketemunya dokumen yg mana)</p>
+<p>data tfidf ditransofrmasi menjadi sdikit dimensi menggunakan svd
+yg diambil v dan sigma (v tdk diambil smua)(Sebagian dri v)
+mentransformasi supaya dikit kolom</p>
+<p>cosinus similtas (mirip mendekati 1) boleh pke euclidean</p>
+<ul class="simple">
+<li><p>membuat sistem pencarian dokumen</p></li>
+<li><p>reduksi dimensi SVD</p></li>
+<li><p>data baru juga di reduksi</p></li>
+<li><p>mencari kemiripan ecludian distance</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d5df0069828e&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, readonly)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">120000</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Mount your Google Drive at the specified mountpoint path.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">_mount</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>       <span class="n">mountpoint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>   <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_Preprocessing_Hasan.csv&quot;</span><span class="p">)</span>
+<span class="n">news_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+
+<span class="n">news_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-af7a3250-6d4f-48e6-8a2c-5ab9e254b4a5" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleansing</th>
+      <th>case_folding</th>
+      <th>tokenize</th>
+      <th>stopword_removal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Iran Serukan Negara Muslim Bersatu Hentikan Ke...</td>
+      <td>Kamis, 17 Okt 2024 10:01 WIB</td>
+      <td>Jakarta - Presiden Iran Masoud Pezeshkian mene...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Presiden Iran Masoud Pezeshkian menek...</td>
+      <td>jakarta  presiden iran masoud pezeshkian menek...</td>
+      <td>['jakarta', 'presiden', 'iran', 'masoud', 'pez...</td>
+      <td>jakarta presiden iran masoud pezeshkian meneka...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bacaan Al-Qur'an Surah Asy-Syu'ara: Arab, Lati...</td>
+      <td>Kamis, 17 Okt 2024 09:30 WIB</td>
+      <td>NaN</td>
+      <td>Keislaman</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>['nan']</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rukun Iman Ke-2, Setiap Muslim Wajib Mengimani...</td>
+      <td>Kamis, 17 Okt 2024 08:45 WIB</td>
+      <td>Jakarta - Malaikat adalah makhluk ciptaan Alla...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Malaikat adalah makhluk ciptaan Allah...</td>
+      <td>jakarta  malaikat adalah makhluk ciptaan allah...</td>
+      <td>['jakarta', 'malaikat', 'adalah', 'makhluk', '...</td>
+      <td>jakarta malaikat makhluk ciptaan allah swt mus...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kalender Ramadhan 2025 Muhammadiyah dan Predik...</td>
+      <td>Kamis, 17 Okt 2024 08:00 WIB</td>
+      <td>Jakarta - Kalender Ramadhan 2025 versi Muhamma...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Kalender Ramadhan  versi Muhammadiyah...</td>
+      <td>jakarta  kalender ramadhan  versi muhammadiyah...</td>
+      <td>['jakarta', 'kalender', 'ramadhan', 'versi', '...</td>
+      <td>jakarta kalender ramadhan versi muhammadiyah t...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20 Gambaran Kehidupan di Neraka Menurut Al-Qur...</td>
+      <td>Kamis, 17 Okt 2024 07:15 WIB</td>
+      <td>Jakarta - Gambaran kehidupan di neraka selalu ...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Gambaran kehidupan di neraka selalu m...</td>
+      <td>jakarta  gambaran kehidupan di neraka selalu m...</td>
+      <td>['jakarta', 'gambaran', 'kehidupan', 'di', 'ne...</td>
+      <td>jakarta gambaran kehidupan neraka pengingat ke...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>Praha Incar Turis-Turis Kaya, 'Wisata Pub Jala...</td>
+      <td>Rabu, 16 Okt 2024 06:13 WIB</td>
+      <td>Praha - Praha ingin mengganti imej dari kota s...</td>
+      <td>Pariwisata</td>
+      <td>Praha  Praha ingin mengganti imej dari kota se...</td>
+      <td>praha  praha ingin mengganti imej dari kota se...</td>
+      <td>['praha', 'praha', 'ingin', 'mengganti', 'imej...</td>
+      <td>praha praha mengganti imej kota tujuan wisata ...</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Usai Festival Vegetarian, Phuket Pusing dengan...</td>
+      <td>Rabu, 16 Okt 2024 05:39 WIB</td>
+      <td>Phuket - Festival Vegetarian menjadi salah sat...</td>
+      <td>Pariwisata</td>
+      <td>Phuket  Festival Vegetarian menjadi salah satu...</td>
+      <td>phuket  festival vegetarian menjadi salah satu...</td>
+      <td>['phuket', 'festival', 'vegetarian', 'menjadi'...</td>
+      <td>phuket festival vegetarian salah daya tarik pa...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>Ngeri! Turis Inggris Tewas Saat Memanjat Jemba...</td>
+      <td>Rabu, 16 Okt 2024 05:01 WIB</td>
+      <td>Jakarta - Seorang turis yang juga kreator kont...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  Seorang turis yang juga kreator konte...</td>
+      <td>jakarta  seorang turis yang juga kreator konte...</td>
+      <td>['jakarta', 'seorang', 'turis', 'yang', 'juga'...</td>
+      <td>jakarta turis kreator konten inggris berusia t...</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Info Loker: Lion Group Buka Lowongan Mekanik Nih!</td>
+      <td>Selasa, 15 Okt 2024 23:04 WIB</td>
+      <td>Jakarta - Traveler yang ingin bekerja di dunia...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  Traveler yang ingin bekerja di dunia ...</td>
+      <td>jakarta  traveler yang ingin bekerja di dunia ...</td>
+      <td>['jakarta', 'traveler', 'yang', 'ingin', 'beke...</td>
+      <td>jakarta traveler dunia aviasi baiknya simak in...</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Pengumuman! KA Brantas dan KA Dharmawangsa Pak...</td>
+      <td>Selasa, 15 Okt 2024 22:35 WIB</td>
+      <td>Jakarta - PT Kereta Api Indonesia (Persero) ak...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  PT Kereta Api Indonesia Persero akan ...</td>
+      <td>jakarta  pt kereta api indonesia persero akan ...</td>
+      <td>['jakarta', 'pt', 'kereta', 'api', 'indonesia'...</td>
+      <td>jakarta pt kereta api indonesia persero mengop...</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 8 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-af7a3250-6d4f-48e6-8a2c-5ab9e254b4a5')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-af7a3250-6d4f-48e6-8a2c-5ab9e254b4a5 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-af7a3250-6d4f-48e6-8a2c-5ab9e254b4a5');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-a8809f84-a69e-486b-b085-38657d9379fe">
+  <button class="colab-df-quickchart" onclick="quickchart('df-a8809f84-a69e-486b-b085-38657d9379fe')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-a8809f84-a69e-486b-b085-38657d9379fe button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_80138d2a-1c4d-416c-822f-5bd7a4218e04">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('news_data')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_80138d2a-1c4d-416c-822f-5bd7a4218e04 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('news_data');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ambil kolom dokumen berita</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>TfidfVectorizer adalah alat dari pustaka scikit-learn untuk mengubah kumpulan teks menjadi representasi vektor berbasis Term Frequency-Inverse Document Frequency (TF-IDF)</p></li>
+<li><p>from sklearn.feature_extraction.text adalah modul dalam pustaka scikit-learn yang menyediakan berbagai alat untuk mengekstraksi fitur atau informasi numerik dari data teks (seperti dokumen atau kalimat) agar bisa digunakan dalam model pembelajaran mesin. Salah satu alat penting yang disediakan modul ini adalah TfidfVectorizer, yang digunakan untuk mengonversi teks menjadi representasi numerik berbasis frekuensi.</p></li>
+<li><p>from sklearn.decomposition import TruncatedSVD adalah bagian dari pustaka scikit-learn yang menyediakan alat untuk melakukan reduksi dimensi pada data numerik, terutama matriks besar, dengan menggunakan teknik Truncated Singular Value Decomposition (Truncated SVD). Truncated SVD biasanya diterapkan pada data yang telah diproses menjadi bentuk matriks dengan representasi TF-IDF atau lainnya, terutama pada data teks untuk analisis Latent Semantic Analysis (LSA).</p></li>
+<li><p>Truncated SVD adalah varian dari Singular Value Decomposition (SVD), yang menguraikan matriks menjadi tiga matriks komponen, tetapi dengan hanya menyimpan komponen terbesar. Dalam konteks pembelajaran mesin dan pemrosesan data teks, tujuan utamanya adalah untuk mereduksi dimensi data agar menjadi lebih sederhana, namun tetap mempertahankan informasi penting.</p></li>
+<li><p>from sklearn.metrics.pairwise import euclidean_distances adalah bagian dari pustaka scikit-learn yang digunakan untuk menghitung jarak Euclidean antara pasangan data dalam matriks. Jarak Euclidean adalah ukuran jarak “lurus” antara dua titik dalam ruang dimensi. Di dalam konteks pemrosesan teks atau data numerik, ini sering digunakan untuk mengukur seberapa dekat atau jauh dua dokumen atau dua sampel dalam ruang vektor.</p></li>
+<li><p>euclidean_distances digunakan untuk menghitung jarak Euclidean antara setiap pasangan baris dalam dua matriks. Jika hanya ada satu matriks yang diberikan, euclidean_distances akan menghitung jarak Euclidean antara semua baris dalam matriks tersebut, sehingga menghasilkan matriks jarak.</p></li>
+</ul>
+<p>Matriks jarak Euclidean menunjukkan jarak antara setiap dokumen:</p>
+<ul class="simple">
+<li><p>Nilai yang lebih kecil mengindikasikan bahwa dua dokumen tersebut lebih mirip secara semantik.</p></li>
+<li><p>Nilai yang lebih besar menunjukkan bahwa dua dokumen memiliki perbedaan yang lebih jauh.</p></li>
+<li><p>pandas adalah pustaka Python yang digunakan untuk manipulasi dan analisis data. Dengan menggunakan pandas, Anda dapat dengan mudah bekerja dengan data yang terstruktur dalam bentuk tabel (DataFrame) serta melakukan operasi seperti pemfilteran, pengelompokan, agregasi, dan transformasi data.</p></li>
+<li><p>numpy adalah pustaka Python yang digunakan untuk komputasi numerik. Pustaka ini menyediakan dukungan untuk array multidimensi dan berbagai fungsi matematis yang efisien untuk memanipulasi data tersebut.</p></li>
+<li><p>Digunakan untuk menyimpan dan memuat objek Python, joblib adalah pustaka Python yang digunakan untuk serialisasi (menyimpan) dan deserialisasi (memuat) objek Python, khususnya yang besar, seperti model machine learning.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tfidf_vectorizer = TfidfVectorizer()</span>
+<span class="c1"># tfidf_matrix = tfidf_vectorizer.fit_transform(documents)</span>
+
+<span class="c1"># # Mendapatkan fitur (kata-kata) dari TF-IDF</span>
+<span class="c1"># tfidf_features = tfidf_vectorizer.get_feature_names_out()</span>
+
+<span class="c1"># # Mengonversi matriks TF-IDF menjadi DataFrame</span>
+<span class="c1"># tfidf_df = pd.DataFrame(tfidf_matrix.toarray(), columns=tfidf_features)</span>
+
+<span class="c1"># # Tampilkan hasil TF-IDF</span>
+<span class="c1"># print(&quot;\nHasil TF-IDF dalam bentuk DataFrame:&quot;)</span>
+<span class="c1"># tfidf_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Replace np.nan values in &#39;documents&#39; with empty strings</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+
+<span class="c1"># Misalkan &#39;documents&#39; adalah daftar dokumen yang ingin dianalisis</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan fitur (kata-kata) dari TF-IDF</span>
+<span class="n">tfidf_features</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Mengonversi matriks TF-IDF menjadi DataFrame dan mentransposenya</span>
+<span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_features</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Tampilkan hasil TF-IDF</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil TF-IDF dalam bentuk DataFrame (fitur sebagai baris):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil TF-IDF dalam bentuk DataFrame (fitur sebagai baris):
+            0    1    2         3    4         5    6    7    8    9   ...  \
+aamiin     0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+ab         0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+abaa       0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+abaabiil   0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+abaabiila  0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+...        ...  ...  ...       ...  ...       ...  ...  ...  ...  ...  ...   
+zubkov     0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+zulaikha   0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+zulfi      0.0  0.0  0.0  0.000000  0.0  0.043141  0.0  0.0  0.0  0.0  ...   
+zulhijah   0.0  0.0  0.0  0.016557  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+zulkipli   0.0  0.0  0.0  0.000000  0.0  0.000000  0.0  0.0  0.0  0.0  ...   
+
+            90   91   92   93   94   95   96   97   98   99  
+aamiin     0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+ab         0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+abaa       0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+abaabiil   0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+abaabiila  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+...        ...  ...  ...  ...  ...  ...  ...  ...  ...  ...  
+zubkov     0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+zulaikha   0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+zulfi      0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+zulhijah   0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+zulkipli   0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  
+
+[6772 rows x 100 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menggunakan .T saat membuat tfidf_df, sehingga hasil akhirnya adalah fitur (kata-kata) sebagai baris dan setiap kolom mewakili dokumen. Ini membuat hasil TF-IDF lebih mudah dibaca jika kita ingin menganalisis bobot setiap fitur (kata) per dokumen.</p>
+<ol class="arabic simple">
+<li><p>membuat sebuah objek TfidfVectorizer. Ini adalah langkah pertama untuk mengonversi kumpulan dokumen teks menjadi representasi numerik berdasarkan frekuensi kata dengan mempertimbangkan seberapa umum atau jarang kata tersebut dalam koleksi dokumen.</p></li>
+<li><p>TfidfVectorizer mengubah teks menjadi matriks TF-IDF, yang merupakan representasi numerik dari kata-kata dalam dokumen.</p></li>
+<li><p>menggunakan metode fit_transform() pada objek tfidf_vectorizer untuk menerapkan TF-IDF ke kumpulan dokumen yang disimpan dalam variabel documents.</p></li>
+<li><p>Hasilnya, tfidf_matrix adalah matriks yang menyimpan nilai TF-IDF untuk setiap kata dalam setiap dokumen. Setiap baris mewakili satu dokumen, dan setiap kolom mewakili satu kata (fitur) dari kumpulan dokumen.</p></li>
+<li><p>Dengan menggunakan get_feature_names_out(), kita dapat mengambil daftar kata (fitur) yang telah diidentifikasi oleh TfidfVectorizer. Ini adalah kata-kata unik yang ada dalam kumpulan dokumen.</p></li>
+<li><p>Variabel tfidf_features sekarang berisi daftar semua kata yang digunakan dalam analisis TF-IDF.</p></li>
+<li><p>mengonversi matriks TF-IDF (yang awalnya dalam bentuk sparse matrix) menjadi DataFrame menggunakan pd.DataFrame().</p></li>
+<li><p>Metode toarray() digunakan untuk mengubah sparse matrix menjadi array NumPy, yang kemudian dapat dengan mudah dimasukkan ke dalam DataFrame.</p></li>
+<li><p>columns=tfidf_features memberikan nama kolom pada DataFrame sesuai dengan kata-kata (fitur) yang ada.</p></li>
+<li><p>menampilkan DataFrame tfidf_df yang berisi nilai TF-IDF untuk setiap kata di setiap dokumen.</p></li>
+</ol>
+<p><strong>Singular Value Decomposition (SVD)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Menggunakan SVD untuk reduksi dimensi</span>
+<span class="c1"># n_components = 100</span>
+<span class="c1"># svd = TruncatedSVD(n_components=n_components)</span>
+<span class="c1"># svd_matrix = svd.fit_transform(tfidf_matrix)</span>
+
+<span class="c1"># # Mengubah hasil SVD menjadi DataFrame</span>
+<span class="c1"># svd_df = pd.DataFrame(svd_matrix, columns=[f&#39;feature {i+1}&#39; for i in range(n_components)])</span>
+
+<span class="c1"># # Menampilkan hasil</span>
+<span class="c1"># print(&quot;Hasil reduksi dimensi dengan SVD:&quot;)</span>
+<span class="c1"># svd_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggunakan SVD untuk reduksi dimensi</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_components</span><span class="p">)</span>
+<span class="n">svd_matrix</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">)</span>
+
+<span class="c1"># Mengubah hasil SVD menjadi DataFrame</span>
+<span class="n">svd_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">svd_matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_components</span><span class="p">)])</span>
+
+<span class="c1"># Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil reduksi dimensi dengan SVD:&quot;</span><span class="p">)</span>
+<span class="n">svd_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil reduksi dimensi dengan SVD:
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-c664a811-e3cf-4ebe-8029-6b77cd8b9fd2" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>...</th>
+      <th>91</th>
+      <th>92</th>
+      <th>93</th>
+      <th>94</th>
+      <th>95</th>
+      <th>96</th>
+      <th>97</th>
+      <th>98</th>
+      <th>99</th>
+      <th>100</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.110493</td>
+      <td>0.001359</td>
+      <td>0.031066</td>
+      <td>0.001588</td>
+      <td>0.053761</td>
+      <td>0.036660</td>
+      <td>-0.029007</td>
+      <td>0.080733</td>
+      <td>-0.099305</td>
+      <td>0.042532</td>
+      <td>...</td>
+      <td>0.007694</td>
+      <td>0.006916</td>
+      <td>-0.004255</td>
+      <td>-0.002584</td>
+      <td>0.003955</td>
+      <td>-0.002007</td>
+      <td>0.002198</td>
+      <td>0.000414</td>
+      <td>0.000224</td>
+      <td>-2.987909e-19</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.282719</td>
+      <td>-0.205761</td>
+      <td>-0.029395</td>
+      <td>-0.030589</td>
+      <td>-0.036069</td>
+      <td>-0.014527</td>
+      <td>-0.002444</td>
+      <td>-0.017847</td>
+      <td>0.007204</td>
+      <td>-0.035738</td>
+      <td>...</td>
+      <td>0.002726</td>
+      <td>-0.000051</td>
+      <td>0.003010</td>
+      <td>-0.000772</td>
+      <td>-0.001028</td>
+      <td>-0.001149</td>
+      <td>-0.003963</td>
+      <td>-0.001884</td>
+      <td>-0.000308</td>
+      <td>-1.030060e-16</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.061380</td>
+      <td>0.023102</td>
+      <td>0.109489</td>
+      <td>0.080139</td>
+      <td>0.518540</td>
+      <td>-0.491117</td>
+      <td>0.202782</td>
+      <td>-0.013010</td>
+      <td>0.045813</td>
+      <td>-0.011109</td>
+      <td>...</td>
+      <td>0.039017</td>
+      <td>0.010242</td>
+      <td>0.002959</td>
+      <td>0.026359</td>
+      <td>-0.003785</td>
+      <td>-0.001713</td>
+      <td>0.002995</td>
+      <td>0.000739</td>
+      <td>-0.000012</td>
+      <td>-1.628675e-16</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.292447</td>
+      <td>-0.192141</td>
+      <td>-0.013284</td>
+      <td>-0.033423</td>
+      <td>-0.034398</td>
+      <td>-0.000757</td>
+      <td>0.011308</td>
+      <td>-0.008904</td>
+      <td>-0.017783</td>
+      <td>-0.090181</td>
+      <td>...</td>
+      <td>0.003751</td>
+      <td>0.004190</td>
+      <td>0.003915</td>
+      <td>-0.003198</td>
+      <td>0.003496</td>
+      <td>0.001719</td>
+      <td>-0.001416</td>
+      <td>-0.000133</td>
+      <td>-0.000229</td>
+      <td>2.161226e-16</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>0.062469</td>
+      <td>0.033656</td>
+      <td>0.081548</td>
+      <td>0.008528</td>
+      <td>0.064518</td>
+      <td>0.056404</td>
+      <td>-0.091251</td>
+      <td>0.011009</td>
+      <td>-0.092769</td>
+      <td>0.010968</td>
+      <td>...</td>
+      <td>0.011117</td>
+      <td>-0.013415</td>
+      <td>-0.001411</td>
+      <td>-0.000438</td>
+      <td>-0.000236</td>
+      <td>0.006870</td>
+      <td>0.007640</td>
+      <td>-0.000451</td>
+      <td>-0.000168</td>
+      <td>8.582016e-17</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.049629</td>
+      <td>0.024674</td>
+      <td>0.060501</td>
+      <td>0.013246</td>
+      <td>0.083287</td>
+      <td>0.062497</td>
+      <td>-0.100594</td>
+      <td>-0.021326</td>
+      <td>-0.045690</td>
+      <td>-0.006969</td>
+      <td>...</td>
+      <td>-0.008777</td>
+      <td>0.000129</td>
+      <td>0.001661</td>
+      <td>-0.000761</td>
+      <td>-0.003693</td>
+      <td>0.000670</td>
+      <td>0.002044</td>
+      <td>0.001853</td>
+      <td>0.000507</td>
+      <td>-1.072648e-17</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.108899</td>
+      <td>0.053186</td>
+      <td>0.046970</td>
+      <td>0.038515</td>
+      <td>0.085366</td>
+      <td>0.054746</td>
+      <td>-0.006478</td>
+      <td>0.102111</td>
+      <td>-0.172763</td>
+      <td>0.026996</td>
+      <td>...</td>
+      <td>0.002541</td>
+      <td>0.010726</td>
+      <td>0.001227</td>
+      <td>0.014159</td>
+      <td>0.010698</td>
+      <td>0.004199</td>
+      <td>-0.001766</td>
+      <td>0.007107</td>
+      <td>0.001844</td>
+      <td>-7.607764e-17</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.132533</td>
+      <td>0.149239</td>
+      <td>0.045425</td>
+      <td>-0.018484</td>
+      <td>0.027507</td>
+      <td>0.017035</td>
+      <td>-0.061102</td>
+      <td>0.016889</td>
+      <td>-0.177783</td>
+      <td>0.148279</td>
+      <td>...</td>
+      <td>0.015501</td>
+      <td>0.014468</td>
+      <td>0.016024</td>
+      <td>0.003582</td>
+      <td>-0.003636</td>
+      <td>-0.003106</td>
+      <td>-0.002070</td>
+      <td>0.001008</td>
+      <td>-0.001285</td>
+      <td>7.299899e-17</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.064053</td>
+      <td>0.058329</td>
+      <td>0.252478</td>
+      <td>-0.088827</td>
+      <td>-0.014368</td>
+      <td>-0.014947</td>
+      <td>-0.024669</td>
+      <td>-0.050687</td>
+      <td>0.031053</td>
+      <td>-0.010590</td>
+      <td>...</td>
+      <td>0.005466</td>
+      <td>-0.002238</td>
+      <td>-0.011780</td>
+      <td>0.012566</td>
+      <td>0.006811</td>
+      <td>0.002694</td>
+      <td>0.006795</td>
+      <td>-0.011124</td>
+      <td>0.000359</td>
+      <td>-3.328544e-16</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 100 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c664a811-e3cf-4ebe-8029-6b77cd8b9fd2')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-c664a811-e3cf-4ebe-8029-6b77cd8b9fd2 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-c664a811-e3cf-4ebe-8029-6b77cd8b9fd2');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-d63d613f-235d-4dca-9faf-f397ed5200f0">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d63d613f-235d-4dca-9faf-f397ed5200f0')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-d63d613f-235d-4dca-9faf-f397ed5200f0 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_ed2abae5-7c79-4e2e-ac25-86bcf0f21ea5">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('svd_df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_ed2abae5-7c79-4e2e-ac25-86bcf0f21ea5 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('svd_df');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># svd_df.head(100)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>menggunakan SVD (Singular Value Decomposition) untuk reduksi dimensi pada matriks TF-IDF.</p></li>
+<li><p>n_components: Di sini, kita menentukan jumlah komponen utama yang ingin kita ambil dari matriks TF-IDF. Dalam hal ini, kita ingin mengurangi dimensi ke 100 komponen. Jumlah ini bisa disesuaikan tergantung pada data dan tujuan analisis.</p></li>
+<li><p>TruncatedSVD: Ini adalah kelas dari pustaka sklearn.decomposition yang digunakan untuk melakukan SVD dengan cara yang efisien pada data besar dan sparse (seperti matriks TF-IDF). TruncatedSVD melakukan reduksi dimensi dengan cara menyimpan informasi penting dari data dengan mengurangi jumlah dimensi.</p></li>
+<li><p>fit_transform(): Metode ini melakukan dua langkah :</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Fit: Menyesuaikan model SVD ke matriks TF-IDF untuk menemukan struktur dan pola.</p></li>
+<li><p>Transform: Mengubah matriks TF-IDF menjadi bentuk baru (matriks SVD) dengan dimensi yang lebih rendah.</p></li>
+</ol>
+<ul class="simple">
+<li><p>svd_matrix: Hasil dari fit_transform() adalah matriks baru yang memiliki dimensi n_samples x n_components. Setiap baris di svd_matrix merepresentasikan dokumen dalam ruang dimensi yang lebih rendah.</p></li>
+<li><p>mengonversi hasil matriks SVD (yang merupakan array NumPy) menjadi sebuah DataFrame menggunakan pandas.</p></li>
+<li><p>pd.DataFrame(svd_matrix, …): Ini menciptakan DataFrame baru dengan baris yang sama dengan jumlah dokumen dan kolom yang sesuai dengan jumlah komponen yang telah ditentukan (100).</p></li>
+<li><p>daftar komprehensif yang membuat nama kolom sebagai feature 1, feature 2, …, hingga feature 100. Ini memberikan label pada kolom-kolom baru berdasarkan jumlah komponen.</p></li>
+</ul>
+<p><strong>Implementasi</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt.zip.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>import re: Memungkinkan kita menggunakan modul reguler ekspresi (regex) untuk pencarian dan manipulasi string. Ini berguna untuk membersihkan teks, seperti menghapus karakter yang tidak diinginkan.</p></li>
+<li><p>import string: Digunakan untuk mengakses sekumpulan konstanta string, seperti daftar karakter alfabet, digit, dan tanda baca. Ini berguna untuk memfilter atau menghapus karakter tertentu dari teks.</p></li>
+<li><p>from nltk.corpus import stopwords: Mengimpor daftar kata yang umum (stopwords) dari pustaka NLTK. Stopwords adalah kata-kata yang sering muncul dalam bahasa tetapi tidak memiliki makna penting untuk analisis, seperti “dan”, “di”, “yang”, dll.</p></li>
+<li><p>from nltk.tokenize import word_tokenize: Mengimpor fungsi untuk memisahkan (tokenisasi) teks menjadi kata-kata. Tokenisasi adalah langkah awal penting dalam pemrosesan teks.</p></li>
+<li><p>import nltk: Mengimpor pustaka NLTK itu sendiri. Ini adalah pustaka yang sangat kuat untuk  menyediakan berbagai alat dan sumber daya.</p></li>
+<li><p>nltk.download(‘stopwords’): Mengunduh daftar stopwords yang diperlukan dari repositori NLTK. Ini akan memungkinkan Anda menggunakan daftar kata yang umum dalam bahasa Inggris (atau bahasa lain) untuk membersihkan teks.</p></li>
+<li><p>nltk.download(‘punkt’): Mengunduh tokenizer yang digunakan untuk memisahkan teks menjadi kata dan kalimat. punkt adalah model untuk memisahkan kalimat dan kata, yang dapat menangani berbagai jenis teks dengan baik.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="c1"># Download the necessary NLTK data</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt_tab&#39;</span><span class="p">)</span>  <span class="c1"># This line is added to download the punkt_tab data</span>
+
+
+<span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Cleaning: Menghapus angka dan tanda baca</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Stopword removal</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;indonesian&quot;</span><span class="p">))</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">search_similar_documents</span><span class="p">(</span><span class="n">query_text</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">query_text</span> <span class="o">=</span> <span class="n">preprocess_text</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+    <span class="c1"># Transformasi query text</span>
+    <span class="n">query_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">query_text</span><span class="p">])</span>
+    <span class="n">query_svd</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">query_tfidf</span><span class="p">)</span>
+
+    <span class="c1"># Hitung jarak Euclidean antara query dan dokumen</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">query_svd</span><span class="p">,</span> <span class="n">svd_matrix</span><span class="p">)</span>
+
+    <span class="c1"># Ambil indeks dokumen terdekat</span>
+    <span class="n">closest_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:</span><span class="n">top_k</span><span class="p">]</span>
+    <span class="n">similarities</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">closest_indices</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">closest_indices</span><span class="p">,</span> <span class="n">similarities</span>
+
+<span class="c1"># Input teks dan preprocessing</span>
+<span class="n">query_text</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Masukkan teks: &quot;</span><span class="p">)</span>
+<span class="n">processed_query_text</span> <span class="o">=</span> <span class="n">preprocess_text</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+<span class="c1"># Melakukan pencarian dengan teks yang telah dipreproses</span>
+<span class="n">top_k</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">indices</span><span class="p">,</span> <span class="n">distances</span> <span class="o">=</span> <span class="n">search_similar_documents</span><span class="p">(</span><span class="n">processed_query_text</span><span class="p">,</span> <span class="n">top_k</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil pencarian</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil pencarian untuk query:&quot;</span><span class="p">,</span> <span class="n">processed_query_text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dokumen ke-</span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">documents</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak Euclidean: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to /root/nltk_data...
+[nltk_data]   Unzipping tokenizers/punkt_tab.zip.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Masukkan teks: stasiun
+
+Hasil pencarian untuk query: stasiun
+Dokumen ke-65: jakarta krl rangkasbitung menghubungkan stasiun rangkasbitung banten stasiun tanah abang jakarta jalur transportasi pekerja rute memfasilitasi mobilitas masyarakat bepergian cepat kemacetan jalan raya bepergian stasiun rangkasbitung traveler stasiun dilewati jadwal keberangkatannya ketahui rute perjalanan transit stasiun tanah abang stasiun manggarai stasiun duri rute krl rangkasbitung transit jadwal keberangkatannya rute krl jabodetabek terbaru foto commuterlineid rute commuter line rangkasbitung melayani lintasan tujuan stasiun tanah abang stasiun merak stasiunstasiun rangkasbitungtanah abang traveler tanah abang stasiun jadwal keberangkatannya kereta berangkat rangkasbitung stasiun tanah abang laman commuter line jadwal keberangkatannya rutenya rangkasbitung citeras maja cikoya tigaraksa tenjo daru cilejit parung cicayur cisauk serpong rawa buntu sudimara jurang mangu pondok ranji kebayoran palmerah tanah abang rangkasbitungmerak tujuan stasiun merak traveler stasiun jadwal keberangkatannya dibandingkan kereta tanah abang keberangkatan rutenya rangkasbitung jambubaru catang cikeusal walantaka serang karangantu tonjongbaru cilegon krenceng merak rute krl rangkasbitung tujuan transit jalur stasiun tanah abang stasiun merak traveler transit stasiun tujuan rangkasbitungjakarta kota jakarta kota rangkasbitung transit melanjutkan perjalanan kereta begin kereta stasiun tanah abang turun stasiun tanah abang kereta stasiun manggarai stasiun manggarai lanjutkan perjalanan stasiun jakarta kota melewati pemberhentian stasiun jakarta kota rangkasbitungdepokbogor depok bogor traveler transit kali tanah abang manggarai kereta stasiun tanah abang turun stasiun tanah abang lanjutkan perjalanan kereta stasiun manggarai kereta arah depok bogor rangkasbitungbekasicikarang traveler bekasicikarang perjalanannya kereta stasiun tanah abang lanjutkan perjalanan stasiun manggarai kereta arah stasiun bekasicikarang rangkasbitungtangerang perjalanan tangerang traveler transit stasiun tanah abang duri rute perjalanannya kereta arah tanah abang teruskan perjalanan kereta arah duri stasiun duri kereta arah tangerang rute krl rangkasbitung jadwal keberangkatan rute perjalanan transit duri tanah abang manggarai elkrow
+Jarak Euclidean: 0.5653
+
+Dokumen ke-85: jakarta pt kereta api indonesia persero mencatat peningkatan volume penumpang ka jarak stasiun pasar senen stasiun dijanjikan perbaikan fasilitas stasiun pasar senen melayani perjalanan kereta api jarak perjalanan commuterline stasiun pasar senen melayani penumpang kereta api jarak angka meningkat signifikan persen penumpang meningkat persen penumpang januari september volume penumpang kereta api jarak stasiun pasar senen mencapai penumpang commuterline peningkatan pengguna commuterline turun stasiun pasar senen pengguna angka mengalami kenaikan persen pengguna januari september pengguna commuterline stasiun pasar senen mencapai pengguna vice president public relations kai anne purba rilis detiktravel rabu anne peningkatan volume kereta api jarak commuterline stasiun pasar senen kai program revitalisasi pengembangan berkesinambungan stasiun pasar senen langkah mengantisipasi lonjakan peningkatan penumpang stasiun pasar senen fasilitas face recognition dioperasionalkan tanggal september oktober fasilitas face recognition penumpang kereta api jarak stasiun pasar senen anne anne mengklaim stasiun pasar senen nyaman dibandingkan penambahan fasilitas stasiun peninggalan kolonial belanda penambahan ruang tunggu berac hall stasiun fasilitas eskalator peron melayani penumpang meningkat stasiun pasar senen mengalami pembangunan direncanakan tahap dikembangkan tambahan bangunan sebelah stasiun zona keberangkatan kedatangan dipisahkan rencananya pembangunan pengembangan stasiun pasar senen memakan anne anne poin rencana pengembangan stasiun pasar senen pembangunan hall crossing penumpang beutifikasi stasiun cagar budaya penataan landscape pedestrian area parkir luas stasiun pasar senen bertambah m m menampung pelanggan ka jarak penumpang pelanggan commuterline penumpang upaya menciptakan solusi ekosistem perkeretaapian kai berkomitmen mengintegrasikan layanan transportasi publik ramah lingkungan revitalisasi stasiun pasar senen diharapkan mendukung mobilitas masyarakat efisien berkelanjutan anne femfem
+Jarak Euclidean: 0.6697
+
+Dokumen ke-2: 
+Jarak Euclidean: 0.7228
+
+Dokumen ke-92: jakarta kendaraan pribadi kawasan wisata tangerang dijangkau krl commuter line tangerang traveler memperhatikan rute kereta terbarunya kereta line tangerang stasiun tangerang stasiun duri selengkapnya disimak uraian rute krl line tangerangduri peta rute krl jabodetabek merak foto dok website kai commuter krl line tangerangduri memiliki kode t total stasiun mengutip situs kai commuter daftar stasiunnya stasiun tangerang stasiun tanah stasiun batu ceper stasiun poris stasiun kali deres stasiun rawa buaya stasiun bojong indah stasiun taman kota stasiun pesing stasiun grogol stasiun duri jadwal krl line tangerangduri aplikasi access by kai jadwal keberangkatan kereta line tangerang pp jadwal krl pertamaterakhir tangerang duri wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib jadwal krl pertamaterakhir duri tangerang wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib wib rute krl tangerang tujuan traveler kereta stasiun tangerang tujuan rute krl diikuti rute krl tangerang manggarai manggarai tangerang commuter line tangerang turun stasiun stasiun duri kereta line cikarang turun stasiun manggarai melewati stasiun stasiun duri manggarai ya rute krl tangerang kota tua kota tua traveler krl line tangerang stasiun tangerang turun stasiun duri commuter line cikarang transit stasiun manggarai kereta line bogor turun stasiun stasiun jakarta kota stasiun jakarta kota barulah detikers berjalan kawasan kota tua rute krl tangerang tanah abang tangerang tanah abang commuter line tangerang stasiun tangerang turun stasiun duri kereta line cikarang turun stasiun stasiun tanah abang traveler stasiun kawasan pasar tanah abang krl line rangkasbitung wilayah tangerang selatan lebak banten menyeberang pulau pelabuhan merak kereta line merak stasiun rangkasbitung rute krl tangerang pasar senen traveler kawasan pasar senen tangerang krl line tangerang turun stasiun duri kereta line cikarang transit jatinegara commuter line cikarang kampung bandan via pasar senen barulah turun stasiun pasar senen kawasan pasar senen rute krl line tangerang lengkap jadwal keberangkatannya traveler rute lupa update jadwal dengarkan informasi stasiun info terkini aznfem
+Jarak Euclidean: 0.7584
+
+Dokumen ke-54: jakarta kereta rel listrik krl salah salah moda transportasi andalan masyarakat jabodetabek salah rute krl cikarang rute krl stasiun cikarang menjangkau wilayah jabodetabek angke kampung bandan manggarai stasiun rute sejalur traveler transit simak informasinya peta rute krl cikarang dikutip situs kai commuter peta jangkauan krl commuter line rute krl cikarang ditandai line warna biru peta rute krl jabodetabek merak foto dok website kai commuter rute krl cikarang transit stasiun ditempuh transit stasiun cikarang rute krl cikarangbekasi krl cikarangbekasi melewati stasiun pemberhentian cikarang metland telaga murni cibitung tambun bekasi timur bekasi rute krl cikarangjatinegara jatinegara stasiun transit traveler meneruskan rute tujuan pemberhentian stasiun jatinegara cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara rute krl cikarangkampung bandan pemberhentian cikarang stasiun kampung bandan perjalanan melewati stasiun cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara pondok jati kramat gang sentiong pasar senen kemayoran rajawali kampung bandan rute krl cikarangduriangke via kampung bandan line krl cikarang melewati rute stasiun kampung bandan berhentu stasiun duriangke cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara pondok jati kramat gang sentiong pasar senen kemayoran rajawali kampung bandan angke duri rute krl cikarangduriangke via manggarai krl cikarang berhenti stasiun manggarai transit traveler depok bogor nambo kereta bandara cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai sudirman karet tanah abang duri angke kampung bandan cikarangtanah abang tanah abang tujuan traveler arah rangkasbitung stasiun dilewati stasiun tanah abang cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai sudirman karet tanah abang rute krl cikarang transit rute krl cikarang transit manggarai duri jatinegara tanah abang peta commuter line stasiun transit penumpang salah kereta perubahan jadwal tujuan rute krl cikarangjakarta kota transit manggarai stasiun jakarta kota traveler kereta stasiun angkekampung bandanmanggarai manggarai kereta arah jakarta kota cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai transit cikini gondangdia juanda sawah mangga jayakarta jakarta kota rute krl cikarangdepokbogor transit manggarai perjalanan jakarta kota arah bogor traveler turun stasiun manggarai melanjutkan perjalanan stasiun depok bogor stasiun manggarai stasiun cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai transit tebet cawang duren kalibata pasar minggu pasar minggu tanjung barat lenteng agung universitas pancasila universitas indonesia pondok cina depok depok citayam bojong gede cilebut bogor rute krl cikarangnambo transit manggarai stasiun pemberhentian penumpang nambo cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai transit tebet cawang duren kalibata pasar minggu pasar minggu tanjung barat lenteng agung universitas pancasila universitas indonesia pondok cina depok depok citayam cibinong nambo rute krl cikarangtangerang transit duri penumpang memilih rute krl cikarangduri kampung bandan mannggarai penumpang transit krl tangerang cikarangduri via kampung bandan manggarai grogol pesing taman kota bojong indah rawa buaya kali deres poris batu ceper tanah tangerang cikarangrangkasbitung transit tanah abang traveler arah rangkasbitung turun stasiun tanah abang kereta tujuan angke kampung bandan lanjutkan perjalanan kereta rangkasbitung rute cikarang metland telaga murni cibitung tambun bekasi timur bekasi kranji cakung klender buaran klender jatinegara matraman manggarai sudirman karet tanah abang transit palmerah kebayoran pondok ranji jurang mangu sudimara rawa buntu serpong cisauk cicayur parung cilejit daru tenjo tigaraksa cikoya maja citeras rangkasbitung rute krl cikarang informasi traveler menggunakannya lupa update ketersediaan rute jadwal kereta aplikasi situs krl commuter line memilih angkutan efektif efisien elkfem
+Jarak Euclidean: 0.9940
+
+Dokumen ke-64: jakarta kai wisata menyediakan fasilitas mandi penitipan stasiun salah satunya stasiun pasar senen traveler mandi berdandan menyewa loker traveler mandi stasiun pasar senen fasilitas shower locker tarifnya lokasinya simak informasinya tarif shower locker stasiun pasar senen mandi menitipkan barang shower locker pasar senen ketahui biaya dibayar pembayaran shower qris debit kredit loker dibayar prepaid emoney tap cash qris tarif shower mengutip katalog shower locker tarif fasilitas kamar mandi shower locker stasiun senen rp keterangan rilis kai diterima detiktravel kamar mandi tersedia meletakkan barangbarang pelanggan mandi menyewa loker tarif penyewaan loker loker disediakan berukuran m l dalamnya paket jam jam menitipkan barang seharian loker loker m paket jam rp paket jam rp paket jam rp paket jam rp loker l paket jam rp paket jam rp paket jam rp paket jam rp fasilitas shower locker fasilitas shower locker stasiun pasar senen lengkap shower air hangat wifi minuman shower air hangat toilet perlengkapan mandi handuk sabun sampo pengering rambut ac wifi setrika uap tehkopi lokasi jam operasional shower locker arah pintu utama stasiun pasar senen loket tiket loko cafe jam operasionalnya jam informasi shower locker stasiun pasar senen tertarik fasilitas elkrow
+Jarak Euclidean: 1.0332
+
+Dokumen ke-5: jakarta gambaran kehidupan neraka pengingat keras ajaran islam menggambarkan balasan menyimpang jalan kebenaran alquran hadits menggambarkan kehidupan neraka simak gambaran rinci membuka mata menyadarkan kumpulan gambaran kehidupan neraka alquran hadits kehidupan neraka digambarkan rinci siksa api membakar penderitaan menimpa penghuninya kumpulan gambaran bayangan dahsyatnya siksa mengabaikan perintah allah swt gambaran kehidupan neraka tercantum alquran hadits luas besarnya neraka berdasarkan informasi buku jauhi neraka khalid abu syady luas besarnya neraka digambarkan hadits neraka jahanam memiliki ribuan tali kekang diseret malaikat rasulullah saw bersabda neraka jahanam tujuh puluh ribu tali kekang tali kekang tujuh puluh ribu malaikat menyeretnya hr muslim tirmidzi neraka menampung matahari digambarkan rasulullah saw hadits diriwayatkan ibnu masud ra beliau bersabda matahari sapi diikat dilemparkan neraka kiamat hr muslim tirmidzi neraka terisi penuh allah swt menempatkan kakinya hadits neraka terisi penuh allah meletakkan kakinya neraka neraka penuh sebagiannya menindih allah menzalimi makhluknya hr bukhari muslim penyiksa neraka sumber neraka makhluk kuasa menyiksa pendosa rasulullah saw bersabda batang leher neraka kiamat berbicara kuasa menyiksa jenis manusia tiaptiap orang sombong keras hati orang mempersekutukan allah orang membunuh jiwa jiwa merangkul melemparkannya jahanam sifat neraka abadi allah swt berfirman surah alfurqan ayat orangorang tuhan jauhkanlah azab jahanam sesungguhnya azabnya kekal panasnya suhu neraka hadits diriwayatkan muslim rasulullah saw betapa dahsyatnya panas api neraka dibandingkan api dunia rasulullah saw bersabda api dinyalakan anakcucu adam tujuh puluh panasnya neraka jahannam sahabat beliau sesungguhnya enam puluh sembilan masingmasing panasnya panas api dunia sekelumit dibandingkan panasnya api neraka penjelasan perbandingan panas api dunia api neraka panas neraka kali lipat panas api temui bumi api dinyalakan umat manusia dikumpulkan setara api neraka jahanam hukuman orang kafir neraka allah swt berfirman surah annisa ayat sesungguhnya orangorang kufur ayatayat kelak masukkan neraka kali kulit hangus ganti kulit merasakan kepedihan azab sesungguhnya allah maha perkasa maha bijaksana alas tidur selimut api neraka allah swt berfirman surah alaraf ayat disediakan alas tidur api neraka jahanam selimut api neraka balasan orangorang zalim penghibur hati allah swt berfirman surah azzukhruf ayat harapanmu sekalikali manfaat kepadamu menzalimi dirimu sesungguhnya orang berpaling setan bersekutu azab penghuni neraka kehausan allah swt berfirman surah maryam ayat menggiring pendurhaka neraka jahanam dahaga minuman penghuni neraka minuman penghuni neraka hamim air mendidih ghassaq air mendidih bercampur nanah alhamim allah swt berfirman surah arrahman ayat bolakbalik api neraka air mendidih panas ghassaq allah swt berfirman surah annaba ayat merasakan kesejukan dalamnya minuman air mendidih nanah kedalaman neraka rasulullah saw bersabda dzat diriku tangannya sesungguhnya jauhnya jarak pinggir neraka dasarnya batu seukuran tujuh unta hamil lemak dagingnya anakanaknya jatuh pinggiran neraka mencapai dasarnya tujuh puluh hr thabrani dinding neraka dikutip buku dahsyatnya neraka pedihnya azab neraka calon penghuninya karangan syaiful bachri azzidani gambaran menakutkan neraka keberadaan dinding luas mencapai ujung dinding puluh perjalanan henti menggambarkan betapa luasnya neraka terbayangkan akal manusia ukuran menambah kengerian siksa dalamnya suara neraka allah swt berfirman surah almulk ayat dilemparkan dalamnya neraka mendengar suaranya mengerikan membara bahan bakar neraka allah swt berfirman surah albaqarah ayat membuatnya membuatnya takutlah api neraka bahan bakarnya manusia batu disediakan orangorang kafir alat siksa neraka belenggu rantai allah swt berfirman surah alhaqqah ayat allah berfirman tangkap belenggu tangannya lehernya masukkan neraka jahim belit rantai panjangnya tujuh puluh hasta cambuk allah swt berfirman surah alhajj ayat azab cambuk besi kali darinya neraka tersiksa dikembalikan dalamnya rasakanlah azab neraka membakar gunung neraka rasulullah saw bersabda neraka gunung api bernama saud penghuni neraka ditumpuk atasnya tujuh puluh dijatuhkan puncaknya tujuh puluh mendaki puncak gunung membutuhkan tujuh puluh menuruninya hr tirmidzi aroma neraka rasulullah saw bersabda seandainya timba berisi nanah baunya busuk mengalir penghuni neraka menimpa kehidupan dunia niscaya penduduk dunia busuk baunya hr tirmidzi penghuni neraka kelaparan rasulullah saw bersabda lapar ditimpakan penghuni naraka lapar alami menyamai azab neraka tolong makanan makanan pohon berduri menggemukkan menghilangkan lapar makanan makanan menyumbat kerongkongan makanan tersendat kerongkongan dunia menghilangkannya minum air minum diangkatlah air mendidih besi pengait wajah air mendidih memanggang wajah air perut cairan memotongmotong isi perut hr tirmidzi malaikat penjaga neraka allah swt berfirman surah attahrim ayat orangorang beriman jagalah dirimu keluargamu api neraka bahan bakarnya manusia batu penjaganya malaikatmalaikat kasar keras durhaka allah perintahkan diperintahkan jembatan neraka jembatan shirath jembatan terbentang neraka jahanam jembatan memiliki karakteristik menakutkan tipis rambut tajam pedang gelap malam licin menyeberanginya terpeleset hatihati jembatan memiliki tujuh pos pos memiliki jarak perjalanan kelompok manusia melewati shirath kecepatan berbedabeda tergantung amal perbuatan uraiannya kelompok melewati shirath kecepatan kilat menyambar kelompok menyeberang shirath angin berhembus kencang kelompok ketiga melintasi shirath secepat burung terbang kelompok keempat melaluinya kuda pacu berlari kelompok berjalan cepat menyeberangi shirath kelompok keenam bergerak melewati shirath hewan ternak berlari kelompok ketujuh menyeberanginya berlari sehari semalam penuh tingkatan neraka dikutip buku surga neraka alquran assunnah ditulis umar sulaiman alasyqar neraka tingkat memiliki tingkatan berbedabeda panas siksa penghuninya tingkatantingkatan kitab allah swt berfirman surah annisa ayat munafik ditempatkan tingkatan neraka firman allah swt berbunyi sesungguhnya orangorang munafik ditempatkan tingkat neraka penolong berdasarkan kitab namanama tingkatan neraka tingkat jahanam tingkat lazha tingkat ketiga alhuthamah tingkat keempat assair tingkat saqar tingkat keenam jahim tingkat ketujuh hawiyah uraian gambaran kehidupan neraka alquran hadits rasulullah saw semoga gambaran neraka berhatihati menjalani hidup infinf
+Jarak Euclidean: 1.2339
+
+Dokumen ke-16: jakarta islam tindakan diambil selaras ketentuan ditetapkan syariat mencapai kebahagiaan dunia akhirat diciptakan hukum islam pedoman manusia bertindak dikemukakan ahli ushul al fiqh buku fatwa hubungan antaragama indonesia karya rumadi jumhur ulama ushul hukum titah allah terkait perbuatan hamba mukallaf tuntutan meninggalkan pilihan meninggalkan wadhi syarat mani hukum syariat islam terbagi wajib sunnah makruh haram mubah muslim asing istilah arti masingmasing jenis hukum pengertian wajib sunnah haram makruh mubah mengutip buku ushul fiqh kajian hukum islam ditulis iwan hermawan arti masingmasing jenis hukum islam wajib sunnah haram makruh mubah wajib pengertian wajib bahasa berasal saqith jatuh gugur lazim istilah wajib merujuk diperintahkan syariat ilzam pelaksanaan wajib pahala pelakunya niat melaksanakan perintah allah swt meninggalkan kewajiban berhak hukuman pengertian wajib pengertain fardhu mahtum lazim hukum wajib terbagi kewajiban pelaksanaannya hukum wajib dibagi a wajib muthlaq wajib muthlaq kewajiban memiliki batasan pelaksanaannya contohnya mengqadha puasa ramadan tertinggal membayar kafarah sumpah b wajib muaqqad wajib muaqqad kewajiban dilaksanakan sah ditentukan kewajiban dibagi kategori wajib muwassa kewajiban memiliki pelaksanaan luas disediakan contohnya salat dzuhur wajib mudhayyaq kewajiban pelaksanaannya disediakan contohnya puasa ramadan wajib dzu syabhaini kewajiban gabungan wajib muwassa wajib mudhayyaq contohnya ibadah haji kewajiban orang melaksanakannya hukum wajib dibagi a wajib aini kewajiban bersifat pribadi dilaksanakan orang diwakilkan contohnya puasa salat b wajib kafai kifayah kewajiban bersifat kelompok melaksanakannya berdosa orang melaksanakannya kewajiban gugur contohnya salat jenazah kewajiban berdasarkan ukurankadar pelaksanaannya hukum wajib dibagi a wajib muhaddad kewajiban dilaksanakan sesuai kadar ditentukan contohnya zakat b wajib ghairu muhaddad kewajiban memiliki ketentuan kadar contohnya menafkahi kerabat kewajiban berdasarkan kandungan kewajiban perintahnya hukum wajib dibagi a wajib muayyan kewajiban ditentukan pilihan contohnya membayar zakat melaksanakan salat b wajib mukhayyar kewajiban pilihan objek alternatif contohnya kafarat pelanggaran sumpah surah almaidah ayat arab latin l yukhidzukumullhu billaghwi f aimnikum wa lkiy yukhidzukum bim aqqattumulaimn fa kaffratuh ithmu asyarati maskna min ausathi m tuthimna ahlkum au kiswatuhum au tarru raqabah fa mal lam yajid fa shiymu tsaltsati ayym dzlika kaffratu aimnikum idz alaftum wafadh aimnakum kadzlika yubayyinullhu lakum ytih laallakum tasykurn allah menghukum disebabkan sumpahsumpahmu bersumpah menghukum disebabkan sumpahsumpah sengaja kaffarat melanggar sumpah makan sepuluh orang miskin makanan keluargamu pakaian memerdekakan budak barang sanggup kaffaratnya puasa kaffarat sumpahsumpahmu bersumpah langgar jagalah sumpahmu sunnah mandub bahasa mandub berasal madu dianjurkan istilah mandub diperintahkan syariat bersifat wajib mandub mencakup halhal haram makruh mubah memiliki konsekuensi hukuman ditinggalkan melaksanakan mandub pahala meninggalkannya hukuman literatur pendapat ulama mandub disamakan istilah sunnah nafilah mustahab tathawi ikhsan fadilah fiqh mandub merujuk tuntunan perbuatan disarankan melaksanakannya ganjaran ditinggalkan pengaruh tuntunan perbuatan nadb perbuatan dianjurkan mandub contohnya sumbangan panti jompo bersedekah hukum sunnah mandub tuntutan melakukannya terbagi sunnah muakkad sunnah ghairu muakad hukum sunnah mandub meninggalkannya terbagi sunnah hadyu sunnah zaidahzawaid sunnah nafal sunnah muakkad sunnah muakkad perbuatan nabi muhammad saw keterangan perbuatan fardhu wajib contohnya salat witir salat rakaat fajar subuh ulama berpendapat orang meninggalkan sunnah muakkad dicela dianggap berdosa meninggalkan sunnah sengaja dianggap menyalahi sunnah nabi definisi sunnah muakkad sunnah rasulullah saw konsisten penjelasan kewajiban dilaksanakan sunnah ghairu muakkad sunnah ghairu muakkad sunnah nabi muhammad saw beliau melaksanakan perbuatan rutin contohnya salat sunnah rakaat dzuhur asar sunnah rutin rasulullah saw pelaksanaannya bersifat pilihan umat islam dianjurkan meninggalkan sunnah ghairu muakkad celaan dosa sunnah hadyu sunnah hadyu perbuatan dianjurkan manfaat meninggalkan sunnah dianggap sesat tercela kelompok sengaja meninggalkannya terusmenerus diperangi sunnah hadyu pelengkap kewajiban keagamaan adzan salat berjamaah salat raya kategori sunnah sunnah sunnah muakkad pahalanya sunnah zaidahzawaid sunnah zaidah sunnah dianggap umat islam sanksi ditinggalkan contohnya mengikuti kebiasaan nabi aspek seharihari sopan santun makan minum tidur sunnah nafal sunnah nafal perbuatan tambahan dianjurkan dilaksanakan bersamaan kewajiban contohnya salat sunnah rakaat salat wajib salat tahajud salat witir istilah sunnah nafal kategori sunnah ghairu muakkad haram muharram bahasa mamnu dihalangi dilarang istilah haram dilarang syariat wajib ditinggalkan mencakup halhal wajib mandub mubah mencakup makruh orang meninggalkan perbuatan haram pahala menaati perintah allah swt melakukannya berhak hukuman hukum haram perbuatan jelasjelas dilarang syariat pendapat ulama jumhur haram diartikan larangan allah swt perbuatan ditetapkan dalil qathi dalil zhanni madzhab hanafi hukum haram didasarkan dalil qathi mengandung keraguan sedikitpun mempermudah menetapkan hukum haram surah annahl ayat arab latin wa l taql lim tashifu alsinatukumulkadziba hdz alluw wa hdz armul litaftar alallhilkadzib innalladzna yaftarna alallhilkadziba l yuflin disebutsebut lidahmu dusta halal haram mengada adakan kebohongan allah sesungguhnya orangorang mengadaadakan kebohongan allah tiadalah beruntung jumhur ulama hukum haram terbagi almuharram li dzatihi diharamkan syariat dasarnya mengandung kemudharatan kehidupan manusia bahaya terpisah zatnya perbuatan diharamkan alasan mencakup halhal makan bangkai minum khamr berzina mencuri kemudharatan perbuatan berhubungan langsung dijaga badan keturunan harta benda akal agama haram li dzatihi kecuali darurat meminum khamr diharamkan merusak akal darurat menghindari kematian dehidrasi diperbolehkan almuharram li ghairihi dilarang sifat dasarnya mengandung kemudharatan kondisi perbuatan dilarang pertimbangan mengarah halhal diharamkan contohnya jual beli barang riba membeli barang ditawar orang jual beli azan salat jumat larangan terletak konsekuensi perbuatan perbuatan sisi haram li ghairihi kebutuhan darurat contoh dokter mendiagnosis terapi pasien perempuan diperbolehkan aurat pasiennya terapi makruh makruh bahasa mubghadh dibenci istilah dilarang syari ilzam ditinggalkan dilarang syari mencakup wajib mandub mubah ilzam ditinggalkan mencakup haram makruh ditinggalkan melaksanakan perintah allah swt pelakunya pahala melakukannya hukuman istilah ushul fiqh makruh dianjurkan syariat meninggalkannya ditinggalkan pujian dilanggar berdosa meninggalkan larangan mematuhi melarang berhak ganjaran pahala meninggalkan larangan menyalahi melarang berhak ancaman dosa larangan bentuk karahah pengaruh larangan perbuatan dilarang makruh hukum makruh ulama membagi makruh tahrim makruh tanzih makruh tahrim dilarang syariat berdasarkan dalil zhanni mengandung keraguan contohnya larangan memakai bahan sutra perhiasan emas lakilaki poligami orang khawatir berbuat adil makruh tahrim dianggap tercela makruh tanzih dianjurkan ditinggalkan larangan bersifat dalil perbuatan haram jumhur ulama pelaku makruh tanzih dicela orang meninggalkannya dianggap terpuji contohnya memakan daging kuda membutuhkan perang ulama hanafiyah menganggapnya haram darurat diperbolehkan dianggap makruh pelaku makruh tahrim tergolong tercela pelaku makruh tanzih dicela orang meninggalkan jenis makruh pujian mubah mubah perintah allah swt kebebasan memilih perbuatan perbuatan mubah ganjaran diancam perbuatannya hukum pengaruh perbuatan ibahah perbuatan pilihan ditinggalkan mubah bahasa mubah mulan diumumkan madzun fih diizinkan istilah mubah berkaitan perintah larangan langsung kategori wajib mandub mencakup haram makruh perbuatan mubah pahala siksa statusnya mubah segi keterkaitannya madharat manfaat ulamaulama ushul fiqh mengemukakan mubah kedalam bentuk mubah mengandung mudharat makan minum berpakaian mubah mudharatnya perbuatan dasarnya diharamkan makan daging babi darurat mubah dasarnya bersifat mudharat syara allah swt memaafkan pelakunya contohnya pekerjaan haram islam menikahi bu tiri luslus
+Jarak Euclidean: 1.2339
+
+Dokumen ke-71: washington hubungan aschina memanas panda tiongkok panda washington dilansir channel news asia cna selasa panda raksasa berangkat china kebun binatang nasional smithsonian washington berdasarkan perjanjian pengembangbiakan penelitian panda as dekade tiongkok amerika serikat pengaturan tertib panda raksasa kebun binatang nasional washington selamat lancar asosiasi konservasi satwa liar tiongkok cwca pernyataan panda bernama li bao pejantan qing bao betina berangkat senin panda raksasa berusia as mengembalikan panda raksasa china sesuai kontrak terkahir ekor panda kebun binatang nasional dikembalikan november kurangnya pengganti dipandang orang simbol meningkatnya ketegangan washington beijing tiongkok diplomasi panda hewan dikirim washington hadiah menyusul kunjungan bersejarah presiden as richard nixon negara komunis agustus kebun binatang san diego menyambut panda raksasa kalinya sambutan kedatangan panda washington semarak situs web kebun binatang nasional dihiasi spanduk bertuliskan panda berukukan raksasa washington kebun binatang posting x kebun binatang ditutup selasa keselamatan panda staf persiapan kebun binatang dibilang kandang panda daya tarik utama dekade renovasi habitat panda meningkatkan keamanan fasilitas memaksimalkan ruang beruang berkeliaran situs web kebun binatang struktur dibangun panda meliputi kolam dangkal mandi bambu tiruan arena berburu panda mencari makan alam liar pandapanda tersedia sebulan kedatangan dikarantina beradaptasi habitat penerbangan panda makan rebung wortel roti jagung cina asosiasi konservasi bnlbnl
+Jarak Euclidean: 1.2339
+
+Dokumen ke-31: jakarta nabi musa keturunan bani israil la lahir negeri mesir mesir dikuasai firaun raja kejam menganggap tuhan nabi musa as memiliki kisah diabadikan alquran alquran nama nabi musa as yukabad kelahirannya nabi musa as memiliki kisah menarik sejarah islam berpisah ibunya diasuh firaun kisah nabi musa as selengkapnya kisah nabi musa as pelukan ibunya buku kisah nabi musa as karya abdillah diceritakan kisah malam firaun bermimpi seolaholah mesir dipimpinnya terbakar habis rakyatnya mati kecuali bani israil firaun gelisah datangnya mimpi la mengumpulkan ahli ramal mengartikan mimpinya terkumpul salah berusaha mengartikan mimpi la lakilaki keturunan bani israil meruntuhkan kekuasaannya mendengar firaun gelisah ketakutan memerintahkan bawahannya membunuh bayi lakilaki lahir keturunan bani israil hamil keturunan bani israil dilanda kegelisahan khawatir bayi lakilaki dibunuh dikisahkan buku hikmah kisah nabi rasul karya ridwan abdullah sani pengawal tentara firaun melaksanakan perintahnya rumah dimasuki diselidiki perempuan hamil perhatian melahirkan bayinya bayi lakilaki bani israil dibunuh firaun tenang aman kabar pasukannya wilayah kerajaannya bersih bayi lakilaki hidup kehendak allah swt ditolak wilayah kerajaannya mengandung bayi lakilaki firaun pasukannya nabi musa as datangnya bidan memberinya pertolongan melahirkan bidan ditunggu menolong musa melahirkan hati musa khawatir bayinya lakilaki bidan merahasiakan kelahiran bayi musa diterima sang bidan simpati bayi musa lucu merasakan betapa sedihnya hati kehilangan bayi dilahirkan musa menyusui bayinya tenang cemas khawatir keselamatan bayinya allah swt petunjuk menyembunyikan bayinya peti menghanyutkan peti berisi bayinya sungai nil allah swt petunjuk musa bersedih cemas keselamatan bayinya allah swt menjamin mengembalikan bayi mengutuskannya salah rasul musa menghanyutkan peti bayi berisi musa permukaan air sungai nil bertawakal allah swt musa memerintahkan kakak musa mengawasi mengikuti peti peti berlabuh mengambil peti betapa khawatirnya hati kakak musa peti diawasinya ditemukan istri firaun tepi sungai nil dayangnya peti dibawanya masuk istana musa kejadian sedih cemas allah swt menjamin keselamatan anaknya asiyah istri firaun orang beriman suaminya kejam asiyah istri firaun memberitahukan bayi lakilaki ditemuinya peti terapung permukaan sungai nil firaun firaun memerintahkan membunuh bayi istrinya khawatir bayi diramalkan musuh penyebab kesedihan membinasakan kerajaan istri firaun telanjur menaruh simpati sayang bayi musa suaminya bayi berdosa dibunuh sayang ambil anak kelak berguna bermanfaat hatiku tertarik kesayanganku kesayanganmu allah maha kuasa jalan terlaksananya takdir dimudahkan allah swt menakdirkan nyawa bayi selamat musa diasuh keluarga firaun keluarga firaun nama musa bayi musa bayi merah membutuhkan air susu keluarga firaun mencari orang memberikannya susu bayi musa mencoba air susunya langsung ditolak bayi istri firaun bingung memikirkan bayi angkatnya enggan meminum susu sekian istana kakak nabi musa as diperintahkan ibunya mengawasi adiknya mendengar informasi memberanikan menjumpai istri firaun menawarkan diterima bayi disusui penyamarannya firaun kakak nabi musa mengenal keluarga bayi keluarga rajin mengasuh anak kalaukalau bayi menerima air susu keluarga tawaran kakak musa diterima istri firaun kandung musa dijemput menyusui bayi musa disusukan kandungnya keluarga firaun nabi musa as meminumnya lahap musa diserahkan kandungnya diasuh menyusui imbalan upah sesuai janji allah swt nabi musa as menerima putranya selesai menyusui nabi musa as nabi musa as dikembalikan ibunya istana diasuh dibesarkan dididik anakanak raja nabi musa as mengendarai kendaraan firaun berpakaian sesuai caracara firaun dikenal orang musa bin firaun kisah nabi musa diabadikan alquran surah alqasas ayat luslus
+Jarak Euclidean: 1.2339
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nilai jarak ini menunjukkan tingkat kemiripan: semakin kecil nilai jaraknya, semakin relevan dokumen tersebut dengan kata kunci. Dengan jarak 0.8262, dokumen ini dianggap cukup relevan dalam konteks pencarian.</p>
+<p><strong>Cleaning:</strong></p>
+<ul class="simple">
+<li><p>re.sub(r’\d+’, ‘’, text): Menghapus semua angka dari teks menggunakan ekspresi reguler.</p></li>
+<li><p>text.translate(…): Menghapus semua tanda baca dengan menggunakan metode translate.</p></li>
+<li><p>text.lower(): Mengubah semua huruf dalam teks menjadi huruf kecil untuk menghindari perbedaan antara huruf besar dan kecil saat analisis.</p></li>
+<li><p>word_tokenize(text): Memisahkan teks menjadi kata-kata (token).</p></li>
+</ul>
+<p><strong>Stopword Removal:</strong></p>
+<ul class="simple">
+<li><p>stop_words = set(stopwords.words(“indonesian”)): Mengambil daftar kata-kata umum yang tidak memiliki makna penting dalam konteks analisis.</p></li>
+<li><p>words = [word for word in words if word not in stop_words]: Menggunakan pemahaman daftar untuk menghapus semua kata yang terdapat dalam daftar stopwords.</p></li>
+<li><p>Return: Fungsi mengembalikan string yang terdiri dari kata-kata yang telah diproses, digabungkan kembali menjadi satu kalimat.</p></li>
+</ul>
+<p><strong>Preprocessing:</strong></p>
+<ul class="simple">
+<li><p>query_text = preprocess_text(query_text): Memanggil fungsi preprocess_text untuk membersihkan dan mempersiapkan teks query sebelum analisis.</p></li>
+</ul>
+<p><strong>Transformasi:</strong></p>
+<ul class="simple">
+<li><p>query_tfidf = tfidf_vectorizer.transform([query_text]): Mengubah teks query yang telah diproses menjadi representasi TF-IDF.</p></li>
+<li><p>query_svd = svd.transform(query_tfidf): Mengubah matriks TF-IDF dari query menjadi bentuk yang direduksi dimensinya menggunakan SVD.</p></li>
+</ul>
+<p><strong>Menghitung Jarak:</strong></p>
+<ul class="simple">
+<li><p>distances = euclidean_distances(query_svd, svd_matrix): Menghitung jarak Euclidean antara representasi SVD dari query dan semua dokumen yang ada dalam matriks SVD.</p></li>
+</ul>
+<p><strong>Mengambil Dokumen Terdekat:</strong></p>
+<ul class="simple">
+<li><p>closest_indices = np.argsort(distances[0])[:top_k]: Mengurutkan jarak dari yang terkecil dan mengambil indeks dari top_k dokumen terdekat.</p></li>
+<li><p>similarities = distances[0][closest_indices]: Mengambil jarak dari dokumen terdekat sesuai dengan indeks yang diperoleh.</p></li>
+</ul>
+<p><strong>Melakukan Pencarian</strong></p>
+<ul class="simple">
+<li><p>top_k = 5 : Variabel ini menetapkan jumlah maksimum dokumen yang ingin ditampilkan sebagai hasil pencarian. Dalam hal ini, hanya 5 dokumen terdekat yang akan diambil berdasarkan kesamaan dengan query.</p></li>
+<li><p>indices, distances = search_similar_documents(processed_query_text, top_k):</p></li>
+<li><p>Fungsi search_similar_documents dipanggil dengan argumen processed_query_text dan top_k.</p></li>
+</ul>
+<p><strong>Menampilkan Hasil Pencarian</strong></p>
+<ul class="simple">
+<li><p>print(“\nHasil pencarian untuk query:”, processed_query_text):</p></li>
+<li><p>print(“\nHasil pencarian untuk query:”, processed_query_text):</p></li>
+<li><p>for idx, distance in zip(indices, distances):</p></li>
+<li><p>Menggunakan loop untuk iterasi melalui indices (indeks dokumen terdekat) dan distances (jarak Euclidean untuk setiap dokumen).</p></li>
+<li><p>Fungsi zip digunakan untuk menggabungkan dua list ini sehingga kita dapat mengakses elemen yang berpasangan.</p></li>
+<li><p>print(f”Dokumen ke-{idx + 1}: {documents[idx]}”):</p></li>
+<li><p>Menampilkan informasi tentang dokumen terdekat yang ditemukan, termasuk urutan dokumen (dengan menambahkan 1 pada indeks) dan isi dokumen dari list documents.</p></li>
+<li><p>print(f”Jarak Euclidean: {distance:.4f}\n”):</p></li>
+<li><p>Menampilkan jarak Euclidean antara query dan dokumen tersebut, dengan format hingga 4 angka desimal.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">euclidean_distances</span>
+
+<span class="c1"># Mengunduh stopwords dan tokenizer</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+
+<span class="c1"># Contoh DataFrame news_data (Anda harus menggantinya dengan DataFrame Anda sendiri)</span>
+<span class="c1"># news_data = pd.DataFrame({</span>
+<span class="c1">#     &#39;nomor&#39;: [...], # Ensure this column exists in your DataFrame</span>
+<span class="c1">#     &#39;tanggal&#39;: [...],</span>
+<span class="c1">#     &#39;judul&#39;: [...],</span>
+<span class="c1">#     &#39;kategori&#39;: [...],</span>
+<span class="c1">#     &#39;isi&#39;: [...],</span>
+<span class="c1">#     &#39;stopword_removal&#39;: [...]</span>
+<span class="c1"># })</span>
+
+<span class="c1"># ... (rest of the code remains the same) ...</span>
+
+<span class="c1"># Menampilkan hasil pencarian</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil pencarian untuk query:&quot;</span><span class="p">,</span> <span class="n">processed_query_text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">distance</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="c1"># Ambil informasi dari news_data, using correct column names if different</span>
+    <span class="c1"># If &#39;nomor&#39; column doesn&#39;t exist, replace with actual column name</span>
+    <span class="c1"># For example, if the column with document number is named &#39;id&#39;, use:</span>
+    <span class="c1"># nomor_berita = news_data[&#39;id&#39;].iloc[idx]</span>
+    <span class="n">nomor_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nomor&#39;</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Get &#39;nomor&#39; if exists, else default to idx + 1</span>
+    <span class="n">tanggal_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;tanggal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">judul_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;judul&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">kategori_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">isi_berita</span> <span class="o">=</span> <span class="n">news_data</span><span class="p">[</span><span class="s1">&#39;isi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1"># Menampilkan informasi berita</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dokumen ke-</span><span class="si">{</span><span class="n">nomor_berita</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span> <span class="c1"># Output using retrieved or default nomor_berita</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tanggal: </span><span class="si">{</span><span class="n">tanggal_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Judul: </span><span class="si">{</span><span class="n">judul_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kategori: </span><span class="si">{</span><span class="n">kategori_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Isi Berita: </span><span class="si">{</span><span class="n">isi_berita</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak Euclidean: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil pencarian untuk query: stasiun
+Dokumen ke-65:
+Tanggal: Rabu, 16 Okt 2024 22:10 WIB
+Judul: Rute KRL Rangkasbitung, Cek Dulu Jadwal Keberangkatannya
+Kategori: Pariwisata
+Isi Berita: Jakarta - KRL Rangkasbitung menghubungkan Stasiun Rangkasbitung yang ada di Banten dengan stasiun lainnya, termasuk Tanah Abang di Jakarta. Selain menjadi jalur transportasi bagi pekerja, rute ini juga memfasilitasi mobilitas masyarakat yang ingin bepergian dengan cepat tanpa kemacetan di jalan raya. Nah, untuk bepergian dari Stasiun Rangkasbitung, traveler perlu mengetahui stasiun apa saja yang dilewati serta jadwal keberangkatannya. Ketahui juga rute perjalanan lainnya dengan transit di Stasiun Tanah Abang, Stasiun Manggarai, dan Stasiun Duri. Rute KRL Rangkasbitung Tanpa Transit dan Jadwal Keberangkatannya Rute KRL Jabodetabek Terbaru. Foto: Commuterline.id Rute Commuter Line Rangkasbitung melayani lintasan dengan tujuan akhir Stasiun Tanah Abang dan Stasiun Merak. Berikut stasiun-stasiun yang akan dilalui: Rangkasbitung-Tanah Abang Traveler yang mau ke Tanah Abang akan melalui 18 stasiun. Dilihat dari jadwal keberangkatannya, banyak kereta yang berangkat dari Rangkasbitung menuju Stasiun Tanah Abang. Menurut laman Commuter Line, jadwal keberangkatannya mulai dari pukul 04.00, 04.20, 04.40, 05.00, 05.15, 05.30, 05.45, 06.01, 06.15, 06.30, 06.45, 07.10, 07.30, 07.46, 08.03, 08.30, 08.45, 09.00, 09.14, 09.30, 09.46, 10.00, 10.15, 10.30, 10.45, 11.00, 11.16, 11.45, 12.00, 12.30. 12.53, 13.10, 13.26, 13.40, 13.56, 14.10, 14.30, 14.45, 15.00, 15.16, 15.45, 16.00, 16.15,16.30, 17.00, 17.16, 17.36, 17.56, 18.10, 18.25, 19.17, 19.35, 19.50, 20.05. 20.20, 20.35, 20.51, dan terakhir pada pukul 21.19. Berikut rutenya: Rangkasbitung Citeras Maja Cikoya Tigaraksa Tenjo Daru Cilejit Parung Panjang Cicayur Cisauk Serpong Rawa Buntu Sudimara Jurang Mangu Pondok Ranji Kebayoran Palmerah Tanah Abang Rangkasbitung-Merak Untuk tujuan stasiun Merak. traveler akan melalui 11 stasiun. Jadwal keberangkatannya lebih sedikit dibandingkan dengan kereta menuju Tanah Abang. Keberangkatan dimulai dari pukul 05.05, 07.35, 09.55, 13.50, 16.45, dan yang terakhir pada pukul 18.55. Rutenya adalah sebagai berikut: Rangkasbitung Jambubaru Catang Cikeusal Walantaka Serang Karangantu Tonjongbaru Cilegon Krenceng Merak Rute KRL dari Rangkasbitung ke Berbagai Tujuan dengan Transit Selain jalur ke Stasiun Tanah Abang dan Stasiun Merak, traveler harus transit untuk menuju ke stasiun tujuan. Berikut caranya: 1. Rangkasbitung-Jakarta Kota Jika ingin menuju Jakarta Kota dari Rangkasbitung, kamu perlu transit dan melanjutkan perjalanan dengan kereta lain. Begin caranya: Naik kereta ke Stasiun Tanah Abang Turun di Stasiun Tanah Abang, naik kereta ke Stasiun Manggarai Dari Stasiun Manggarai lanjutkan perjalanan ke Stasiun Jakarta Kota Kamu akan melewati 7 pemberhentian ke Stasiun Jakarta Kota 2. Rangkasbitung-Depok/Bogor Untuk menuju Depok atau Bogor, traveler juga harus transit dua kali, yaitu di Tanah Abang dan Manggarai. Begini caranya. Naik kereta ke Stasiun Tanah Abang Turun di Stasiun Tanah Abang, lanjutkan perjalanan dengan naik kereta ke Stasiun Manggarai Naik kereta ke arah Depok atau Bogor 3. Rangkasbitung-Bekasi/Cikarang Bagi traveler yang mau ke Bekasi/Cikarang, maka perjalanannya adalah sebagai berikut: Naik Kereta ke Stasiun Tanah Abang Lanjutkan perjalanan ke Stasiun Manggarai Naik kereta ke arah Stasiun Bekasi/Cikarang 4. Rangkasbitung-Tangerang Untuk perjalanan ke Tangerang, traveler akan transit di Stasiun Tanah Abang dan Duri. Begini rute perjalanannya: Naik kereta ke arah Tanah Abang Teruskan perjalanan dengan naik kereta ke arah Duri Dari Stasiun Duri naik kereta ke arah Tangerang Itulah rute KRL Rangkasbitung, jadwal keberangkatan, dan rute perjalanan lainnya dengan transit di Duri, Tanah Abang, dan Manggarai. (elk/row)
+Jarak Euclidean: 0.5653
+
+Dokumen ke-85:
+Tanggal: Rabu, 16 Okt 2024 12:15 WIB
+Judul: Jadi yang Paling Sibuk, Stasiun Pasar Senen Tambah Beragam Fasilitas
+Kategori: Pariwisata
+Isi Berita: Jakarta - PT Kereta Api Indonesia (Persero) mencatat peningkatan volume jumlah penumpang KA Jarak Jauh di Stasiun Pasar Senen dari tahun ke tahun. Stasiun itu dijanjikan mendapatkan perbaikan fasilitas. Stasiun Pasar Senen melayani 32 perjalanan kereta api jarak jauh dan 52 perjalanan Commuterline. Pada 2021, Stasiun Pasar Senen melayani 1.218.734 penumpang kereta api jarak jauh. Angka itu meningkat signifikan sebesar 155,8 persen pada 2022 menjadi 3.117.565 penumpang. Kemudian, pada tahun 2023 jumlahnya kembali meningkat 30,73 persen menjadi 4.075.619 penumpang. &quot;Dari Januari hingga September 2024, volume penumpang kereta api jarak jauh di Stasiun Pasar Senen telah mencapai 3.076.540 penumpang. Selain itu, untuk Commuterline ada peningkatan antara tahun 2022 dan 2023. Pada tahun 2022 jumlah pengguna Commuterline yang naik dan turun di Stasiun Pasar Senen yaitu 2.454.306 pengguna, angka tersebut mengalami kenaikan sebanyak 38,16 persen pada tahun 2023 yaitu 3.391.023 pengguna. Dari Januari hingga September 2024, jumlah pengguna Commuterline di Stasiun Pasar Senen sudah mencapai 3.048.234 pengguna,&quot; kata Vice President Public Relations KAI Anne Purba, dalam rilis kepada detikTravel, Rabu (16/10/2024). Anne mengatakan dengan peningkatan volume kereta api jarak jauh maupun Commuterline di Stasiun Pasar Senen, KAI melakukan program revitalisasi pengembangan secara berkesinambungan pada Stasiun Pasar Senen. Langkah itu dilakukan agar mampu mengantisipasi lonjakan peningkatan jumlah penumpang. &quot;Saat ini, di Stasiun Pasar Senen sudah terdapat fasilitas face recognition. Sejak mulai dioperasionalkan pada tanggal 14 September 2024 hingga 10 Oktober 2024, fasilitas face recognition sudah digunakan oleh 20.913 penumpang kereta api jarak jauh di Stasiun Pasar Senen,&quot; kata Anne. Anne juga mengklaim Stasiun Pasar Senen lebih nyaman dibandingkan sebelumnya. Terdapat sejumlah penambahan fasilitas di stasiun peninggalan kolonial Belanda tersebut, seperti penambahan ruang tunggu ber-AC di hall stasiun, fasilitas eskalator menuju peron 3 dan 4. &quot;Guna dapat melayani penumpang yang terus meningkat, Stasiun Pasar Senen akan terus mengalami pembangunan. Direncanakan pada tahap selanjutnya, akan dikembangkan dengan tambahan bangunan di sebelah stasiun yang ada saat ini. Nantinya zona keberangkatan dan kedatangan dipisahkan. Rencananya pembangunan untuk pengembangan Stasiun Pasar Senen tersebut akan memakan waktu sekitar dua tahun hingga akhir 2026,&quot; kata Anne. Anne menjelaskan terdapat tiga poin penting dalam rencana pengembangan Stasiun Pasar Senen yakni pembangunan hall dan crossing penumpang baru, beutifikasi stasiun cagar budaya dan penataan landscape, pedestrian dan area parkir. Luas Stasiun Pasar Senen akan bertambah dari 15.900 m2 menjadi 20.000 m2, sehingga mampu menampung pelanggan KA jarak jauh sebanyak 44.747 penumpang per hari dan pelanggan Commuterline sebanyak 11.144 penumpang per hari. &quot;Sebagai upaya untuk menciptakan solusi ekosistem perkeretaapian, KAI berkomitmen untuk mengintegrasikan layanan transportasi publik ramah lingkungan. Revitalisasi Stasiun Pasar Senen diharapkan dapat mendukung mobilitas masyarakat yang lebih efisien dan berkelanjutan,&quot; kata Anne. (fem/fem)
+Jarak Euclidean: 0.6697
+
+Dokumen ke-2:
+Tanggal: Kamis, 17 Okt 2024 09:30 WIB
+Judul: Bacaan Al-Qur&#39;an Surah Asy-Syu&#39;ara: Arab, Latin, dan Artinya
+Kategori: Keislaman
+Isi Berita: nan
+Jarak Euclidean: 0.7228
+
+Dokumen ke-92:
+Tanggal: Rabu, 16 Okt 2024 08:39 WIB
+Judul: Rute KRL Line Tangerang-Duri 2024 dan Jadwal Keberangkatannya
+Kategori: Pariwisata
+Isi Berita: Jakarta - Selain kendaraan pribadi, sejumlah kawasan wisata di Tangerang dapat dijangkau dengan KRL commuter line Tangerang. Untuk menuju ke sana, traveler dapat memperhatikan rute kereta terbarunya 2024. Kereta line Tangerang bermula dari Stasiun Tangerang dan berakhir di Stasiun Duri. Selengkapnya dapat disimak pada uraian di bawah ini. Rute KRL Line Tangerang-Duri Peta Rute KRL Jabodetabek &amp; Merak 2024 Foto: dok. website KAI Commuter KRL line Tangerang-Duri memiliki kode T dengan total 11 stasiun. Mengutip situs KAI Commuter, berikut daftar stasiunnya: Stasiun Tangerang Stasiun Tanah Tinggi Stasiun Batu Ceper Stasiun Poris Stasiun Kali Deres Stasiun Rawa Buaya Stasiun Bojong Indah Stasiun Taman Kota Stasiun Pesing Stasiun Grogol Stasiun Duri. Jadwal KRL Line Tangerang-Duri Dilihat dari aplikasi Access by KAI, berikut jadwal keberangkatan pertama hingga terakhir kereta line Tangerang (PP): Jadwal KRL Pertama-Terakhir dari Tangerang ke Duri 04.25, 04.53 WIB 05.06, 05.23, 05.37, 05.53 WIB 06.06, 06.23, 06.37, 06.53 WIB 07.06, 07.23, 07.37, 07.53 WIB 08.06, 08.23, 08.37, 08.53 WIB 09.06, 09.23, 09.37, 09.53 WIB 10.07, 10.37 WIB 11.07, 11.37 WIB 12.07, 12.37 WIB 13.07, 13.37 WIB 14.07, 14.37 WIB 15.07, 15.23, 15.37, 15.53 WIB 16.06, 16.23, 16.37, 16.53 WIB 17.06, 17.23, 17.37, 17.53 WIB 18.06, 18.23, 18.37, 18.53 WIB 19.06, 19.23, 19.37, 19.53 WIB 20.06, 20.23, 20.37 WIB 21.00, 21.23, 21.53 WIB 22.06, 22.37 WIB 23.13 WIB Jadwal KRL Pertama-Terakhir dari Duri ke Tangerang 05.11, 05.28, 05.43, 05.58 WIB 06.13, 06.28, 06.42, 06.58 WIB 07.13, 07.28, 07.42, 07.58 WIB 08.13, 08.28, 08.42, 08.58 WIB 09.13, 09.28, 09.42, 09.58 WIB 10.13, 10.28, 10.42 WIB 11.13, 11.42 WIB 12.13, 12.42 WIB 13.13, 13.42 WIB 14.13, 14.42 WIB 15.13, 15.42, 15.58 WIB 16.13, 16.28, 16.42, 16.58 WIB 17.13, 17.28, 17.42, 17.58 WIB 18.13, 18.28, 18.42, 18.58 WIB 19.13, 19.28, 19.42, 19.58 WIB 20.13, 20.28, 20.42, 20.58 WIB 21.13, 21.58 WIB 22.28, 22.42 WIB 23.15, 23.30, 23.48 WIB Rute KRL dari Tangerang ke Berbagai Tujuan Kalau traveler naik kereta di Stasiun Tangerang dan ingin menuju berbagai tujuan, berikut rute KRL yang dapat diikuti: Rute KRL dari Tangerang ke Manggarai Untuk menuju Manggarai dari Tangerang maka dapat naik commuter line Tangerang dan turun di stasiun terakhir yaitu Stasiun Duri. Dari sana naik kereta line Cikarang dan turun di Stasiun Manggarai. Jadi, kamu hanya melewati empat stasiun dari Stasiun Duri untuk sampai di Manggarai ya. Rute KRL dari Tangerang ke Kota Tua Untuk ke Kota Tua maka traveler bisa naik KRL line Tangerang dari Stasiun Tangerang dan turun di Stasiun Duri. Lanjut naik commuter line Cikarang dan transit di Stasiun Manggarai. Di sana kemudian naik kereta line Bogor dan turun di stasiun terakhir yakni Stasiun Jakarta Kota. Dari Stasiun Jakarta Kota, barulah detikers bisa keluar dan berjalan sedikit untuk sampai di kawasan Kota Tua. Rute KRL dari Tangerang ke Tanah Abang Dari Tangerang menuju Tanah Abang, kamu dapat naik commuter line Tangerang dari Stasiun Tangerang dan turun di Stasiun Duri. Kemudian naik kereta line Cikarang dan cukup turun di stasiun berikutnya yaitu Stasiun Tanah Abang. Setelah itu, traveler dapat keluar stasiun untuk menuju kawasan Pasar Tanah Abang. Bisa juga naik KRL line Rangkasbitung untuk menuju wilayah Tangerang Selatan maupun Lebak, Banten. Jika ingin menyeberang pulau dari Pelabuhan Merak, maka bisa lanjut naik kereta line Merak dari Stasiun Rangkasbitung. Rute KRL dari Tangerang ke Pasar Senen Traveler yang ingin menuju kawasan Pasar Senen dari Tangerang, bisa naik KRL line Tangerang dan turun di Stasiun Duri. Selanjutnya, naik kereta line Cikarang dan transit di Jatinegara. Kemudian, naik lagi commuter line Cikarang menuju Kampung Bandan via Pasar Senen. Barulah kamu dapat turun di Stasiun Pasar Senen dan keluar menuju kawasan Pasar Senen. Nah, itu tadi rute KRL line Tangerang lengkap dengan jadwal keberangkatannya. Bagi traveler yang ingin menggunakan rute ini, jangan lupa update jadwal dan dengarkan informasi di stasiun jika ada info terkini. (azn/fem)
+Jarak Euclidean: 0.7584
+
+Dokumen ke-54:
+Tanggal: Kamis, 17 Okt 2024 09:07 WIB
+Judul: Peta Rute KRL Cikarang 2024 dengan dan Tanpa Transit
+Kategori: Pariwisata
+Isi Berita: Jakarta - Kereta Rel Listrik (KRL) menjadi salah salah satu moda transportasi andalan masyarakat Jabodetabek. Salah satu rute yang sering dilalui adalah KRL Cikarang. Rute KRL dari Stasiun Cikarang dapat menjangkau wilayah Jabodetabek misal Angke, Kampung Bandan, hingga Manggarai. Untuk menuju stasiun di luar rute yang sejalur, traveler perlu melakukan transit. Simak informasinya berikut ini. Peta Rute KRL Cikarang 2024 Dikutip dari situs KAI Commuter, berikut peta jangkauan KRL commuter line yang bisa digunakan tiap hari. Rute KRL Cikarang ditandai dengan line warna biru. Peta Rute KRL Jabodetabek &amp; Merak Foto: dok. website KAI Commuter Rute KRL Cikarang Tanpa Transit Ada beberapa stasiun yang bisa ditempuh tanpa transit dari Stasiun Cikarang. Berikut di antaranya. 1. Rute KRL Cikarang-Bekasi KRL Cikarang-Bekasi melewati empat stasiun pemberhentian yaitu: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi 2. Rute KRL Cikarang-Jatinegara Jatinegara merupakan stasiun transit yang bisa digunakan traveler, untuk meneruskan ke rute tujuan. Pemberhentian menuju Stasiun Jatinegara adalah: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara 3. Rute KRL Cikarang-Kampung Bandan Ada 18 pemberhentian dari Cikarang menuju Stasiun Kampung Bandan. Perjalanan tersebut melewati stasiun: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Pondok Jati Kramat Gang Sentiong Pasar Senen Kemayoran Rajawali Kampung Bandan. 4. Rute KRL Cikarang-Duri/Angke via Kampung Bandan Line KRL Cikarang ini melewati rute yang menuju Stasiun Kampung Bandan, namun berhentu di Stasiun Duri/Angke. Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Pondok Jati Kramat Gang Sentiong Pasar Senen Kemayoran Rajawali Kampung Bandan Angke Duri. 4. Rute KRL Cikarang-Duri/Angke via Manggarai KRL Cikarang ini berhenti di stasiun Manggarai, yang bisa menjadi transit bagi traveler yang menuju Depok, Bogor, Nambo, atau kereta bandara. Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai Sudirman Karet Tanah Abang Duri Angke Kampung Bandan. 4. Cikarang-Tanah Abang Tanah Abang juga bisa menjadi tujuan untuk traveler yang ingin ke arah Rangkasbitung. Ada 15 stasiun yang dilewati untuk sampai di Stasiun Tanah Abang. Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai Sudirman Karet Tanah Abang. Rute KRL dari Cikarang dengan Transit Rute KRL Cikarang bisa transit di Manggarai, Duri, Jatinegara, dan Tanah Abang, seperti peta commuter line lainnya. Stasiun transit ini dapat digunakan penumpang yang salah kereta, ada perubahan jadwal, dan ingin segera sampai di tujuan. 1. Rute KRL Cikarang-Jakarta Kota (Transit Manggarai) Untuk menuju Stasiun Jakarta Kota, traveler naik bisa kereta ke menuju Stasiun Angke/Kampung Bandan/Manggarai. Setelah sampai di Manggarai, naik kereta ke arah Jakarta Kota. Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai (transit) Cikini Gondangdia Juanda Sawah Besar Mangga Besar Jayakarta Jakarta Kota. 2. Rute KRL Cikarang-Depok/Bogor (Transit Manggarai) Sama dengan perjalanan ke Jakarta Kota, jika ingin ke arah Bogor, traveler harus turun di Stasiun Manggarai, lalu melanjutkan perjalanan ke Stasiun Depok atau Bogor. Dari Stasiun Manggarai, berikut stasiun yang akan dilalui: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai (transit) Tebet Cawang Duren Kalibata Pasar Minggu Baru Pasar Minggu Tanjung Barat Lenteng Agung Universitas Pancasila Universitas Indonesia Pondok Cina Depok Baru Depok Citayam Bojong Gede Cilebut Bogor. 3. Rute KRL Cikarang-Nambo (Transit Manggarai) Stasiun pemberhentian bagi penumpang yang hendak menuju Nambo adalah: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai (transit) Tebet Cawang Duren Kalibata Pasar Minggu Baru Pasar Minggu Tanjung Barat Lenteng Agung Universitas Pancasila Universitas Indonesia Pondok Cina Depok Baru Depok Citayam Cibinong Nambo. Rute KRL Cikarang-Tangerang (Transit Duri) Penumpang bisa memilih rute KRL Cikarang-Duri lebih dulu melalui Kampung Bandan atau Mannggarai. Selanjutnya, penumpang transit naik KRL menuju Tangerang. Cikarang-Duri (via Kampung Bandan atau Manggarai) Grogol Pesing Taman Kota Bojong Indah Rawa Buaya Kali Deres Poris Batu Ceper Tanah Tinggi Tangerang. 5. Cikarang-Rangkasbitung (Transit Tanah Abang) Traveler yang mau ke arah Rangkasbitung bisa turun di Stasiun Tanah Abang dengan menaiki kereta tujuan Angke atau Kampung Bandan. Setelah itu, lanjutkan perjalanan dengan naik kereta menuju Rangkasbitung. Berikut rute yang akan dilalui: Cikarang Metland Telaga Murni Cibitung Tambun Bekasi Timur Bekasi Kranji Cakung Klender Baru Buaran Klender Jatinegara Matraman Manggarai Sudirman Karet Tanah Abang (transit) Palmerah Kebayoran Pondok Ranji Jurang Mangu Sudimara Rawa Buntu Serpong Cisauk Cicayur Parung Panjang Cilejit Daru Tenjo Tigaraksa Cikoya Maja Citeras Rangkasbitung. Rute KRL Cikarang ini bisa menjadi informasi bagi traveler yang ingin menggunakannya. Jangan lupa, update ketersediaan rute dan jadwal kereta lebih dulu di aplikasi atau situs KRL commuter line sebelum memilih angkutan umum efektif dan efisien ini. (elk/fem)
+Jarak Euclidean: 0.9940
+
+Dokumen ke-64:
+Tanggal: Rabu, 16 Okt 2024 22:35 WIB
+Judul: Tarif dan Fasilitas Shower &amp; Locker di Stasiun Pasar Senen
+Kategori: Pariwisata
+Isi Berita: Jakarta - KAI Wisata menyediakan fasilitas mandi serta penitipan di beberapa stasiun, salah satunya di Stasiun Pasar Senen. Tempat ini bisa digunakan traveler untuk mandi, berdandan dan menyewa loker. Jadi, traveler yang mau mandi setelah sampai di Stasiun Pasar Senen bisa menggunakan fasilitas shower &amp; locker ini. Berapa tarifnya? Lokasinya di mana? Simak informasinya berikut ini. Tarif Shower &amp; Locker Stasiun Pasar Senen Sebelum mandi atau menitipkan barang di Shower &amp; Locker Pasar Senen, ketahui dulu biaya yang harus dibayar. Pembayaran shower dilakukan dengan QRIS, debit atau kredit, sementara loker dapat dibayar dengan prepaid (e-money dan tap cash) dan QRIS. Tarif Shower Mengutip katalog Shower &amp; Locker, tarif untuk menggunakan fasilitas kamar mandi Shower &amp; Locker di Stasiun Senen adalah Rp 60.000. Menurut keterangan dari rilis KAI yang sebelumnya diterima detikTravel, di dalam kamar mandi sudah tersedia tempat untuk meletakkan barang-barang. Sehingga, pelanggan yang mau mandi tidak perlu menyewa loker. Tarif Penyewaan Loker Ada dua macam loker yang disediakan, yaitu berukuran M dan L. Di dalamnya terdapat beberapa paket, mulai dari satu jam sampai 24 jam. Jadi, kamu bisa menitipkan barang seharian di loker ini. Loker M Paket 1 jam: Rp 10.000 Paket 2 jam: Rp 20.000 Paket 12 jam: Rp 60.000 Paket 24 jam: Rp 80.000 Loker L Paket 1 jam: Rp 15.000 Paket 2 jam: Rp 30.000 Paket 12 jam: Rp 90.000 Paket 24 jam: Rp 120.000 Fasilitas Shower &amp; Locker Fasilitas shower &amp; locker di Stasiun Pasar Senen cukup lengkap. Mulai dari shower dengan air hangat, wifi hingga minuman. Shower Air hangat Toilet Perlengkapan mandi, seperti handuk, sabun, dan sampo Pengering rambut AC Wi-FI Setrika uap Teh/Kopi Lokasi dan Jam Operasional Shower &amp; Locker berada di arah pintu keluar utama Stasiun Pasar Senen, dekat loket tiket atau Loko Cafe. Jam operasionalnya adalah 24 jam. Itulah informasi mengenai Shower &amp; Locker di Stasiun Pasar Senen. Bagaimana? Kamu tertarik untuk menggunakan fasilitas ini? (elk/row)
+Jarak Euclidean: 1.0332
+
+Dokumen ke-5:
+Tanggal: Kamis, 17 Okt 2024 07:15 WIB
+Judul: 20 Gambaran Kehidupan di Neraka Menurut Al-Qur&#39;an dan Hadits
+Kategori: Keislaman
+Isi Berita: Jakarta - Gambaran kehidupan di neraka selalu menjadi pengingat yang sangat keras dalam ajaran Islam, menggambarkan balasan bagi mereka yang menyimpang dari jalan kebenaran. Ingin tahu lebih banyak tentang bagaimana Al-Qur&#39;an dan hadits menggambarkan kehidupan di neraka? Simak 20 gambaran rinci yang mungkin akan membuka mata dan menyadarkan kita. Kumpulan Gambaran Kehidupan di Neraka Dalam Al-Qur&#39;an dan hadits, kehidupan di neraka digambarkan dengan sangat rinci. Mulai dari siksa api yang membakar hingga penderitaan tanpa akhir yang menimpa para penghuninya. Kumpulan gambaran ini memberikan bayangan tentang dahsyatnya siksa bagi mereka yang mengabaikan perintah Allah SWT. Berikut beberapa gambaran kehidupan di neraka yang tercantum dalam Al-Qur&#39;an dan hadits. 1. Luas dan Besarnya Neraka Berdasarkan informasi dari buku Jauhi Neraka oleh Khalid Abu Syady, mengenai luas dan besarnya neraka dapat digambarkan dari hadits yang menyebutkan bahwa Neraka Jahanam memiliki ribuan tali kekang yang diseret oleh malaikat. Rasulullah SAW bersabda, &quot;Pada hari itu Neraka Jahanam didatangkan, ia mempunyai tujuh puluh ribu tali kekang, dan pada setiap tali kekang terdapat tujuh puluh ribu malaikat yang akan menyeretnya.&quot; (HR. Muslim dan Tirmidzi) Neraka bahkan mampu menampung matahari dan bulan seperti yang digambarkan oleh Rasulullah SAW. Dalam sebuah hadits yang diriwayatkan oleh Ibnu Mas&#39;ud r.a., beliau bersabda &quot;Matahari dan Bulan seperti dua sapi yang diikat, kemudian dilemparkan ke neraka pada Hari Kiamat&quot;. (HR. Muslim dan Tirmidzi) Selain itu, neraka juga tidak pernah terisi penuh hingga Allah SWT sendiri yang menempatkan kaki-Nya. Sebuah hadits menyebutkan bahwa &quot;Neraka tidak terisi penuh hingga Allah meletakkan kaki-Nya, kemudian neraka berkata, &#39;Cukup, cukup.&#39; Saat itulah neraka penuh dan sebagiannya menindih sebagian yang lain. Allah tidak menzalimi seorang pun dari makhluk-Nya.&quot; (HR. Bukhari dan Muslim) 2. Penyiksa di Neraka Dijelaskan pada sumber sebelumnya, bahwa di dalam neraka terdapat makhluk yang diberi kuasa untuk menyiksa para pendosa. Rasulullah SAW bersabda &quot;Akan keluar satu batang leher dari neraka pada Hari Kiamat, yang bisa berbicara, lalu ia berkata, &#39;Aku diberi kuasa menyiksa tiga jenis manusia: Tiap-tiap orang yang sombong dan keras hati, orang yang mempersekutukan Allah dengan sesuatu yang lain, dan orang yang membunuh jiwa tanpa jiwa.&#39; Lalu ia merangkul mereka dan melemparkannya ke dalam Jahanam.&quot; 3. Sifat Neraka yang Abadi Allah SWT berfirman dalam surah Al-Furqan ayat 65 : وَالَّذِيْنَ يَقُوْلُوْنَ رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَۖ اِنَّ عَذَابَهَا كَانَ غَرَامًا ۖ Artinya: &quot;Dan, orang-orang yang berkata, &quot;Wahai Tuhan kami, jauhkanlah azab Jahanam dari kami (karena) sesungguhnya azabnya itu kekal.&quot; 4. Panasnya Suhu Neraka Dalam sebuah hadits yang diriwayatkan oleh Muslim, Rasulullah SAW menjelaskan betapa dahsyatnya panas api neraka dibandingkan dengan api yang ada di dunia. Rasulullah SAW bersabda, &quot;Api kalian yang dinyalakan oleh anak-cucu Adam hanyalah satu dari tujuh puluh bagian panasnya Neraka Jahannam.&quot; Ketika para sahabat bertanya apakah itu tidak cukup, beliau menjawab, &quot;Sesungguhnya ditambahkan enam puluh sembilan bagian, masing-masing seperti panasnya.&quot; Ini berarti panas api di dunia hanyalah sekelumit dibandingkan panasnya api neraka. Dalam penjelasan lebih lanjut, dikatakan bahwa perbandingan panas antara api dunia dan api neraka adalah 1:70. Artinya, panas neraka itu 70 kali lipat lebih panas daripada api yang biasa kita temui di bumi. Bahkan jika semua api yang dinyalakan oleh umat manusia dikumpulkan, itu hanya setara dengan satu bagian dari api Neraka Jahanam. 5. Hukuman bagi Orang Kafir di Neraka Allah SWT berfirman dalam surah An-Nisa ayat 56 : اِنَّ الَّذِيْنَ كَفَرُوْا بِاٰيٰتِنَا سَوْفَ نُصْلِيْهِمْ نَارًاۗ كُلَّمَا نَضِجَتْ جُلُوْدُهُمْ بَدَّلْنٰهُمْ جُلُوْدًا غَيْرَهَا لِيَذُوْقُوا الْعَذَابَۗ اِنَّ اللّٰهَ كَانَ عَزِيْزًا حَكِيْمًا Artinya: &quot;Sesungguhnya orang-orang yang kufur pada ayat-ayat Kami kelak akan Kami masukkan ke dalam neraka. Setiap kali kulit mereka hangus, Kami ganti dengan kulit yang lain agar mereka merasakan (kepedihan) azab. Sesungguhnya Allah Maha Perkasa lagi Maha Bijaksana.&quot; 6. Alas Tidur dan Selimut dari Api Neraka Allah SWT berfirman dalam surah Al-A&#39;raf ayat 41 : لَهُمْ مِّنْ جَهَنَّمَ مِهَادٌ وَّمِنْ فَوْقِهِمْ غَوَاشٍۗ وَكَذٰلِكَ نَجْزِى الظّٰلِمِيْنَ Artinya: &quot;Bagi mereka (disediakan) alas tidur dari (api neraka) Jahanam dan di atas mereka ada selimut (dari api neraka). Demikianlah Kami memberi balasan kepada orang-orang yang zalim.&quot; 7. Tidak Ada Penghibur Hati Allah SWT berfirman dalam surah Az-Zukhruf ayat 39 : وَلَنْ يَّنْفَعَكُمُ الْيَوْمَ اِذْ ظَّلَمْتُمْ اَنَّكُمْ فِى الْعَذَابِ مُشْتَرِكُوْنَ Artinya: &quot;(Harapanmu itu) sekali-kali tidak akan memberi manfaat kepadamu pada hari itu karena kamu telah menzalimi (dirimu sendiri). Sesungguhnya kamu (orang yang berpaling dan setan) adalah bersekutu dalam azab itu.&quot; 8. Penghuni Neraka akan Selalu Kehausan Allah SWT berfirman dalam surah Maryam ayat 86 : وَنَسُوْقُ الْمُجْرِمِيْنَ اِلٰى جَهَنَّمَ وِرْدًا ۘ Artinya: &quot;dan Kami menggiring para pendurhaka ke (neraka) Jahanam dalam keadaan dahaga.&quot; 9. Minuman Penghuni Neraka Minuman penghuni neraka adalah Hamim (air yang mendidih) dan Ghassaq (air yang mendidih bercampur dengan nanah). - Al-Hamim Allah SWT berfirman dalam surah Ar-Rahman ayat 44 : يَطُوْفُوْنَ بَيْنَهَا وَبَيْنَ حَمِيْمٍ اٰنٍۚ Artinya: &quot;Mereka bolak-balik di antaranya (api neraka) dan air mendidih yang sangat panas.&quot; - Ghassaq Allah SWT berfirman dalam surah An-Naba ayat 24-25 : لَا يَذُوْقُوْنَ فِيْهَا بَرْدًا وَّلَا شَرَابًاۙ 24. Artinya: &quot;Mereka tidak merasakan kesejukan di dalamnya dan tidak (pula mendapat) minuman&quot; اِلَّا حَمِيْمًا وَّغَسَّاقًاۙ 25. Artinya: &quot;selain air yang mendidih dan nanah&quot; 10. Kedalaman Neraka Rasulullah SAW bersabda: &quot;Demi Dzat yang diriku ada di tangan-Nya. Sesungguhnya jauhnya jarak antara pinggir neraka sampai ke dasarnya seperti batu seukuran tujuh unta hamil dengan lemak dan dagingnya serta anak-anaknya yang jatuh di antara pinggiran neraka hingga mencapai dasarnya selama tujuh puluh tahun lamanya.&quot; (HR. Thabrani). 11. Dinding Neraka Dikutip dari buku Dahsyatnya Neraka, Pedihnya Azab Neraka, dan Keadaan Calon Penghuninya karangan Syaiful Bachri Az-Zidani, gambaran menakutkan tentang neraka adalah keberadaan dinding yang sangat luas dan besar. Bahkan disebutkan bahwa untuk mencapai ujung dari setiap dinding tersebut, seseorang memerlukan waktu empat puluh tahun perjalanan tanpa henti. Hal ini menggambarkan betapa luasnya neraka yang tidak terbayangkan oleh akal manusia. Ukuran yang begitu besar menambah kengerian akan siksa yang ada di dalamnya. 12. Suara Neraka Allah SWT berfirman dalam surah Al-Mulk ayat 7 : اِذَآ اُلْقُوْا فِيْهَا سَمِعُوْا لَهَا شَهِيْقًا وَّهِيَ تَفُوْرُۙ Artinya: &quot;Apabila dilemparkan ke dalamnya (neraka), mereka pasti mendengar suaranya yang mengerikan saat ia membara.&quot; 13. Bahan Bakar Neraka Allah SWT berfirman dalam surah Al-Baqarah ayat 24 : فَاِنْ لَّمْ تَفْعَلُوْا وَلَنْ تَفْعَلُوْا فَاتَّقُوا النَّارَ الَّتِيْ وَقُوْدُهَا النَّاسُ وَالْحِجَارَةُ ۖ اُعِدَّتْ لِلْكٰفِرِيْنَ Artinya: &quot;Jika kamu tidak (mampu) membuat(-nya) dan (pasti) kamu tidak akan (mampu) membuat(-nya), takutlah pada api neraka yang bahan bakarnya adalah manusia dan batu yang disediakan bagi orang-orang kafir.&quot; 14. Alat Siksa Neraka - Belenggu dan rantai Allah SWT berfirman dalam surah Al-Haqqah ayat 30-32 : خُذُوْهُ فَغُلُّوْهُۙ 30. Artinya: &quot;(Allah berfirman,) &quot;Tangkap dia lalu belenggu tangannya ke lehernya.&quot; ثُمَّ الْجَحِيْمَ صَلُّوْهُۙ 31. Artinya: &quot;Kemudian, masukkan dia ke dalam (neraka) Jahim.&quot; ثُمَّ فِيْ سِلْسِلَةٍ ذَرْعُهَا سَبْعُوْنَ ذِرَاعًا فَاسْلُكُوْهُۗ 32. Artinya: &quot;Kemudian, belit dia dengan rantai yang panjangnya tujuh puluh hasta.&quot; - Cambuk Allah SWT berfirman dalam surah Al-Hajj ayat 21-22 : وَلَهُمْ مَّقَامِعُ مِنْ حَدِيْدٍ 21. Artinya: &quot;Untuk mereka (azab berupa) cambuk dari besi.&quot; كُلَّمَآ اَرَادُوْٓا اَنْ يَّخْرُجُوْا مِنْهَا مِنْ غَمٍّ اُعِيْدُوْا فِيْهَا وَذُوْقُوْا عَذَابَ الْحَرِيْقِ ࣖ 22. Artinya: &quot;Setiap kali hendak keluar darinya (neraka) karena tersiksa, mereka dikembalikan (lagi) ke dalamnya. (Kepada mereka dikatakan,) &quot;Rasakanlah azab (neraka) yang membakar ini!&quot; 15. Gunung di Neraka Rasulullah SAW bersabda: &quot;Di neraka terdapat sebuah gunung api yang bernama Saud. Para penghuni neraka akan ditumpuk di atasnya selama tujuh puluh tahun. Kemudian, mereka dijatuhkan dari puncaknya selama tujuh puluh tahun juga. Dan, untuk mendaki puncak gunung tersebut membutuhkan waktu selama tujuh puluh tahun, begitu juga menuruninya.&quot; (HR. Tirmidzi). 16. Aroma Neraka Rasulullah SAW bersabda, &quot;Seandainya satu timba berisi nanah yang baunya busuk yang mengalir dari penghuni neraka menimpa kehidupan dunia, niscaya seluruh penduduk dunia akan menjadi busuk baunya.&quot; (HR. Tirmidzi). 17. Penghuni Neraka akan Selalu Kelaparan Rasulullah SAW Bersabda, &quot;Rasa lapar akan ditimpakan kepada para penghuni naraka. Rasa lapar yang mereka alami itu sudah menyamai azab di neraka. Mereka akan meminta tolong untuk diberi makanan. Mereka diberi makanan berupa pohon berduri yang tidak menggemukkan dan tidak juga menghilangkan rasa lapar. Mereka kembali minta diberi makanan, lalu mereka diberi makanan yang menyumbat di kerongkongan. Mereka teringat kalau ada makanan yang tersendat di kerongkongan ketika masih di dunia, maka mereka menghilangkannya dengan cara minum air. Mereka pun minta minum. Diangkatlah air yang mendidih untuk mereka dengan besi pengait. Ketika telah dekat di wajah mereka, maka air mendidih itu memanggang wajah mereka. Jika air itu telah sampai di perut, maka cairan itu akan memotong-motong isi perut mereka.&quot; (HR. Tirmidzi). 18. Malaikat Penjaga Neraka Allah SWT berfirman dalam surah At-Tahrim ayat 6 : يٰٓاَيُّهَا الَّذِيْنَ اٰمَنُوْا قُوْٓا اَنْفُسَكُمْ وَاَهْلِيْكُمْ نَارًا وَّقُوْدُهَا النَّاسُ وَالْحِجَارَةُ عَلَيْهَا مَلٰۤىِٕكَةٌ غِلَاظٌ شِدَادٌ لَّا يَعْصُوْنَ اللّٰهَ مَآ اَمَرَهُمْ وَيَفْعَلُوْنَ مَا يُؤْمَرُوْنَ Artinya: &quot;Wahai orang-orang yang beriman, jagalah dirimu dan keluargamu dari api neraka yang bahan bakarnya adalah manusia dan batu. Penjaganya adalah malaikat-malaikat yang kasar dan keras. Mereka tidak durhaka kepada Allah terhadap apa yang Dia perintahkan kepadanya dan selalu mengerjakan apa yang diperintahkan.&quot; 19. Jembatan di Neraka Jembatan shirath yang disebutkan adalah jembatan yang terbentang tepat di atas neraka Jahanam. Jembatan ini memiliki karakteristik yang sangat menakutkan. Lebih tipis dari rambut, lebih tajam dari pedang, lebih gelap dari malam, dan sangat licin, sehingga siapa pun yang menyeberanginya bisa terpeleset jika tidak hati-hati. Jembatan ini memiliki tujuh pos, dan tiap pos memiliki jarak perjalanan yang sangat jauh. Terdapat beberapa kelompok manusia yang akan melewati shirath dengan kecepatan yang berbeda-beda, tergantung amal perbuatan mereka. Berikut uraiannya: Kelompok pertama akan melewati shirath dengan kecepatan seperti kilat yang menyambar. Kelompok kedua akan menyeberang shirath seperti angin yang berhembus kencang. Kelompok ketiga akan melintasi shirath secepat burung yang terbang. Kelompok keempat akan melaluinya seperti kuda pacu yang berlari. Kelompok kelima akan berjalan cepat ketika menyeberangi shirath. Kelompok keenam akan bergerak melewati shirath seperti hewan ternak yang berlari. Kelompok ketujuh akan menyeberanginya dengan berlari selama sehari semalam penuh. 20. Tingkatan di Neraka Dikutip dari buku Surga dan Neraka Menurut al-Qur&#39;an dan as-Sunnah yang ditulis oleh Umar Sulaiman al-Asyqar, neraka tidak hanya terdiri dari satu tingkat, melainkan memiliki beberapa tingkatan yang berbeda-beda, baik dalam hal panas maupun siksa bagi para penghuninya. Tingkatan-tingkatan ini disebutkan dalam berbagai kitab. Allah SWT juga berfirman dalam surah An-Nisa ayat 145 mengenai para munafik yang akan ditempatkan di tingkatan paling bawah neraka. Firman Allah SWT tersebut berbunyi: اِنَّ الْمُنٰفِقِيْنَ فِى الدَّرْكِ الْاَسْفَلِ مِنَ النَّارِۚ وَلَنْ تَجِدَ لَهُمْ نَصِيْرًاۙ Artinya: :Sesungguhnya orang-orang munafik itu (ditempatkan) di tingkat paling bawah dari neraka. Kamu tidak akan mendapat seorang penolong pun bagi mereka.&quot; Berdasarkan beberapa kitab, berikut adalah nama-nama dari tingkatan neraka yang disebutkan: Tingkat pertama: Jahanam Tingkat kedua: Lazha Tingkat ketiga: al-Huthamah Tingkat keempat: as-Sa&#39;ir Tingkat kelima: Saqar Tingkat keenam: Jahim Tingkat ketujuh: Hawiyah Demikianlah uraian mengenai gambaran kehidupan di neraka, sebagaimana yang dijelaskan dalam Al-Qur&#39;an dan hadits Rasulullah SAW. Semoga dengan mengetahui gambaran neraka membuat kita semakin berhati-hati dalam menjalani hidup. (inf/inf)
+Jarak Euclidean: 1.2339
+
+Dokumen ke-16:
+Tanggal: Rabu, 16 Okt 2024 15:30 WIB
+Judul: Arti dari Wajib, Sunnah, Haram, Makruh, dan Mubah Menurut Syariat Islam
+Kategori: Keislaman
+Isi Berita: Jakarta - Dalam Islam, setiap tindakan yang diambil oleh seseorang harus selaras dengan ketentuan yang ditetapkan dalam syariat agar dapat mencapai kebahagiaan dunia dan akhirat. Untuk itu, diciptakan hukum Islam sebagai pedoman setiap manusia untuk bertindak. Sebagaimana dikemukakan para ahli ushul al- fiqh dalam buku Fatwa hubungan antaragama di Indonesia karya Rumadi, mereka mengatakan, &quot;Menurut jumhur ulama ushul, hukum adalah titah Allah yang terkait dengan perbuatan seorang hamba (mukallaf), baik berupa tuntutan untuk mengerjakan dan meninggalkan, pilihan untuk mengerjakan atau meninggalkan, atau berupa wadh&#39;i (sebab, syarat dan mani&#39;).&quot; Hukum dalam syariat Islam terbagi menjadi lima, yaitu wajib, sunnah, makruh, haram, dan mubah. Seorang muslim pasti sudah tidak asing lagi dengan lima istilah ini. Namun apa arti dari masing-masing jenis hukum ini? Pengertian Wajib, Sunnah, Haram, Makruh, dan Mubah Mengutip buku Ushul Fiqh Kajian Hukum Islam yang ditulis oleh Iwan Hermawan, berikut adalah arti dari masing-masing jenis hukum islam, yaitu wajib, sunnah, haram, makruh, dan mubah. 1. Wajib Pengertian wajib secara bahasa berasal dari kata &quot;saqith&quot; yang berarti jatuh atau gugur, dan &quot;lazim&quot; yang berarti tetap. Secara istilah, wajib merujuk pada sesuatu yang diperintahkan oleh syariat secara tegas (ilzam). Pelaksanaan sesuatu yang wajib akan mendatangkan pahala bagi pelakunya jika dilakukan dengan niat melaksanakan perintah Allah SWT, sedangkan jika seseorang meninggalkan kewajiban tersebut, ia berhak mendapatkan hukuman. Pengertian wajib di sini sama dengan pengertain fardhu, mahtum dan lazim. Hukum wajib terbagi atas empat bagian, yaitu: 1) Kewajiban dari waktu pelaksanaannya Hukum wajib ini dibagi menjadi dua, yaitu: a) Wajib Muthlaq Wajib muthlaq adalah kewajiban yang tidak memiliki batasan waktu untuk pelaksanaannya. Contohnya adalah mengqadha puasa Ramadan yang tertinggal atau membayar kafarah sumpah. b) Wajib Muaqqad Wajib muaqqad adalah kewajiban yang harus dilaksanakan dalam waktu tertentu dan tidak sah jika dilakukan di luar waktu yang ditentukan. Kewajiban ini dibagi lagi menjadi tiga kategori, yaitu: • Wajib muwassa, yaitu kewajiban yang memiliki waktu pelaksanaan lebih luas daripada waktu yang disediakan. Contohnya adalah salat dzuhur. • Wajib mudhayyaq, yaitu kewajiban yang waktu pelaksanaannya sama dengan waktu yang disediakan. Contohnya adalah puasa Ramadan. • Wajib Dzu Syabhaini, yaitu kewajiban yang merupakan gabungan antara wajib muwassa dan wajib mudhayyaq. Contohnya adalah ibadah haji. 2) Kewajiban bagi Orang yang Melaksanakannya Hukum wajib ini dibagi menjadi dua, yaitu: a) Wajib aini, yaitu kewajiban yang bersifat pribadi dan tidak dapat dilaksanakan oleh orang lain atau diwakilkan. Contohnya adalah puasa dan salat. b) Wajib kafa&#39;i atau kifayah, yaitu kewajiban yang bersifat kelompok. Jika tidak ada satu pun yang melaksanakannya, maka semua akan berdosa. Namun, jika sudah ada beberapa orang yang melaksanakannya, kewajiban tersebut gugur. Contohnya adalah salat jenazah. 3) Kewajiban Berdasarkan Ukuran/Kadar Pelaksanaannya Hukum wajib ini dibagi menjadi dua, yaitu: a) Wajib muhaddad, yaitu kewajiban yang harus dilaksanakan sesuai dengan kadar yang telah ditentukan. Contohnya adalah zakat. b) Wajib ghairu muhaddad, yaitu kewajiban yang tidak memiliki ketentuan kadar tertentu. Contohnya adalah menafkahi kerabat. 4) Kewajiban Berdasarkan Kandungan Kewajiban Perintahnya Hukum wajib ini dibagi menjadi dua, yaitu: a) Wajib mu&#39;ayyan, yaitu kewajiban yang telah ditentukan secara jelas dan tidak ada pilihan lain. Contohnya adalah membayar zakat dan melaksanakan salat lima waktu. b) Wajib mukhayyar, kewajiban yang memberikan pilihan objek antara beberapa alternatif. Contohnya adalah kafarat untuk pelanggaran sumpah. seperti yang terdapat dalam Surah Al-Maidah ayat 89, عَدتُمُ الْأَيْمَن فَكَفَّرَتُهُ إِطْعَامُ عَشَرَةِ وَلَكِن يُؤَاخِذُكُم بِمَا لَا يُؤَاخِذُكُمُ اللهُ بِاللَّغْوِ فِي أَيْمَنِكُمْ وَمَسْكِينَ مِنْ أَوْسَطِ مَا تُطْعِمُونَ أَهْلِيكُمْ أَوْ كِسْوَتُهُمْ أَوْ تَحْرِيرُ رَقَبَةٌ فَمَن لَّمْ يَجِدْ فَصِيَامُ ذلِكَ كَفَّرَةُ أَيْمَنِكُمْ إِذَا حَلَفْتُمْ وَاحْفَظُوا أَيْمَنَكُمْ كَذَلِكَ يُبَيِّنُ اللَّهُ لَكُمْ ءَايَتِهِ لَعَلَّكُمْ ثَلَثَةِ أَيَّامٍ تَشْكُرُونَ Arab Latin: lâ yu&#39;âkhidzukumullâhu bil-laghwi fî aimânikum wa lâkiy yu&#39;âkhidzukum bimâ &#39;aqqattumul-aimân, fa kaffâratuhû ith&#39;âmu &#39;asyarati masâkîna min ausathi mâ tuth&#39;imûna ahlîkum au kiswatuhum au taḫrîru raqabah, fa mal lam yajid fa shiyâmu tsalâtsati ayyâm, dzâlika kaffâratu aimânikum idzâ ḫalaftum, waḫfadhû aimânakum, kadzâlika yubayyinullâhu lakum âyâtihî la&#39;allakum tasykurûn Artinya: &quot;Allah tidak menghukum kamu disebabkan sumpah-sumpahmu yang tidak dimaksud (untuk bersumpah), tetapi Dia menghukum kamu disebabkan sumpah-sumpah yang kamu sengaja, maka kaffarat (melanggar) sumpah itu, ialah memberi makan sepuluh orang miskin, yaitu dari makanan yang biasa kamu berikan kepada keluargamu, atau memberi pakaian kepada mereka atau memerdekakan seorang budak. Barang siapa tidak sanggup melakukan yang demikian, maka kaffarat-nya puasa selama tiga hari. Yang demikian itu adalah kaffarat sumpah-sumpahmu bila kamu bersumpah (dan kamu langgar). Dan jagalah sumpahmu.&quot; 2. Sunnah atau Mandub Secara bahasa, mandub berasal dari kata &quot;mad&#39;u,&quot; yang berarti yang diminta atau dianjurkan. Secara istilah, mandub adalah sesuatu yang diperintahkan oleh syariat tetapi tidak bersifat wajib. Ini berarti mandub tidak mencakup hal-hal yang haram, makruh, atau mubah, dan tidak memiliki konsekuensi hukuman jika ditinggalkan. Dengan kata lain, seseorang yang melaksanakan mandub akan mendapatkan pahala, sedangkan yang meninggalkannya tidak akan diberi hukuman. Dalam literatur dan pendapat para ulama, mandub sering disamakan dengan istilah seperti sunnah, nafilah, mustahab, tathawi, ikhsan, dan fadilah. Dalam fiqh, mandub merujuk pada tuntunan untuk melakukan suatu perbuatan baik, dan sangat disarankan. Seseorang yang melaksanakannya akan mendapatkan ganjaran, namun jika ditinggalkan, tidak ada masalah. Pengaruh tuntunan untuk melakukan perbuatan ini disebut nadb, sementara perbuatan yang dianjurkan disebut mandub. Contohnya termasuk memberi sumbangan ke panti jompo atau bersedekah. Hukum sunnah atau mandub, jika dilihat dari tuntutan untuk melakukannya terbagi kepada dua bagian, yaitu sunnah mu&#39;akkad, dan sunnah ghairu mu&#39;akad. Sedangkan hukum sunnah atau mandub, jika dilihat dari kemungkinan untuk meninggalkannya terbagi kepada tiga bagian, yaitu sunnah hadyu, sunnah zaidah/zawaid, dan sunnah nafal. 1) Sunnah Mu&#39;akkad Sunnah muakkad adalah perbuatan yang selalu dilakukan oleh Nabi Muhammad SAW dan terdapat keterangan bahwa perbuatan tersebut bukanlah fardhu atau wajib. Contohnya termasuk salat witir dan salat dua rakaat fajar sebelum subuh. Sebagian ulama berpendapat bahwa orang yang meninggalkan sunnah muakkad ini dicela, meskipun tidak dianggap berdosa. Dan jika meninggalkan sunnah ini secara sengaja dianggap menyalahi sunnah yang biasa dilakukan Nabi. Definisi lain menyebutkan bahwa sunnah muakkad adalah sunnah yang dikerjakan oleh Rasulullah SAW secara konsisten, dengan penjelasan bahwa hal tersebut bukan kewajiban yang harus dilaksanakan. 2) Sunnah Ghairu Mu&#39;akkad Sunnah ghairu mu&#39;akkad adalah sunnah yang dilakukan oleh Nabi Muhammad SAW, tetapi beliau tidak melaksanakan perbuatan tersebut secara rutin. Contohnya termasuk salat sunnah empat rakaat sebelum dzuhur dan sebelum asar. Sunnah ini tidak dikerjakan secara rutin oleh Rasulullah SAW, sehingga pelaksanaannya bersifat pilihan bagi umat Islam. Meskipun dianjurkan, meninggalkan sunnah ghairu mu&#39;akkad tidak akan mendatangkan celaan atau dosa. 3) Sunnah Hadyu Sunnah hadyu adalah perbuatan yang sangat dianjurkan karena memberikan manfaat yang besar. Meninggalkan sunnah ini dianggap sesat dan tercela, bahkan jika satu kelompok secara sengaja meninggalkannya terus-menerus, maka mereka harus diperangi. Sunnah hadyu menjadi pelengkap kewajiban keagamaan, seperti adzan, salat berjamaah, dan salat hari raya. Dalam kategori sunnah, sunnah ini juga termasuk sunnah mu&#39;akkad karena pahalanya yang besar. 4) Sunnah Zaidah/Zawaid Sunnah zaidah adalah sunnah yang dianggap baik jika dilakukan oleh umat Islam, tetapi tidak mendapatkan sanksi jika ditinggalkan. Contohnya adalah mengikuti kebiasaan nabi dalam aspek sehari-hari, seperti sopan santun, cara makan, minum, dan tidur. 5) Sunnah Nafal Sunnah nafal adalah perbuatan tambahan yang dianjurkan untuk dilaksanakan bersamaan dengan kewajiban. Contohnya termasuk salat sunnah dua rakaat setelah salat wajib, salat tahajud, dan salat witir. Secara istilah, sunnah nafal juga termasuk dalam kategori sunnah ghairu mu&#39;akkad. 3. Haram Muharram secara bahasa berarti &quot;mamnu&#39;&quot; yang berarti dihalangi atau dilarang. Secara istilah, haram adalah sesuatu yang dilarang oleh syariat dengan tegas dan wajib untuk ditinggalkan. Ini tidak mencakup hal-hal yang wajib, mandub, dan mubah, serta tidak mencakup yang makruh. Orang yang meninggalkan perbuatan haram akan mendapatkan pahala jika dilakukan untuk menaati perintah Allah SWT, sementara yang melakukannya berhak mendapat hukuman. Secara hukum, haram adalah perbuatan yang jelas-jelas dilarang oleh syariat. Menurut pendapat ulama jumhur, haram diartikan sebagai larangan Allah SWT yang pasti terhadap suatu perbuatan, baik yang ditetapkan dengan dalil yang qathi (pasti) maupun dalil zhanni (tidak pasti). Menurut madzhab Hanafi, hukum haram harus didasarkan pada dalil qathi (pasti) yang tidak mengandung keraguan sedikitpun, sehingga kita tidak mempermudah dalam menetapkan hukum haram, sebagaimana dalam surah An-Nahl ayat 116, https://www.detik.com/hikmah/quran-online/an-nahl/tafsir-ayat-116-2017 وَلَا تَقُولُواْ لِمَا تَصِفُ أَلْسِنَتُكُمُ الْكَذِبَ هَذَا حَلَّلَ وَهُذَا حَرَامَ لِتَفْتَرُوا عَلَى اللَّهِ الْكَذِبُ إِنَّ الَّذِينَ يَفْتَرُونَ عَلَى اللَّهِ الْكَذِبَ لَا يُفْلِحُونَ Arab Latin: wa lâ taqûlû limâ tashifu alsinatukumul-kadziba hâdzâ ḫalâluw wa hâdzâ ḫarâmul litaftarû &#39;alallâhil-kadzib, innalladzîna yaftarûna &#39;alallâhil-kadziba lâ yufliḫûn Artinya: &quot;Dan janganlah kamu mengatakan terhadap apa yang disebut-sebut oleh lidahmu secara dusta &quot;ini halal dan ini haram&quot;, untuk mengada- adakan kebohongan terhadap Allah. Sesungguhnya orang-orang yang mengada-adakan kebohongan terhadap Allah tiadalah beruntung&quot;. Menurut jumhur para ulama, hukum haram terbagi menjadi dua bagian, yaitu: 1) Al-Muharram li Dzatihi, yaitu sesuatu yang diharamkan oleh syariat karena dasarnya mengandung kemudharatan bagi kehidupan manusia, di mana bahaya tersebut tidak bisa terpisah dari zatnya. Perbuatan yang diharamkan karena alasan ini mencakup hal-hal seperti makan bangkai, minum khamr, berzina, dan mencuri. Kemudharatan dari perbuatan ini berhubungan langsung dengan lima hal yang harus dijaga, yaitu badan, keturunan, harta benda, akal, dan agama. Haram li dzatihi tidak boleh dilakukan sama sekali, kecuali dalam keadaan darurat. Misalnya, meminum khamr diharamkan karena merusak akal, namun dalam keadaan darurat, seperti menghindari kematian karena dehidrasi, dapat diperbolehkan. 2) Al-Muharram li Ghairihi, yaitu sesuatu yang dilarang bukan karena sifat dasarnya, karena tidak mengandung kemudharatan. Namun, dalam kondisi tertentu, perbuatan tersebut dilarang karena ada pertimbangan yang dapat mengarah pada hal-hal yang diharamkan. Contohnya termasuk jual beli barang secara riba, membeli barang yang sudah ditawar oleh orang lain, dan melakukan jual beli pada waktu azan salat jum&#39;at. Dalam kasus ini, larangan terletak pada konsekuensi dari perbuatan tersebut, bukan pada perbuatan itu sendiri. Di sisi lain, haram li ghairihi dapat dilakukan jika ada kebutuhan, meskipun tidak dalam pada keadaan darurat. Sebagai contoh, seorang dokter yang perlu mendiagnosis dan memberikan terapi kepada pasien perempuan diperbolehkan melihat aurat pasiennya jika itu memang diperlukan untuk melakukan terapi. 4. Makruh Makruh secara bahasa berarti mubghadh (yang dibenci). Secara istilah berarti sesuatu yang dilarang oleh syar&#39;i, tetapi tidak secara ilzam untuk ditinggalkan, atau sesuatu yang dilarang syar&#39;i berarti tidak mencakup yang wajib, mandub, dan mubah. Tidak secara ilzam untuk ditinggalkan berarti tidak mencakup yang haram. Makruh jika ditinggalkan karena melaksanakan perintah Allah SWT, maka pelakunya akan mendapat pahala, dan jika ia melakukannya tidak akan mendapat hukuman. Dalam istilah ushul fiqh, makruh adalah sesuatu yang dianjurkan syariat untuk meninggalkannya, dan jika ditinggalkan akan mendapat pujian dan jika dilanggar tidak berdosa. Seseorang yang meninggalkan larangan berarti ia telah mematuhi yang melarang, karenanya ia berhak mendapat ganjaran pahala. Sedangkan bagi yang tidak meninggalkan larangan tidak mungkin disebut menyalahi yang melarang, karenanya ia tidak berhak mendapat ancaman dosa. Larangan dalam bentuk ini disebut &quot;karahah&quot; dan pengaruh larangan tidak pasti terhadap perbuatan yang dilarang disebut makruh. Dalam hal hukum makruh ini, para ulama membagi kepada dua bagian, yaitu makruh tahrim dan makruh tanzih. 1) Makruh Tahrim, yaitu sesuatu yang dilarang oleh syariat secara tegas, berdasarkan dalil zhanni yang masih mengandung keraguan. Contohnya termasuk larangan memakai bahan sutra dan perhiasan emas bagi laki-laki, serta poligami bagi orang yang khawatir tidak dapat berbuat adil. Melakukan makruh tahrim dianggap tercela. 2) Makruh Tanzih, yaitu sesuatu yang dianjurkan untuk ditinggalkan, tetapi larangan tersebut tidak bersifat pasti karena tidak ada dalil yang menunjukkan bahwa perbuatan tersebut haram. Menurut jumhur ulama, pelaku makruh tanzih tidak dicela, sedangkan orang yang meninggalkannya dianggap terpuji. Contohnya adalah memakan daging kuda saat sangat membutuhkan selama perang. Beberapa ulama Hanafiyah menganggapnya haram, tetapi jika dalam keadaan darurat, maka diperbolehkan, meskipun dianggap makruh. Pelaku makruh tahrim tergolong tercela, sementara pelaku makruh tanzih tidak dicela. Orang yang meninggalkan kedua jenis makruh tersebut akan mendapatkan pujian. 5. Mubah Mubah adalah perintah Allah SWT yang memberikan kebebasan untuk memilih antara melakukan atau tidak melakukan suatu perbuatan. Seseorang yang melakukan perbuatan mubah tidak akan mendapatkan ganjaran, dan tidak juga diancam atas perbuatannya. Hukum dan pengaruh terhadap perbuatan ini disebut &quot;ibahah&quot;, sementara perbuatan yang diberikan pilihan untuk dilakukan atau ditinggalkan disebut &quot;mubah&quot;. Secara bahasa, mubah berarti &quot;mu&#39;lan&quot; (yang diumumkan) dan &quot;ma&#39;dzun fih&quot; (yang diizinkan). Dalam istilah, mubah adalah sesuatu yang tidak berkaitan dengan perintah atau larangan secara langsung, artinya tidak termasuk dalam kategori yang wajib atau mandub, dan juga tidak mencakup yang haram atau makruh. Secara keseluruhan, perbuatan yang mubah tidak akan mendatangkan pahala atau siksa selama ia tetap dalam statusnya sebagai mubah. Dilihat dari segi keterkaitannya dengan madharat dan manfaat, ulama-ulama ushul fiqh mengemukakan mubah kedalam tiga bentuk, antara lain: 1) Mubah yang apabila dilakukan atau tidak dilakukan, tidak mengandung mudharat, seperti makan, minum, dan berpakaian. 2) Mubah yang apabila dilakukan tidak ada mudharatnya, sedangkan perbuatan itu sendiri pada dasarnya diharamkan. Misalnya makan daging babi saat keadaan darurat. 3) Mubah yang apabila sesuatu itu pada dasarnya bersifat mudharat dan tidak boleh dilakukan menurut syara&#39;, tetapi Allah SWT memaafkan pelakunya. Contohnya, mengerjakan pekerjaan haram sebelum Islam seperti menikahi bu tiri. (lus/lus)
+Jarak Euclidean: 1.2339
+
+Dokumen ke-71:
+Tanggal: Rabu, 16 Okt 2024 18:35 WIB
+Judul: AS-China Baik-baik Saja, 2 Panda Baru Akan Dirawat Bonbin Washington
+Kategori: Pariwisata
+Isi Berita: Washington - Hubungan AS-China sempat dikira memanas karena sejumlah panda mulai kembali ke Tiongkok. Tapi ternyata, ada dua panda baru yang akan datang ke Washington. Dilansir dari Channel News Asia (CNA) pada Selasa (15/10), dua panda raksasa berangkat dari China menuju Kebun Binatang Nasional Smithsonian di Washington. Berdasarkan perjanjian pengembangbiakan dan penelitian, dua panda itu akan berada di AS selama satu dekade. &quot;Tiongkok dan Amerika Serikat telah membuat pengaturan yang tertib untuk memastikan bahwa kedua panda raksasa itu akan tiba di Kebun Binatang Nasional Washington dengan selamat dan lancar,&quot; kata Asosiasi Konservasi Satwa Liar Tiongkok (CWCA) dalam sebuah pernyataan. Dua panda bernama Li Bao (pejantan) dan Qing Bao (betina) berangkat pada hari Senin. Dua panda raksasa ini berusia 3 tahun. Beberapa tahun terakhir, AS telah mengembalikan hampir semua panda raksasa China sesuai dengan kontrak. Terkahir, ada tiga ekor panda dari Kebun Binatang Nasional yang dikembalikan November lalu. Kurangnya pengganti segera dipandang oleh banyak orang sebagai simbol meningkatnya ketegangan antara Washington dan Beijing. Tiongkok telah menggunakan &#39;diplomasi panda&#39; sejak 1972, hewan pertama dikirim ke Washington sebagai hadiah, menyusul kunjungan bersejarah presiden AS Richard Nixon ke negara Komunis tersebut. Pada bulan Agustus, Kebun Binatang San Diego menyambut dua panda raksasa, pertama kalinya dalam 21 tahun. Sambutan kedatangan panda di Washington dilakukan dengan semarak, terlihat dari situs web Kebun Binatang Nasional dihiasi dengan spanduk bertuliskan &quot;Panda akan datang&quot;. &quot;Sesuatu yang berukukan &quot;raksasa&quot; akan datang ke Washington,&quot; kata kebun binatang itu dalam sebuah posting di X. Pihak kebun binatang menambahkan bahwa mereka akan ditutup pada hari Selasa demi keselamatan panda dan staf. Persiapan berlangsung dengan baik di kebun binatang, bisa dibilang kandang panda telah menjadi daya tarik utama selama beberapa dekade. &quot;Renovasi telah dilakukan di habitat panda untuk meningkatkan keamanan fasilitas dan memaksimalkan ruang bagi beruang untuk berkeliaran,&quot; menurut situs web kebun binatang tersebut. Struktur baru yang dibangun untuk panda tersebut meliputi kolam dangkal agar mereka dapat mandi, kemudian ada tempat bambu tiruan yang menjadi arena berburu panda untuk mencari makan seperti di alam liar. Namun, panda-panda itu tersebut tidak akan tersedia untuk umum selama lebih dari sebulan setelah kedatangan mereka, karena mereka perlu dikarantina dan beradaptasi dengan habitat baru mereka. &quot;Selama dalam penerbangan, panda akan diberi makan rebung, wortel, dan roti jagung Cina,&quot; kata asosiasi konservasi tersebut. (bnl/bnl)
+Jarak Euclidean: 1.2339
+
+Dokumen ke-31:
+Tanggal: Rabu, 16 Okt 2024 05:00 WIB
+Judul: Kisah Nabi Musa AS Kembali ke Pelukan Ibunya Setelah Diasuh Firaun
+Kategori: Keislaman
+Isi Berita: Jakarta - Nabi Musa adalah keturunan dari Bani Israil, la lahir di negeri Mesir. Pada saat itu Mesir dikuasai oleh Firaun, seorang raja yang kejam dan menganggap dirinya sendiri sebagai Tuhan. Nabi Musa AS memiliki kisah yang diabadikan dalam Al-Qur&#39;an. Dalam Al-Qur&#39;an sendiri, nama ibu Nabi Musa AS adalah Yukabad. Saat kelahirannya, Nabi Musa AS memiliki kisah menarik dalam sejarah islam. Ia sempat berpisah dari ibunya sendiri dan diasuh oleh firaun. Berikut kisah Nabi Musa AS selengkapnya. Kisah Nabi Musa AS Kembali ke Pelukan Ibunya Dalam buku Kisah Nabi Musa AS karya Abdillah, diceritakan bahwa kisah ini bermula pada suatu malam, firaun bermimpi seolah-olah melihat Mesir yang dipimpinnya terbakar habis. Seluruh rakyatnya mati, kecuali seorang dari Bani Israil. Firaun menjadi gelisah sejak datangnya mimpi tersebut. la mengumpulkan seluruh ahli ramal untuk mengartikan mimpinya. Setelah terkumpul, salah seorang dari mereka berusaha mengartikan mimpi tersebut. la berkata bahwa suatu saat akan datang seorang laki-laki dari keturunan bani Israil yang akan meruntuhkan kekuasaannya. Mendengar hal itu, Firaun menjadi gelisah dan ketakutan. Sejak saat itu, ia memerintahkan kepada bawahannya agar membunuh setiap bayi laki-laki yang lahir dari keturunan Bani Israil. Setiap ibu yang hamil dari keturunan Bani Israil dilanda kegelisahan. Mereka khawatir jika bayi mereka nanti adalah laki-laki dan akan dibunuh. Dikisahkan dalam buku Hikmah Kisah Nabi dan Rasul karya Ridwan Abdullah Sani, para pengawal dan tentara Firaun pun melaksanakan perintahnya, setiap rumah dimasuki dan diselidiki, dan setiap perempuan hamil menjadi perhatian mereka saat melahirkan bayinya. Banyak bayi laki-laki dari Bani Israil yang dibunuh pada saat itu. Firaun menjadi tenang dan merasa aman setelah mendapat kabar dari pasukannya bahwa wilayah kerajaannya telah menjadi bersih dan tidak ada seorang pun dari bayi laki-laki yang masih hidup. Namun, ia tidak mengetahui bahwa kehendak Allah SWT tidak dapat ditolak. Ternyata pada saat itu di wilayah kerajaannya masih ada seorang ibu yang sedang mengandung bayi laki-laki yang tidak diketahui sama sekali oleh Firaun dan pasukannya. Ia adalah ibu dari Nabi Musa AS, yang sedang menantikan datangnya seorang bidan untuk memberinya pertolongan saat melahirkan. Bidan yang ditunggu pun datang dan menolong ibu Musa melahirkan, namun hati ibu Musa menjadi khawatir setelah mengetahui bahwa bayinya adalah seorang laki-laki. Ia meminta agar bidan itu merahasiakan kelahiran bayi Musa dari siapa pun, dan hal tersebut diterima oleh sang bidan karena merasa simpati terhadap bayi Musa yang lucu itu, serta merasakan betapa sedihnya hati seorang ibu yang akan kehilangan bayi yang baru dilahirkan. Selama beberapa waktu, ibu Musa menyusui bayinya, namun ia merasa tidak tenang dan selalu cemas serta khawatir terhadap keselamatan bayinya. Suatu ketika, Allah SWT memberi petunjuk kepadanya agar menyembunyikan bayinya dalam sebuah peti, kemudian menghanyutkan peti yang berisi bayinya itu di Sungai Nil. Allah SWT juga memberi petunjuk bahwa ibu Musa tidak boleh bersedih dan cemas atas keselamatan bayinya, Allah SWT menjamin akan mengembalikan bayi itu kepadanya bahkan akan mengutuskannya sebagai salah seorang rasul. Akhirnya, ibu Musa menghanyutkan peti bayi berisi Musa di permukaan air Sungai Nil dengan bertawakal kepada Allah SWT. Ibu Musa memerintahkan kakak Musa untuk mengawasi dan mengikuti peti itu agar mengetahui di mana peti itu berlabuh dan siapa yang akan mengambil peti tersebut. Betapa khawatirnya hati kakak Musa, ketika melihat dari jauh bahwa peti yang diawasinya itu ditemukan oleh istri Firaun yang sedang berada di tepi Sungai Nil bersama beberapa dayangnya, kemudian peti tersebut dibawanya masuk ke dalam istana. Ibu Musa yang mengetahui kejadian tersebut menjadi sedih dan sangat cemas, tetapi ia ingat bahwa Allah SWT telah menjamin keselamatan anaknya tersebut. Perlu diketahui bahwa Asiyah istri Firaun adalah orang yang beriman, walaupun suaminya adalah seorang yang kejam. Asiyah istri firaun memberitahukan tentang bayi laki-laki yang ditemuinya di dalam peti yang terapung di atas permukaan Sungai Nil tersebut kepada firaun. Firaun segera memerintahkan untuk membunuh bayi itu sambil berkata kepada istrinya, &quot;Aku khawatir bahwa inilah bayi yang diramalkan, yang akan menjadi musuh dan penyebab kesedihan kami dan akan membinasakan kerajaan kami yang besar ini.&quot; Akan tetapi, istri firaun yang sudah telanjur menaruh simpati dan sayang terhadap bayi Musa itu, kemudian berkata kepada suaminya, &quot;Janganlah bayi yang tidak berdosa ini dibunuh. Aku sayang kepadanya dan lebih baik kami ambil ia sebagai anak, kalau kelak ia akan berguna dan bermanfaat bagi kita. Hatiku sangat tertarik kepadanya dan ia akan menjadi kesayanganku dan kesayanganmu.&quot; Demikianlah, jika Allah yang Maha kuasa menghendaki sesuatu, maka jalan bagi terlaksananya takdir itu akan dimudahkan. Allah SWT telah menakdirkan bahwa nyawa bayi tersebut akan selamat dan Musa akan diasuh oleh keluarga Firaun. Keluarga Firaun memberikan nama Musa kepada bayi itu. Musa adalah bayi yang masih &quot;merah&quot; dan membutuhkan air susu sehingga keluarga Firaun mencari orang yang dapat memberikannya susu pada bayi tersebut. Setelah itu, beberapa ibu didatangkan untuk Musa, namun semua ibu yang mencoba memberi air susunya langsung ditolak oleh bayi itu. Istri Firaun menjadi sangat bingung memikirkan bayi angkatnya itu yang enggan meminum susu dari sekian banyak ibu yang didatangkan ke istana. Kakak Nabi Musa AS yang memang dari awal sudah diperintahkan oleh ibunya untuk mengawasi keadaan adiknya pun mendengar informasi tersebut, kemudian ia memberanikan diri datang menjumpai istri firaun untuk menawarkan seorang ibu yang mungkin diterima oleh bayi itu untuk disusui. Agar penyamarannya tidak diketahui oleh firaun, maka kakak Nabi Musa berkata kepada mereka, &quot;Aku tidak mengenal siapakah keluarga dan ibu bayi ini, hanya aku ingin menunjukkan satu keluarga yang baik dan selalu rajin mengasuh anak, kalau-kalau bayi itu dapat menerima air susu ibu keluarga itu.&quot; Tawaran kakak Musa diterima oleh istri Firaun, dan ibu kandung Musa dijemput untuk menyusui bayi tersebut. Begitu Musa disusukan oleh ibu kandungnya sendiri yang tidak diketahui oleh keluarga firaun, Nabi Musa AS meminumnya dengan sangat lahap. Melihat hal tersebut maka Musa diserahkan kepada ibu kandungnya sendiri untuk diasuh selama masa menyusui dengan imbalan upah yang besar. Hal tersebut sesuai dengan janji Allah SWT kepada ibu Nabi Musa AS bahwa ia akan menerima kembali putranya itu. Setelah selesai masa menyusui Nabi Musa, AS, Nabi Musa AS dikembalikan oleh ibunya ke istana, untuk diasuh, dibesarkan, dan dididik seperti anak-anak raja yang lain. Nabi Musa AS mengendarai kendaraan firaun dan berpakaian sesuai dengan cara-cara Firaun, ia dikenal orang sebagai Musa bin Firaun. Kisah Nabi Musa ini diabadikan dalam Al-Qur&#39;an surah Al-Qasas ayat 4 sampai 13. (lus/lus)
+Jarak Euclidean: 1.2339
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package punkt to /root/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas_PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Tugas-05.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 05 : <strong>keyword extraction</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Tugas-07.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100169 - Mohammad Hasan Basri
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

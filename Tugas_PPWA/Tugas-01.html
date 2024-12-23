@@ -63,6 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas_PPWA/Tugas-01';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tugas 02 : Membuat Vector Space Model dengan Bobot TFID" href="Tugas-02.html" />
     <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -164,6 +165,13 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 01 : <strong>Crawling Berita</strong></a></li>
 
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas-02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-04.html">Tugas 04 : <strong>Centrality</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-05.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-06.html">Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-07.html">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-08.html">Tugas - 8 Clustering menggunakan Fuzzy C Means</a></li>
 
 </ul>
 
@@ -578,6 +586,9 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Request failed: 404 Client Error: Not Found for url: https://travel.detik.com/travel-news/indeks/8
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Request failed: 404 Client Error: Not Found for url: https://travel.detik.com/travel-news/indeks/9
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="nn">&lt;ipython-input-3-aeb61a3247f1&gt;</span> in <span class="ni">&lt;cell line: 65&gt;</span><span class="nt">()</span>
@@ -595,102 +606,88 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 <span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2"> </span>
-<span class="ne">---&gt; </span><span class="mi">73</span><span class="s2">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd"> </span>
+<span class="ne">---&gt; </span><span class="mi">73</span><span class="sd">     return request(&quot;get&quot;, url, params=params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="sd"> </span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/api.py</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     # cases, and look like a memory leak in others.</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="s2">     with sessions.Session() as session:</span>
-<span class="ne">---&gt; </span><span class="mi">59</span><span class="s2">         return session.request(method=method, url=url, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="sd">     # cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="sd">     with sessions.Session() as session:</span>
+<span class="ne">---&gt; </span><span class="mi">59</span><span class="sd">         return session.request(method=method, url=url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="sd"> </span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
-<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="s2">         }</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">         send_kwargs.update(settings)</span>
-<span class="ne">--&gt; </span><span class="mi">589</span><span class="s2">         resp = self.send(prep, **send_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="s2">         return resp</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span><span class="sd">         }</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="sd">         send_kwargs.update(settings)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span><span class="sd">         resp = self.send(prep, **send_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">590</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span><span class="sd">         return resp</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/sessions.py</span> in <span class="ni">send</span><span class="nt">(self, request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="s2">         # Send the request</span>
-<span class="ne">--&gt; </span><span class="mi">703</span><span class="s2">         r = adapter.send(request, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="s2">         # Total elapsed time of the request (approximately)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span><span class="sd">         # Send the request</span>
+<span class="ne">--&gt; </span><span class="mi">703</span><span class="sd">         r = adapter.send(request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span><span class="sd">         # Total elapsed time of the request (approximately)</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/requests/adapters.py</span> in <span class="ni">send</span><span class="nt">(self, request, stream, timeout, verify, cert, proxies)</span>
-<span class="g g-Whitespace">    </span><span class="mi">665</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">667</span><span class="s2">             resp = conn.urlopen(</span>
-<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="s2">                 method=request.method,</span>
-<span class="g g-Whitespace">    </span><span class="mi">669</span><span class="s2">                 url=url,</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">666</span><span class="sd">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">667</span><span class="sd">             resp = conn.urlopen(</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span><span class="sd">                 method=request.method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">669</span><span class="sd">                 url=url,</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">urlopen</span><span class="nt">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span><span class="s2">             # Make the request on the HTTPConnection object</span>
-<span class="ne">--&gt; </span><span class="mi">789</span><span class="s2">             response = self._make_request(</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="s2">                 conn,</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span><span class="s2">                 method,</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span><span class="sd">             # Make the request on the HTTPConnection object</span>
+<span class="ne">--&gt; </span><span class="mi">789</span><span class="sd">             response = self._make_request(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span><span class="sd">                 conn,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span><span class="sd">                 method,</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_make_request</span><span class="nt">(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)</span>
-<span class="g g-Whitespace">    </span><span class="mi">534</span><span class="s2">         # Receive the response from the server</span>
-<span class="g g-Whitespace">    </span><span class="mi">535</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">536</span><span class="s2">             response = conn.getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">537</span><span class="s2">         except (BaseSSLError, OSError) as e:</span>
-<span class="g g-Whitespace">    </span><span class="mi">538</span><span class="s2">             self._raise_timeout(err=e, url=url, timeout_value=read_timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">464</span><span class="sd">             # Trigger any extra validation we need to do.</span>
+<span class="g g-Whitespace">    </span><span class="mi">465</span><span class="sd">             try:</span>
+<span class="ne">--&gt; </span><span class="mi">466</span><span class="sd">                 self._validate_conn(conn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">467</span><span class="sd">             except (SocketTimeout, BaseSSLError) as e:</span>
+<span class="g g-Whitespace">    </span><span class="mi">468</span><span class="sd">                 self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)</span>
 
-<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span><span class="s2">         # Get the response from http.client.HTTPConnection</span>
-<span class="ne">--&gt; </span><span class="mi">507</span><span class="s2">         httplib_response = super().getresponse()</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">509</span><span class="s2">         try:</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connectionpool.py</span> in <span class="ni">_validate_conn</span><span class="nt">(self, conn)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span><span class="sd">         # Force connect early to allow us to validate the connection.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span><span class="sd">         if conn.is_closed:</span>
+<span class="ne">-&gt; </span><span class="mi">1095</span><span class="sd">             conn.connect()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span><span class="sd">         # TODO revise this, see https://github.com/urllib3/urllib3/issues/2791</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">getresponse</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">             try:</span>
-<span class="ne">-&gt; </span><span class="mi">1375</span><span class="s2">                 response.begin()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1376</span><span class="s2">             except ConnectionError:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1377</span><span class="s2">                 self.close()</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span><span class="sd">         try:</span>
+<span class="g g-Whitespace">    </span><span class="mi">692</span><span class="sd">             sock: socket.socket | ssl.SSLSocket</span>
+<span class="ne">--&gt; </span><span class="mi">693</span><span class="sd">             self.sock = sock = self._new_conn()</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span><span class="sd">             server_hostname: str = self.host</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span><span class="sd">             tls_in_tls = False</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">begin</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span><span class="s2">         # read until we get a non-100 response</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span><span class="s2">         while True:</span>
-<span class="ne">--&gt; </span><span class="mi">318</span><span class="s2">             version, status, reason = self._read_status()</span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span><span class="s2">             if status != CONTINUE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">320</span><span class="s2">                 break</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/connection.py</span> in <span class="ni">_new_conn</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">199</span>             <span class="n">sock</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">create_connection</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span>                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
 
-<span class="nn">/usr/lib/python3.10/http/client.py</span> in <span class="ni">_read_status</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">277</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">     def _read_status(self):</span>
-<span class="ne">--&gt; </span><span class="mi">279</span><span class="s2">         line = str(self.fp.readline(_MAXLINE + 1), &quot;iso-8859-1&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="s2">         if len(line) &gt; _MAXLINE:</span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="s2">             raise LineTooLong(&quot;status line&quot;)</span>
+<span class="nn">/usr/local/lib/python3.10/dist-packages/urllib3/util/connection.py</span> in <span class="ni">create_connection</span><span class="nt">(address, timeout, source_address, socket_options)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>         <span class="k">raise</span> <span class="n">LocationParseError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">&#39;, label empty or too long&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> 
+<span class="ne">---&gt; </span><span class="mi">60</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">family</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>         <span class="n">sock</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">readinto</span><span class="nt">(self, b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span><span class="s2">         while True:</span>
-<span class="g g-Whitespace">    </span><span class="mi">704</span><span class="s2">             try:</span>
-<span class="ne">--&gt; </span><span class="mi">705</span><span class="s2">                 return self._sock.recv_into(b)</span>
-<span class="g g-Whitespace">    </span><span class="mi">706</span><span class="s2">             except timeout:</span>
-<span class="g g-Whitespace">    </span><span class="mi">707</span><span class="s2">                 self._timeout_occurred = True</span>
-
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1301</span><span class="s2">                   &quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot; %</span>
-<span class="g g-Whitespace">   </span><span class="mi">1302</span><span class="s2">                   self.__class__)</span>
-<span class="ne">-&gt; </span><span class="mi">1303</span><span class="s2">             return self.read(nbytes, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="s2">         else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="s2">             return super().recv_into(buffer, nbytes, flags)</span>
-
-<span class="nn">/usr/lib/python3.10/ssl.py</span> in <span class="ni">read</span><span class="nt">(self, len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1157</span><span class="s2">         try:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1158</span><span class="s2">             if buffer is not None:</span>
-<span class="ne">-&gt; </span><span class="mi">1159</span><span class="s2">                 return self._sslobj.read(len, buffer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1160</span><span class="s2">             else:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1161</span><span class="s2">                 return self._sslobj.read(len)</span>
+<span class="nn">/usr/lib/python3.10/socket.py</span> in <span class="ni">getaddrinfo</span><span class="nt">(host, port, family, type, proto, flags)</span>
+<span class="g g-Whitespace">    </span><span class="mi">953</span>     <span class="c1"># and socket type values to enum constants.</span>
+<span class="g g-Whitespace">    </span><span class="mi">954</span>     <span class="n">addrlist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="ne">--&gt; </span><span class="mi">955</span>     <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">_socket</span><span class="o">.</span><span class="n">getaddrinfo</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">family</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span>         <span class="n">af</span><span class="p">,</span> <span class="n">socktype</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">canonname</span><span class="p">,</span> <span class="n">sa</span> <span class="o">=</span> <span class="n">res</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span>         <span class="n">addrlist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">_intenum_converter</span><span class="p">(</span><span class="n">af</span><span class="p">,</span> <span class="n">AddressFamily</span><span class="p">),</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -714,14 +711,14 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># Read Excel file</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_preprocesing_Hasan.xlsx&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Crawl-berita-Pariwisata&amp;Keislaman.xlsx&quot;</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-b20fef95-247a-454d-a334-f1c21214b8d6" class="colab-df-container">
+  <div id="df-a09b8738-7e1c-4a37-b067-6c752b7aa133" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -744,10 +741,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <th>tanggal</th>
       <th>isi</th>
       <th>kategori</th>
-      <th>cleansing</th>
-      <th>case_folding</th>
-      <th>tokenize</th>
-      <th>Filtering/stopword removal</th>
     </tr>
   </thead>
   <tbody>
@@ -757,10 +750,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Kamis, 17 Okt 2024 10:01 WIB</td>
       <td>Jakarta - Presiden Iran Masoud Pezeshkian mene...</td>
       <td>Keislaman</td>
-      <td>Jakarta  Presiden Iran Masoud Pezeshkian menek...</td>
-      <td>jakarta  presiden iran masoud pezeshkian menek...</td>
-      <td>['jakarta', 'presiden', 'iran', 'masoud', 'pez...</td>
-      <td>jakarta presiden iran masoud pezeshkian meneka...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -768,10 +757,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Kamis, 17 Okt 2024 09:30 WIB</td>
       <td>NaN</td>
       <td>Keislaman</td>
-      <td>Jakarta  Surah AsySyuara adalah surah ke dalam...</td>
-      <td>jakarta  surah asysyuara adalah surah ke dalam...</td>
-      <td>['jakarta', 'surah', 'asysyuara', 'adalah', 's...</td>
-      <td>jakarta surah asysyuara surah alquran ayat sur...</td>
     </tr>
     <tr>
       <th>2</th>
@@ -779,10 +764,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Kamis, 17 Okt 2024 08:45 WIB</td>
       <td>Jakarta - Malaikat adalah makhluk ciptaan Alla...</td>
       <td>Keislaman</td>
-      <td>Jakarta  Malaikat adalah makhluk ciptaan Allah...</td>
-      <td>jakarta  malaikat adalah makhluk ciptaan allah...</td>
-      <td>['jakarta', 'malaikat', 'adalah', 'makhluk', '...</td>
-      <td>jakarta malaikat makhluk ciptaan allah swt mus...</td>
     </tr>
     <tr>
       <th>3</th>
@@ -790,10 +771,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Kamis, 17 Okt 2024 08:00 WIB</td>
       <td>Jakarta - Kalender Ramadhan 2025 versi Muhamma...</td>
       <td>Keislaman</td>
-      <td>Jakarta  Kalender Ramadhan  versi Muhammadiyah...</td>
-      <td>jakarta  kalender ramadhan  versi muhammadiyah...</td>
-      <td>['jakarta', 'kalender', 'ramadhan', 'versi', '...</td>
-      <td>jakarta kalender ramadhan versi muhammadiyah t...</td>
     </tr>
     <tr>
       <th>4</th>
@@ -801,17 +778,9 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Kamis, 17 Okt 2024 07:15 WIB</td>
       <td>Jakarta - Gambaran kehidupan di neraka selalu ...</td>
       <td>Keislaman</td>
-      <td>Jakarta  Gambaran kehidupan di neraka selalu m...</td>
-      <td>jakarta  gambaran kehidupan di neraka selalu m...</td>
-      <td>['jakarta', 'gambaran', 'kehidupan', 'di', 'ne...</td>
-      <td>jakarta gambaran kehidupan neraka pengingat ke...</td>
     </tr>
     <tr>
       <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
       <td>...</td>
       <td>...</td>
       <td>...</td>
@@ -823,10 +792,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Rabu, 16 Okt 2024 06:13 WIB</td>
       <td>Praha - Praha ingin mengganti imej dari kota s...</td>
       <td>Pariwisata</td>
-      <td>Praha  Praha ingin mengganti imej dari kota se...</td>
-      <td>praha  praha ingin mengganti imej dari kota se...</td>
-      <td>['praha', 'praha', 'ingin', 'mengganti', 'imej...</td>
-      <td>praha praha mengganti imej kota tujuan wisata ...</td>
     </tr>
     <tr>
       <th>96</th>
@@ -834,10 +799,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Rabu, 16 Okt 2024 05:39 WIB</td>
       <td>Phuket - Festival Vegetarian menjadi salah sat...</td>
       <td>Pariwisata</td>
-      <td>Phuket  Festival Vegetarian menjadi salah satu...</td>
-      <td>phuket  festival vegetarian menjadi salah satu...</td>
-      <td>['phuket', 'festival', 'vegetarian', 'menjadi'...</td>
-      <td>phuket festival vegetarian salah daya tarik pa...</td>
     </tr>
     <tr>
       <th>97</th>
@@ -845,10 +806,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Rabu, 16 Okt 2024 05:01 WIB</td>
       <td>Jakarta - Seorang turis yang juga kreator kont...</td>
       <td>Pariwisata</td>
-      <td>Jakarta  Seorang turis yang juga kreator konte...</td>
-      <td>jakarta  seorang turis yang juga kreator konte...</td>
-      <td>['jakarta', 'seorang', 'turis', 'yang', 'juga'...</td>
-      <td>jakarta turis kreator konten inggris berusia t...</td>
     </tr>
     <tr>
       <th>98</th>
@@ -856,10 +813,6 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Selasa, 15 Okt 2024 23:04 WIB</td>
       <td>Jakarta - Traveler yang ingin bekerja di dunia...</td>
       <td>Pariwisata</td>
-      <td>Jakarta  Traveler yang ingin bekerja di dunia ...</td>
-      <td>jakarta  traveler yang ingin bekerja di dunia ...</td>
-      <td>['jakarta', 'traveler', 'yang', 'ingin', 'beke...</td>
-      <td>jakarta traveler dunia aviasi baiknya simak in...</td>
     </tr>
     <tr>
       <th>99</th>
@@ -867,19 +820,15 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
       <td>Selasa, 15 Okt 2024 22:35 WIB</td>
       <td>Jakarta - PT Kereta Api Indonesia (Persero) ak...</td>
       <td>Pariwisata</td>
-      <td>Jakarta  PT Kereta Api Indonesia Persero akan ...</td>
-      <td>jakarta  pt kereta api indonesia persero akan ...</td>
-      <td>['jakarta', 'pt', 'kereta', 'api', 'indonesia'...</td>
-      <td>jakarta pt kereta api indonesia persero mengop...</td>
     </tr>
   </tbody>
 </table>
-<p>100 rows × 8 columns</p>
+<p>100 rows × 4 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-b20fef95-247a-454d-a334-f1c21214b8d6')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a09b8738-7e1c-4a37-b067-6c752b7aa133')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -931,12 +880,12 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
 
     <script>
       const buttonEl =
-        document.querySelector('#df-b20fef95-247a-454d-a334-f1c21214b8d6 button.colab-df-convert');
+        document.querySelector('#df-a09b8738-7e1c-4a37-b067-6c752b7aa133 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-b20fef95-247a-454d-a334-f1c21214b8d6');
+        const element = document.querySelector('#df-a09b8738-7e1c-4a37-b067-6c752b7aa133');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -956,8 +905,8 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
   </div>
 
 
-<div id="df-db5e614d-9dd5-4a74-81de-4b3a43cf2971">
-  <button class="colab-df-quickchart" onclick="quickchart('df-db5e614d-9dd5-4a74-81de-4b3a43cf2971')"
+<div id="df-591a32d7-8c93-41c4-9d94-989798a39209">
+  <button class="colab-df-quickchart" onclick="quickchart('df-591a32d7-8c93-41c4-9d94-989798a39209')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1076,7 +1025,7 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-db5e614d-9dd5-4a74-81de-4b3a43cf2971 button');
+        document.querySelector('#df-591a32d7-8c93-41c4-9d94-989798a39209 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1127,6 +1076,15 @@ Fungsi ini mengambil data berupa judul berita, tanggal publikasi, isi berita dan
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Welcome to your Jupyter Book</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Tugas-02.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

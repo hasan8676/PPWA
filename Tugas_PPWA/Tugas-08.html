@@ -1,0 +1,2144 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tugas - 8 Clustering menggunakan Fuzzy C Means &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas_PPWA/Tugas-08';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita" href="Tugas-07.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My sample book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas-01.html">Tugas 01 : <strong>Crawling Berita</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Tugas-02.html">Tugas 02 : <strong>Membuat Vector Space Model dengan Bobot TFID</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-04.html">Tugas 04 : <strong>Centrality</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-05.html">Tugas 05 : <strong>keyword extraction</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-06.html">Tugas 6 :  Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas-07.html">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas - 8 Clustering menggunakan Fuzzy C Means</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/hasan8676/PPWA/blob/gh-pages/_sources/Tugas_PPWA/Tugas-08.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/hasan8676/PPWA" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/hasan8676/PPWA/issues/new?title=Issue%20on%20page%20%2FTugas_PPWA/Tugas-08.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tugas_PPWA/Tugas-08.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas - 8 Clustering menggunakan Fuzzy C Means</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas - 8 Clustering menggunakan Fuzzy C Means</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-8-clustering-menggunakan-fuzzy-c-means">
+<h1>Tugas - 8 Clustering menggunakan Fuzzy C Means<a class="headerlink" href="#tugas-8-clustering-menggunakan-fuzzy-c-means" title="Link to this heading">#</a></h1>
+<p>NAMA : Mohammad Hasan Basri</p>
+<p>NIM  : 210411100169</p>
+<p>MATA KULIAH : Pencarian dan Penambangan Web - A</p>
+<p><strong>Analisis kembali komponen dengan mengurangi sedikit demi sedikit, lalu pilih yang terbaik, kemudian tampilkan dalam grafik scater plot lalu di deploy</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>fuzzy-c-means
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>  <span class="c1"># Import TruncatedSVD untuk reduksi dimensi</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">fcmeans</span> <span class="kn">import</span> <span class="n">FCM</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fuzzy-c-means in /usr/local/lib/python3.10/dist-packages (1.7.2)
+Requirement already satisfied: joblib&lt;2.0.0,&gt;=1.2.0 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (1.4.2)
+Requirement already satisfied: numpy&lt;2.0.0,&gt;=1.21.1 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (1.26.4)
+Requirement already satisfied: pydantic&lt;3.0.0,&gt;=2.6.4 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (2.10.3)
+Requirement already satisfied: tabulate&lt;0.9.0,&gt;=0.8.9 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (0.8.10)
+Requirement already satisfied: tqdm&lt;5.0.0,&gt;=4.64.1 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (4.67.1)
+Requirement already satisfied: typer&lt;0.10.0,&gt;=0.9.0 in /usr/local/lib/python3.10/dist-packages (from fuzzy-c-means) (0.9.4)
+Requirement already satisfied: annotated-types&gt;=0.6.0 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (0.7.0)
+Requirement already satisfied: pydantic-core==2.27.1 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (2.27.1)
+Requirement already satisfied: typing-extensions&gt;=4.12.2 in /usr/local/lib/python3.10/dist-packages (from pydantic&lt;3.0.0,&gt;=2.6.4-&gt;fuzzy-c-means) (4.12.2)
+Requirement already satisfied: click&lt;9.0.0,&gt;=7.1.1 in /usr/local/lib/python3.10/dist-packages (from typer&lt;0.10.0,&gt;=0.9.0-&gt;fuzzy-c-means) (8.1.7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-d5df0069828e&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, readonly)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">120000</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Mount your Google Drive at the specified mountpoint path.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">_mount</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>       <span class="n">mountpoint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>   <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_Preprocessing_Hasan_encoded.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c2ea2226-215c-4c3c-ba7c-b4b5c1306a92" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleansing</th>
+      <th>case_folding</th>
+      <th>tokenize</th>
+      <th>stopword_removal</th>
+      <th>kategori_encoded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Iran Serukan Negara Muslim Bersatu Hentikan Ke...</td>
+      <td>Kamis, 17 Okt 2024 10:01 WIB</td>
+      <td>Jakarta - Presiden Iran Masoud Pezeshkian mene...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Presiden Iran Masoud Pezeshkian menek...</td>
+      <td>jakarta  presiden iran masoud pezeshkian menek...</td>
+      <td>['jakarta', 'presiden', 'iran', 'masoud', 'pez...</td>
+      <td>jakarta presiden iran masoud pezeshkian meneka...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bacaan Al-Qur'an Surah Asy-Syu'ara: Arab, Lati...</td>
+      <td>Kamis, 17 Okt 2024 09:30 WIB</td>
+      <td>NaN</td>
+      <td>Keislaman</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>['nan']</td>
+      <td>NaN</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rukun Iman Ke-2, Setiap Muslim Wajib Mengimani...</td>
+      <td>Kamis, 17 Okt 2024 08:45 WIB</td>
+      <td>Jakarta - Malaikat adalah makhluk ciptaan Alla...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Malaikat adalah makhluk ciptaan Allah...</td>
+      <td>jakarta  malaikat adalah makhluk ciptaan allah...</td>
+      <td>['jakarta', 'malaikat', 'adalah', 'makhluk', '...</td>
+      <td>jakarta malaikat makhluk ciptaan allah swt mus...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kalender Ramadhan 2025 Muhammadiyah dan Predik...</td>
+      <td>Kamis, 17 Okt 2024 08:00 WIB</td>
+      <td>Jakarta - Kalender Ramadhan 2025 versi Muhamma...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Kalender Ramadhan  versi Muhammadiyah...</td>
+      <td>jakarta  kalender ramadhan  versi muhammadiyah...</td>
+      <td>['jakarta', 'kalender', 'ramadhan', 'versi', '...</td>
+      <td>jakarta kalender ramadhan versi muhammadiyah t...</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20 Gambaran Kehidupan di Neraka Menurut Al-Qur...</td>
+      <td>Kamis, 17 Okt 2024 07:15 WIB</td>
+      <td>Jakarta - Gambaran kehidupan di neraka selalu ...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Gambaran kehidupan di neraka selalu m...</td>
+      <td>jakarta  gambaran kehidupan di neraka selalu m...</td>
+      <td>['jakarta', 'gambaran', 'kehidupan', 'di', 'ne...</td>
+      <td>jakarta gambaran kehidupan neraka pengingat ke...</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-c2ea2226-215c-4c3c-ba7c-b4b5c1306a92')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-c2ea2226-215c-4c3c-ba7c-b4b5c1306a92 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-c2ea2226-215c-4c3c-ba7c-b4b5c1306a92');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8520b4cd-6a59-469f-8c23-e124abfd9f1c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8520b4cd-6a59-469f-8c23-e124abfd9f1c')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8520b4cd-6a59-469f-8c23-e124abfd9f1c button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Map categories to encoded values</span>
+<span class="n">category_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Keislaman&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;Pariwisata&#39;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">category_mapping</span><span class="p">)</span>
+
+<span class="c1"># Save the updated dataset</span>
+<span class="n">output_file_path</span> <span class="o">=</span> <span class="s1">&#39;kategori_encoded_data_updated.csv&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File berhasil diperbarui dan dapat diunduh di tautan berikut:&quot;</span><span class="p">)</span>
+<span class="n">output_file_path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File berhasil diperbarui dan dapat diunduh di tautan berikut:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;kategori_encoded_data_updated.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">texts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace NaN values with an empty string</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">texts</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Vektorisasi TF-IDF</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="n">X_tfidf</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_tfidf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mendapatkan nama fitur dari TF-IDF</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+
+<span class="c1"># Konversi TF-IDF hasil training ke DataFrame</span>
+<span class="n">df_train_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">df_train_tfidf</span>
+<span class="n">df_train_tfidf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;tf-idf.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">X_tfidf</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(100, 6772)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span><span class="p">,</span> <span class="n">normalized_mutual_info_score</span>
+<span class="kn">from</span> <span class="nn">fcmeans</span> <span class="kn">import</span> <span class="n">FCM</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Pastikan X_scaled sudah terdefinisi sebelumnya</span>
+
+<span class="c1"># Inisialisasi variabel untuk menyimpan hasil</span>
+<span class="n">best_silhouette</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">best_ari</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">best_nmi</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">best_n_components</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Asumsikan y_true adalah label asli dari dataset Anda</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span>  <span class="c1"># Ganti &#39;kategori&#39; dengan nama kolom label asli</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>  <span class="c1"># Rentang nilai n_components</span>
+    <span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">data_reduced</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+    <span class="c1"># Fuzzy C-Means Clustering</span>
+    <span class="n">fcm</span> <span class="o">=</span> <span class="n">FCM</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="c1">#m= jarak kedekatan antara cluster</span>
+    <span class="n">fcm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_reduced</span><span class="p">)</span>
+    <span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">fcm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_reduced</span><span class="p">)</span>
+
+    <span class="c1"># Evaluasi dengan Silhouette Score, ARI, dan NMI</span>
+    <span class="n">silhouette</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">data_reduced</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+    <span class="n">ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+    <span class="n">nmi</span> <span class="o">=</span> <span class="n">normalized_mutual_info_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;silhouette&#39;</span><span class="p">:</span> <span class="n">silhouette</span><span class="p">,</span>
+        <span class="s1">&#39;ari&#39;</span><span class="p">:</span> <span class="n">ari</span><span class="p">,</span>
+        <span class="s1">&#39;nmi&#39;</span><span class="p">:</span> <span class="n">nmi</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Log setiap iterasi</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iterasi dengan n_components=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: Silhouette=</span><span class="si">{</span><span class="n">silhouette</span><span class="si">}</span><span class="s2">, ARI=</span><span class="si">{</span><span class="n">ari</span><span class="si">}</span><span class="s2">, NMI=</span><span class="si">{</span><span class="n">nmi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Perbarui nilai terbaik</span>
+    <span class="k">if</span> <span class="n">silhouette</span> <span class="o">&gt;</span> <span class="n">best_silhouette</span><span class="p">:</span>
+        <span class="n">best_silhouette</span> <span class="o">=</span> <span class="n">silhouette</span>
+        <span class="n">best_n_components</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="k">if</span> <span class="n">ari</span> <span class="o">&gt;</span> <span class="n">best_ari</span><span class="p">:</span>
+        <span class="n">best_ari</span> <span class="o">=</span> <span class="n">ari</span>
+    <span class="k">if</span> <span class="n">nmi</span> <span class="o">&gt;</span> <span class="n">best_nmi</span><span class="p">:</span>
+        <span class="n">best_nmi</span> <span class="o">=</span> <span class="n">nmi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iterasi dengan n_components=2: Silhouette=0.9582827821510551, ARI=0.0, NMI=0.018639764244343528
+Iterasi dengan n_components=3: Silhouette=0.9330469855063613, ARI=0.002427096100870114, NMI=0.0513556720154113
+Iterasi dengan n_components=4: Silhouette=0.9103311404986927, ARI=0.00485601903559462, NMI=0.06633317724023008
+Iterasi dengan n_components=5: Silhouette=0.9064684650676645, ARI=0.008096346523631212, NMI=0.08068918390116896
+Iterasi dengan n_components=6: Silhouette=0.8735346041359235, ARI=0.012148896880163282, NMI=0.09456435533426642
+Iterasi dengan n_components=7: Silhouette=0.859460815010821, ARI=0.01701445012943135, NMI=0.10806496399729751
+Iterasi dengan n_components=8: Silhouette=0.842584349739052, ARI=0.02269374787246114, NMI=0.1212746751286823
+Iterasi dengan n_components=9: Silhouette=0.818910992475677, ARI=0.02918749315918129, NMI=0.13426149725450204
+Iterasi dengan n_components=10: Silhouette=0.7716537743259763, ARI=0.0364963503649635, NMI=0.14708219223672478
+Iterasi dengan n_components=11: Silhouette=0.6226766050497045, ARI=0.1105291175143952, NMI=0.2356214794839988
+Iterasi dengan n_components=12: Silhouette=0.7352744065013478, ARI=0.015099302266113026, NMI=0.04205839862142762
+Iterasi dengan n_components=13: Silhouette=0.5523124797371473, ARI=0.13786870229007633, NMI=0.16867857255934546
+Iterasi dengan n_components=14: Silhouette=0.4559538273526694, ARI=0.24370826390048933, NMI=0.2674405643726493
+Iterasi dengan n_components=15: Silhouette=0.4589475310631704, ARI=0.20498612701219437, NMI=0.22001785356405038
+Iterasi dengan n_components=16: Silhouette=0.41879700815364695, ARI=0.22381418092909536, NMI=0.23375355755269595
+Iterasi dengan n_components=17: Silhouette=0.45138463307389437, ARI=0.09471882640586797, NMI=0.09725478822712842
+Iterasi dengan n_components=18: Silhouette=0.4188396147225136, ARI=0.20498612701219437, NMI=0.22001785356405038
+Iterasi dengan n_components=19: Silhouette=0.40939407715367027, ARI=0.18644731049550797, NMI=0.18084028367456673
+Iterasi dengan n_components=20: Silhouette=0.40083191386896994, ARI=0.20498612701219437, NMI=0.22001785356405038
+Iterasi dengan n_components=21: Silhouette=0.3785604704195056, ARI=0.20472691259002043, NMI=0.2053637959124707
+Iterasi dengan n_components=22: Silhouette=0.38005990177624555, ARI=0.1692200471957646, NMI=0.1682390938673625
+Iterasi dengan n_components=23: Silhouette=0.33055125303215716, ARI=0.28521458361361496, NMI=0.27753402924773746
+Iterasi dengan n_components=24: Silhouette=0.37115655340284215, ARI=0.18644731049550797, NMI=0.18084028367456673
+Iterasi dengan n_components=25: Silhouette=0.3729765701592401, ARI=0.1218796367253102, NMI=0.11789870295965417
+Iterasi dengan n_components=26: Silhouette=0.34401609272028694, ARI=0.10739524926088287, NMI=0.09783188781884344
+Iterasi dengan n_components=27: Silhouette=0.33522035769078373, ARI=0.15231431646932186, NMI=0.1402834245040046
+Iterasi dengan n_components=28: Silhouette=0.36589370498301405, ARI=0.1218796367253102, NMI=0.11789870295965417
+Iterasi dengan n_components=29: Silhouette=0.31010345119370064, ARI=0.18602261048304214, NMI=0.16455265253877288
+Iterasi dengan n_components=30: Silhouette=0.351030381269477, ARI=0.1218796367253102, NMI=0.11789870295965417
+Iterasi dengan n_components=31: Silhouette=0.32778695454853873, ARI=0.16875930268121114, NMI=0.15217136598067355
+Iterasi dengan n_components=32: Silhouette=0.3348832239374579, ARI=0.06996770721205597, NMI=0.06694852805127068
+Iterasi dengan n_components=33: Silhouette=0.2805642247552683, ARI=0.09377345560160559, NMI=0.08198909974765356
+Iterasi dengan n_components=34: Silhouette=0.305161028818495, ARI=0.20472691259002043, NMI=0.2053637959124707
+Iterasi dengan n_components=35: Silhouette=0.2922420929490992, ARI=0.09418729817007535, NMI=0.08809160248687292
+Iterasi dengan n_components=36: Silhouette=0.32580840211148226, ARI=0.1218796367253102, NMI=0.11789870295965417
+Iterasi dengan n_components=37: Silhouette=0.25488622228620356, ARI=0.06923905592008618, NMI=0.059486349180544316
+Iterasi dengan n_components=38: Silhouette=0.27656835845202177, ARI=0.10739524926088287, NMI=0.09783188781884344
+Iterasi dengan n_components=39: Silhouette=0.2697765026685156, ARI=0.06974012626633387, NMI=0.06444636791086797
+Iterasi dengan n_components=40: Silhouette=0.24826832390300846, ARI=0.058734995044234795, NMI=0.054496040820052626
+Iterasi dengan n_components=41: Silhouette=0.24735929482054794, ARI=0.09361077111383109, NMI=0.0797957030202867
+Iterasi dengan n_components=42: Silhouette=0.2697726125810526, ARI=0.15231431646932186, NMI=0.1402834245040046
+Iterasi dengan n_components=43: Silhouette=0.2483837169368514, ARI=0.05855067497276855, NMI=0.05293526690877434
+Iterasi dengan n_components=44: Silhouette=0.2719237676961409, ARI=0.04897739504843918, NMI=0.048883288551161835
+Iterasi dengan n_components=45: Silhouette=0.2412443960967227, ARI=0.09361077111383109, NMI=0.0797957030202867
+Iterasi dengan n_components=46: Silhouette=0.23006930905070688, ARI=0.09377345560160559, NMI=0.08198909974765356
+Iterasi dengan n_components=47: Silhouette=0.2330183798357, ARI=0.1071913659557285, NMI=0.09434576541925767
+Iterasi dengan n_components=48: Silhouette=0.23200424234910788, ARI=0.08116807617462396, NMI=0.07083693545803353
+Iterasi dengan n_components=49: Silhouette=0.21471018701342795, ARI=0.06937576499388005, NMI=0.0607708675871891
+Iterasi dengan n_components=50: Silhouette=0.22582271209613594, ARI=0.05855067497276855, NMI=0.05293526690877434
+Iterasi dengan n_components=51: Silhouette=0.20359967764438305, ARI=0.09361077111383109, NMI=0.0797957030202867
+Iterasi dengan n_components=52: Silhouette=0.20386448874944169, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=53: Silhouette=0.21478792211145187, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=54: Silhouette=0.20177700470359397, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=55: Silhouette=0.18891420640767173, ARI=0.09361077111383109, NMI=0.0797957030202867
+Iterasi dengan n_components=56: Silhouette=0.1858723676828116, ARI=0.05855067497276855, NMI=0.05293526690877434
+Iterasi dengan n_components=57: Silhouette=0.17846371048104867, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=58: Silhouette=0.16849580071262868, ARI=0.0482322985016159, NMI=0.04352281535923647
+Iterasi dengan n_components=59: Silhouette=0.16025388739223684, ARI=0.0482322985016159, NMI=0.04352281535923647
+Iterasi dengan n_components=60: Silhouette=0.16996939630982377, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=61: Silhouette=0.16686297774357786, ARI=0.04874467772720599, NMI=0.04708980014714522
+Iterasi dengan n_components=62: Silhouette=0.15487446372624578, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=63: Silhouette=0.16585421721245133, ARI=0.058949943929044755, NMI=0.05642152637314087
+Iterasi dengan n_components=64: Silhouette=0.14842257831607183, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=65: Silhouette=0.142701350599755, ARI=0.05855067497276855, NMI=0.05293526690877434
+Iterasi dengan n_components=66: Silhouette=0.12983733607823209, ARI=0.03900751180222049, NMI=0.036865411084647505
+Iterasi dengan n_components=67: Silhouette=0.12876271125732114, ARI=0.022849588503392755, NMI=0.024598769673812613
+Iterasi dengan n_components=68: Silhouette=0.11172698185559221, ARI=0.009793959575431853, NMI=0.014576828435880821
+Iterasi dengan n_components=69: Silhouette=0.12493371667428015, ARI=0.030599755201958383, NMI=0.030751805676497313
+Iterasi dengan n_components=70: Silhouette=0.12573203962444665, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=71: Silhouette=0.11573917163402055, ARI=0.03900751180222049, NMI=0.036865411084647505
+Iterasi dengan n_components=72: Silhouette=0.11915085764392336, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=73: Silhouette=0.11178690372801414, ARI=0.01605875152998776, NMI=0.019622102805851988
+Iterasi dengan n_components=74: Silhouette=0.11683094770000067, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=75: Silhouette=0.10857057678078862, ARI=0.030599755201958383, NMI=0.030751805676497313
+Iterasi dengan n_components=76: Silhouette=0.10631959027555148, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=77: Silhouette=0.10804023796549471, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=78: Silhouette=0.10411984814809407, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=79: Silhouette=0.10147388739494304, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=80: Silhouette=0.09858022182121143, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=81: Silhouette=0.09533536095233586, ARI=0.04854289723591032, NMI=0.045626023826804925
+Iterasi dengan n_components=82: Silhouette=0.08854248917122746, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=83: Silhouette=0.08561557863947888, ARI=0.03916433108546391, NMI=0.03773834664531581
+Iterasi dengan n_components=84: Silhouette=0.07602622878444287, ARI=0.03900751180222049, NMI=0.036865411084647505
+Iterasi dengan n_components=85: Silhouette=0.07005398065715, ARI=0.03045734991675644, NMI=0.030119699730181713
+Iterasi dengan n_components=86: Silhouette=0.0630172209037999, ARI=0.022721986215001898, NMI=0.02415423012293781
+Iterasi dengan n_components=87: Silhouette=0.06259395056063582, ARI=0.022721986215001898, NMI=0.02415423012293781
+Iterasi dengan n_components=88: Silhouette=0.05808304084783309, ARI=0.030346561321601725, NMI=0.02964327933391515
+Iterasi dengan n_components=89: Silhouette=0.05682253573295237, ARI=0.030346561321601725, NMI=0.02964327933391515
+Iterasi dengan n_components=90: Silhouette=0.057331605382613005, ARI=0.030346561321601725, NMI=0.02964327933391515
+Iterasi dengan n_components=91: Silhouette=0.0560923915105684, ARI=0.030346561321601725, NMI=0.02964327933391515
+Iterasi dengan n_components=92: Silhouette=0.022613141804285322, ARI=0.015721422274463707, NMI=0.01871144634398399
+Iterasi dengan n_components=93: Silhouette=0.028401605069727262, ARI=0.015673213498555126, NMI=0.018587207287721865
+Iterasi dengan n_components=94: Silhouette=0.02605460689352169, ARI=0.015673213498555126, NMI=0.018587207287721865
+Iterasi dengan n_components=95: Silhouette=0.028551997680162165, ARI=0.02253052028359068, NMI=0.02351258938443967
+Iterasi dengan n_components=96: Silhouette=0.06310490750514751, ARI=0.13626518850262473, NMI=0.11876912541700375
+Iterasi dengan n_components=97: Silhouette=0.07198798310734382, ARI=0.12142123036264865, NMI=0.10805204632615578
+Iterasi dengan n_components=98: Silhouette=0.07409223983194901, ARI=0.13646243245998574, NMI=0.12328837996546078
+Iterasi dengan n_components=99: Silhouette=0.06472916582406489, ARI=0.13626518850262473, NMI=0.11876912541700375
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menyimpan hasil terbaik untuk setiap metrik</span>
+<span class="n">best_silhouette_n_components</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;silhouette&#39;</span><span class="p">])</span>
+<span class="n">best_ari_n_components</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;ari&#39;</span><span class="p">])</span>
+<span class="n">best_nmi_n_components</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;nmi&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan hasil terbaik</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best Silhouette Score is achieved by n_components=</span><span class="si">{</span><span class="n">best_silhouette_n_components</span><span class="si">}</span><span class="s2"> with score: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="n">best_silhouette_n_components</span><span class="p">][</span><span class="s1">&#39;silhouette&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best ARI is achieved by n_components=</span><span class="si">{</span><span class="n">best_ari_n_components</span><span class="si">}</span><span class="s2"> with score: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="n">best_ari_n_components</span><span class="p">][</span><span class="s1">&#39;ari&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best NMI is achieved by n_components=</span><span class="si">{</span><span class="n">best_nmi_n_components</span><span class="si">}</span><span class="s2"> with score: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="n">best_nmi_n_components</span><span class="p">][</span><span class="s1">&#39;nmi&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Silhouette Score is achieved by n_components=2 with score: 0.9582827821510551
+Best ARI is achieved by n_components=23 with score: 0.28521458361361496
+Best NMI is achieved by n_components=23 with score: 0.27753402924773746
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengurutkan hasil berdasarkan silhouette score (dari tertinggi ke terendah)</span>
+<span class="n">sorted_results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;silhouette&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil akhir</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best n_components: </span><span class="si">{</span><span class="n">best_n_components</span><span class="si">}</span><span class="s2"> with silhouette score: </span><span class="si">{</span><span class="n">best_silhouette</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All results (sorted by silhouette score):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">sorted_results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_components=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: Silhouette Score=</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best n_components: 2 with silhouette score: 0.9582827821510551
+
+All results (sorted by silhouette score):
+n_components=2: Silhouette Score={&#39;silhouette&#39;: 0.9582827821510551, &#39;ari&#39;: 0.0, &#39;nmi&#39;: 0.018639764244343528}
+n_components=3: Silhouette Score={&#39;silhouette&#39;: 0.9330469855063613, &#39;ari&#39;: 0.002427096100870114, &#39;nmi&#39;: 0.0513556720154113}
+n_components=4: Silhouette Score={&#39;silhouette&#39;: 0.9103311404986927, &#39;ari&#39;: 0.00485601903559462, &#39;nmi&#39;: 0.06633317724023008}
+n_components=5: Silhouette Score={&#39;silhouette&#39;: 0.9064684650676645, &#39;ari&#39;: 0.008096346523631212, &#39;nmi&#39;: 0.08068918390116896}
+n_components=6: Silhouette Score={&#39;silhouette&#39;: 0.8735346041359235, &#39;ari&#39;: 0.012148896880163282, &#39;nmi&#39;: 0.09456435533426642}
+n_components=7: Silhouette Score={&#39;silhouette&#39;: 0.859460815010821, &#39;ari&#39;: 0.01701445012943135, &#39;nmi&#39;: 0.10806496399729751}
+n_components=8: Silhouette Score={&#39;silhouette&#39;: 0.842584349739052, &#39;ari&#39;: 0.02269374787246114, &#39;nmi&#39;: 0.1212746751286823}
+n_components=9: Silhouette Score={&#39;silhouette&#39;: 0.818910992475677, &#39;ari&#39;: 0.02918749315918129, &#39;nmi&#39;: 0.13426149725450204}
+n_components=10: Silhouette Score={&#39;silhouette&#39;: 0.7716537743259763, &#39;ari&#39;: 0.0364963503649635, &#39;nmi&#39;: 0.14708219223672478}
+n_components=12: Silhouette Score={&#39;silhouette&#39;: 0.7352744065013478, &#39;ari&#39;: 0.015099302266113026, &#39;nmi&#39;: 0.04205839862142762}
+n_components=11: Silhouette Score={&#39;silhouette&#39;: 0.6226766050497045, &#39;ari&#39;: 0.1105291175143952, &#39;nmi&#39;: 0.2356214794839988}
+n_components=13: Silhouette Score={&#39;silhouette&#39;: 0.5523124797371473, &#39;ari&#39;: 0.13786870229007633, &#39;nmi&#39;: 0.16867857255934546}
+n_components=15: Silhouette Score={&#39;silhouette&#39;: 0.4589475310631704, &#39;ari&#39;: 0.20498612701219437, &#39;nmi&#39;: 0.22001785356405038}
+n_components=14: Silhouette Score={&#39;silhouette&#39;: 0.4559538273526694, &#39;ari&#39;: 0.24370826390048933, &#39;nmi&#39;: 0.2674405643726493}
+n_components=17: Silhouette Score={&#39;silhouette&#39;: 0.45138463307389437, &#39;ari&#39;: 0.09471882640586797, &#39;nmi&#39;: 0.09725478822712842}
+n_components=18: Silhouette Score={&#39;silhouette&#39;: 0.4188396147225136, &#39;ari&#39;: 0.20498612701219437, &#39;nmi&#39;: 0.22001785356405038}
+n_components=16: Silhouette Score={&#39;silhouette&#39;: 0.41879700815364695, &#39;ari&#39;: 0.22381418092909536, &#39;nmi&#39;: 0.23375355755269595}
+n_components=19: Silhouette Score={&#39;silhouette&#39;: 0.40939407715367027, &#39;ari&#39;: 0.18644731049550797, &#39;nmi&#39;: 0.18084028367456673}
+n_components=20: Silhouette Score={&#39;silhouette&#39;: 0.40083191386896994, &#39;ari&#39;: 0.20498612701219437, &#39;nmi&#39;: 0.22001785356405038}
+n_components=22: Silhouette Score={&#39;silhouette&#39;: 0.38005990177624555, &#39;ari&#39;: 0.1692200471957646, &#39;nmi&#39;: 0.1682390938673625}
+n_components=21: Silhouette Score={&#39;silhouette&#39;: 0.3785604704195056, &#39;ari&#39;: 0.20472691259002043, &#39;nmi&#39;: 0.2053637959124707}
+n_components=25: Silhouette Score={&#39;silhouette&#39;: 0.3729765701592401, &#39;ari&#39;: 0.1218796367253102, &#39;nmi&#39;: 0.11789870295965417}
+n_components=24: Silhouette Score={&#39;silhouette&#39;: 0.37115655340284215, &#39;ari&#39;: 0.18644731049550797, &#39;nmi&#39;: 0.18084028367456673}
+n_components=28: Silhouette Score={&#39;silhouette&#39;: 0.36589370498301405, &#39;ari&#39;: 0.1218796367253102, &#39;nmi&#39;: 0.11789870295965417}
+n_components=30: Silhouette Score={&#39;silhouette&#39;: 0.351030381269477, &#39;ari&#39;: 0.1218796367253102, &#39;nmi&#39;: 0.11789870295965417}
+n_components=26: Silhouette Score={&#39;silhouette&#39;: 0.34401609272028694, &#39;ari&#39;: 0.10739524926088287, &#39;nmi&#39;: 0.09783188781884344}
+n_components=27: Silhouette Score={&#39;silhouette&#39;: 0.33522035769078373, &#39;ari&#39;: 0.15231431646932186, &#39;nmi&#39;: 0.1402834245040046}
+n_components=32: Silhouette Score={&#39;silhouette&#39;: 0.3348832239374579, &#39;ari&#39;: 0.06996770721205597, &#39;nmi&#39;: 0.06694852805127068}
+n_components=23: Silhouette Score={&#39;silhouette&#39;: 0.33055125303215716, &#39;ari&#39;: 0.28521458361361496, &#39;nmi&#39;: 0.27753402924773746}
+n_components=31: Silhouette Score={&#39;silhouette&#39;: 0.32778695454853873, &#39;ari&#39;: 0.16875930268121114, &#39;nmi&#39;: 0.15217136598067355}
+n_components=36: Silhouette Score={&#39;silhouette&#39;: 0.32580840211148226, &#39;ari&#39;: 0.1218796367253102, &#39;nmi&#39;: 0.11789870295965417}
+n_components=29: Silhouette Score={&#39;silhouette&#39;: 0.31010345119370064, &#39;ari&#39;: 0.18602261048304214, &#39;nmi&#39;: 0.16455265253877288}
+n_components=34: Silhouette Score={&#39;silhouette&#39;: 0.305161028818495, &#39;ari&#39;: 0.20472691259002043, &#39;nmi&#39;: 0.2053637959124707}
+n_components=35: Silhouette Score={&#39;silhouette&#39;: 0.2922420929490992, &#39;ari&#39;: 0.09418729817007535, &#39;nmi&#39;: 0.08809160248687292}
+n_components=33: Silhouette Score={&#39;silhouette&#39;: 0.2805642247552683, &#39;ari&#39;: 0.09377345560160559, &#39;nmi&#39;: 0.08198909974765356}
+n_components=38: Silhouette Score={&#39;silhouette&#39;: 0.27656835845202177, &#39;ari&#39;: 0.10739524926088287, &#39;nmi&#39;: 0.09783188781884344}
+n_components=44: Silhouette Score={&#39;silhouette&#39;: 0.2719237676961409, &#39;ari&#39;: 0.04897739504843918, &#39;nmi&#39;: 0.048883288551161835}
+n_components=39: Silhouette Score={&#39;silhouette&#39;: 0.2697765026685156, &#39;ari&#39;: 0.06974012626633387, &#39;nmi&#39;: 0.06444636791086797}
+n_components=42: Silhouette Score={&#39;silhouette&#39;: 0.2697726125810526, &#39;ari&#39;: 0.15231431646932186, &#39;nmi&#39;: 0.1402834245040046}
+n_components=37: Silhouette Score={&#39;silhouette&#39;: 0.25488622228620356, &#39;ari&#39;: 0.06923905592008618, &#39;nmi&#39;: 0.059486349180544316}
+n_components=43: Silhouette Score={&#39;silhouette&#39;: 0.2483837169368514, &#39;ari&#39;: 0.05855067497276855, &#39;nmi&#39;: 0.05293526690877434}
+n_components=40: Silhouette Score={&#39;silhouette&#39;: 0.24826832390300846, &#39;ari&#39;: 0.058734995044234795, &#39;nmi&#39;: 0.054496040820052626}
+n_components=41: Silhouette Score={&#39;silhouette&#39;: 0.24735929482054794, &#39;ari&#39;: 0.09361077111383109, &#39;nmi&#39;: 0.0797957030202867}
+n_components=45: Silhouette Score={&#39;silhouette&#39;: 0.2412443960967227, &#39;ari&#39;: 0.09361077111383109, &#39;nmi&#39;: 0.0797957030202867}
+n_components=47: Silhouette Score={&#39;silhouette&#39;: 0.2330183798357, &#39;ari&#39;: 0.1071913659557285, &#39;nmi&#39;: 0.09434576541925767}
+n_components=48: Silhouette Score={&#39;silhouette&#39;: 0.23200424234910788, &#39;ari&#39;: 0.08116807617462396, &#39;nmi&#39;: 0.07083693545803353}
+n_components=46: Silhouette Score={&#39;silhouette&#39;: 0.23006930905070688, &#39;ari&#39;: 0.09377345560160559, &#39;nmi&#39;: 0.08198909974765356}
+n_components=50: Silhouette Score={&#39;silhouette&#39;: 0.22582271209613594, &#39;ari&#39;: 0.05855067497276855, &#39;nmi&#39;: 0.05293526690877434}
+n_components=53: Silhouette Score={&#39;silhouette&#39;: 0.21478792211145187, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=49: Silhouette Score={&#39;silhouette&#39;: 0.21471018701342795, &#39;ari&#39;: 0.06937576499388005, &#39;nmi&#39;: 0.0607708675871891}
+n_components=52: Silhouette Score={&#39;silhouette&#39;: 0.20386448874944169, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=51: Silhouette Score={&#39;silhouette&#39;: 0.20359967764438305, &#39;ari&#39;: 0.09361077111383109, &#39;nmi&#39;: 0.0797957030202867}
+n_components=54: Silhouette Score={&#39;silhouette&#39;: 0.20177700470359397, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=55: Silhouette Score={&#39;silhouette&#39;: 0.18891420640767173, &#39;ari&#39;: 0.09361077111383109, &#39;nmi&#39;: 0.0797957030202867}
+n_components=56: Silhouette Score={&#39;silhouette&#39;: 0.1858723676828116, &#39;ari&#39;: 0.05855067497276855, &#39;nmi&#39;: 0.05293526690877434}
+n_components=57: Silhouette Score={&#39;silhouette&#39;: 0.17846371048104867, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=60: Silhouette Score={&#39;silhouette&#39;: 0.16996939630982377, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=58: Silhouette Score={&#39;silhouette&#39;: 0.16849580071262868, &#39;ari&#39;: 0.0482322985016159, &#39;nmi&#39;: 0.04352281535923647}
+n_components=61: Silhouette Score={&#39;silhouette&#39;: 0.16686297774357786, &#39;ari&#39;: 0.04874467772720599, &#39;nmi&#39;: 0.04708980014714522}
+n_components=63: Silhouette Score={&#39;silhouette&#39;: 0.16585421721245133, &#39;ari&#39;: 0.058949943929044755, &#39;nmi&#39;: 0.05642152637314087}
+n_components=59: Silhouette Score={&#39;silhouette&#39;: 0.16025388739223684, &#39;ari&#39;: 0.0482322985016159, &#39;nmi&#39;: 0.04352281535923647}
+n_components=62: Silhouette Score={&#39;silhouette&#39;: 0.15487446372624578, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=64: Silhouette Score={&#39;silhouette&#39;: 0.14842257831607183, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=65: Silhouette Score={&#39;silhouette&#39;: 0.142701350599755, &#39;ari&#39;: 0.05855067497276855, &#39;nmi&#39;: 0.05293526690877434}
+n_components=66: Silhouette Score={&#39;silhouette&#39;: 0.12983733607823209, &#39;ari&#39;: 0.03900751180222049, &#39;nmi&#39;: 0.036865411084647505}
+n_components=67: Silhouette Score={&#39;silhouette&#39;: 0.12876271125732114, &#39;ari&#39;: 0.022849588503392755, &#39;nmi&#39;: 0.024598769673812613}
+n_components=70: Silhouette Score={&#39;silhouette&#39;: 0.12573203962444665, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=69: Silhouette Score={&#39;silhouette&#39;: 0.12493371667428015, &#39;ari&#39;: 0.030599755201958383, &#39;nmi&#39;: 0.030751805676497313}
+n_components=72: Silhouette Score={&#39;silhouette&#39;: 0.11915085764392336, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=74: Silhouette Score={&#39;silhouette&#39;: 0.11683094770000067, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=71: Silhouette Score={&#39;silhouette&#39;: 0.11573917163402055, &#39;ari&#39;: 0.03900751180222049, &#39;nmi&#39;: 0.036865411084647505}
+n_components=73: Silhouette Score={&#39;silhouette&#39;: 0.11178690372801414, &#39;ari&#39;: 0.01605875152998776, &#39;nmi&#39;: 0.019622102805851988}
+n_components=68: Silhouette Score={&#39;silhouette&#39;: 0.11172698185559221, &#39;ari&#39;: 0.009793959575431853, &#39;nmi&#39;: 0.014576828435880821}
+n_components=75: Silhouette Score={&#39;silhouette&#39;: 0.10857057678078862, &#39;ari&#39;: 0.030599755201958383, &#39;nmi&#39;: 0.030751805676497313}
+n_components=77: Silhouette Score={&#39;silhouette&#39;: 0.10804023796549471, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=76: Silhouette Score={&#39;silhouette&#39;: 0.10631959027555148, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=78: Silhouette Score={&#39;silhouette&#39;: 0.10411984814809407, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=79: Silhouette Score={&#39;silhouette&#39;: 0.10147388739494304, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=80: Silhouette Score={&#39;silhouette&#39;: 0.09858022182121143, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=81: Silhouette Score={&#39;silhouette&#39;: 0.09533536095233586, &#39;ari&#39;: 0.04854289723591032, &#39;nmi&#39;: 0.045626023826804925}
+n_components=82: Silhouette Score={&#39;silhouette&#39;: 0.08854248917122746, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=83: Silhouette Score={&#39;silhouette&#39;: 0.08561557863947888, &#39;ari&#39;: 0.03916433108546391, &#39;nmi&#39;: 0.03773834664531581}
+n_components=84: Silhouette Score={&#39;silhouette&#39;: 0.07602622878444287, &#39;ari&#39;: 0.03900751180222049, &#39;nmi&#39;: 0.036865411084647505}
+n_components=98: Silhouette Score={&#39;silhouette&#39;: 0.07409223983194901, &#39;ari&#39;: 0.13646243245998574, &#39;nmi&#39;: 0.12328837996546078}
+n_components=97: Silhouette Score={&#39;silhouette&#39;: 0.07198798310734382, &#39;ari&#39;: 0.12142123036264865, &#39;nmi&#39;: 0.10805204632615578}
+n_components=85: Silhouette Score={&#39;silhouette&#39;: 0.07005398065715, &#39;ari&#39;: 0.03045734991675644, &#39;nmi&#39;: 0.030119699730181713}
+n_components=99: Silhouette Score={&#39;silhouette&#39;: 0.06472916582406489, &#39;ari&#39;: 0.13626518850262473, &#39;nmi&#39;: 0.11876912541700375}
+n_components=96: Silhouette Score={&#39;silhouette&#39;: 0.06310490750514751, &#39;ari&#39;: 0.13626518850262473, &#39;nmi&#39;: 0.11876912541700375}
+n_components=86: Silhouette Score={&#39;silhouette&#39;: 0.0630172209037999, &#39;ari&#39;: 0.022721986215001898, &#39;nmi&#39;: 0.02415423012293781}
+n_components=87: Silhouette Score={&#39;silhouette&#39;: 0.06259395056063582, &#39;ari&#39;: 0.022721986215001898, &#39;nmi&#39;: 0.02415423012293781}
+n_components=88: Silhouette Score={&#39;silhouette&#39;: 0.05808304084783309, &#39;ari&#39;: 0.030346561321601725, &#39;nmi&#39;: 0.02964327933391515}
+n_components=90: Silhouette Score={&#39;silhouette&#39;: 0.057331605382613005, &#39;ari&#39;: 0.030346561321601725, &#39;nmi&#39;: 0.02964327933391515}
+n_components=89: Silhouette Score={&#39;silhouette&#39;: 0.05682253573295237, &#39;ari&#39;: 0.030346561321601725, &#39;nmi&#39;: 0.02964327933391515}
+n_components=91: Silhouette Score={&#39;silhouette&#39;: 0.0560923915105684, &#39;ari&#39;: 0.030346561321601725, &#39;nmi&#39;: 0.02964327933391515}
+n_components=95: Silhouette Score={&#39;silhouette&#39;: 0.028551997680162165, &#39;ari&#39;: 0.02253052028359068, &#39;nmi&#39;: 0.02351258938443967}
+n_components=93: Silhouette Score={&#39;silhouette&#39;: 0.028401605069727262, &#39;ari&#39;: 0.015673213498555126, &#39;nmi&#39;: 0.018587207287721865}
+n_components=94: Silhouette Score={&#39;silhouette&#39;: 0.02605460689352169, &#39;ari&#39;: 0.015673213498555126, &#39;nmi&#39;: 0.018587207287721865}
+n_components=92: Silhouette Score={&#39;silhouette&#39;: 0.022613141804285322, &#39;ari&#39;: 0.015721422274463707, &#39;nmi&#39;: 0.01871144634398399}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Data untuk plotting</span>
+<span class="n">n_components</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">silhouette_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;silhouette&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+<span class="c1"># Ganti dengan style bawaan yang mirip</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;dark_background&quot;</span><span class="p">)</span>
+
+<span class="c1"># Membuat figure dengan nuansa grafik trading</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Plot garis dengan marker</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">silhouette_scores</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Silhouette Score&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lime&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan grid horizontal</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan judul dan label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Silhouette Score vs n_components&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Components (n_components)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Silhouette Score&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan anotasi untuk nilai maksimum</span>
+<span class="n">max_score</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">silhouette_scores</span><span class="p">)</span>
+<span class="n">best_n</span> <span class="o">=</span> <span class="n">n_components</span><span class="p">[</span><span class="n">silhouette_scores</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">max_score</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best: </span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="se">\n</span><span class="s2">Score: </span><span class="si">{</span><span class="n">max_score</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+             <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">best_n</span><span class="p">,</span> <span class="n">max_score</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">best_n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_score</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">),</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="c1"># Menambahkan legenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan grafik</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fb51bde375bbd315e35a998a532ca2f50413139a705940555d71294e48f4868b.png" src="../_images/fb51bde375bbd315e35a998a532ca2f50413139a705940555d71294e48f4868b.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="clustering">
+<h1>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fcmeans</span> <span class="kn">import</span> <span class="n">FCM</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>  <span class="c1"># Untuk manipulasi DataFrame</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_Preprocessing_Hasan_encoded.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span>
+<span class="n">random_seed</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># Tetapkan seed untuk konsistensi</span>
+
+<span class="c1"># Step 2: Vektorisasi TF-IDF</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+<span class="c1">#Step 3 Normalisasi Hasil TF-IDF</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">data_normalisasi</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf</span><span class="p">)</span>
+
+<span class="c1"># Step 4 : Reduksi dimensi menggunakan SVD</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">36</span> <span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_seed</span><span class="p">)</span>
+<span class="c1">#merubah n_components=</span>
+<span class="n">data_cluster</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data_normalisasi</span><span class="p">)</span>
+
+<span class="c1">#fcm = FCM(n_clusters=2, m=2.0, max_iter=1000, error=0.001, random_state=42) parameter</span>
+
+<span class="c1"># Fuzzy C-Means Clustering</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1">#fcm = FCM(n_clusters=n_clusters, m=2.0, max_iter=1000, epsilon=0.001, random_state=42)</span>
+<span class="n">fcm</span> <span class="o">=</span> <span class="n">FCM</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">fcm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_cluster</span><span class="p">)</span>
+
+<span class="c1"># Mendapatkan hasil clustering</span>
+<span class="n">membership</span> <span class="o">=</span> <span class="n">fcm</span><span class="o">.</span><span class="n">u</span>
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">membership</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menentukan cluster untuk setiap data</span>
+<span class="c1"># Tambahkan hasil klasterisasi ke dalam DataFrame</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_labels</span>
+<span class="c1"># Tampilkan jumlah data pada setiap cluster</span>
+<span class="n">cluster_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="c1"># Tambahkan setelah cluster_labels dihasilkan</span>
+<span class="n">silhouette_avg</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">data_cluster</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Silhouette Score: </span><span class="si">{</span><span class="n">silhouette_avg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cetak hasil jumlah data per cluster</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data pada setiap cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cluster_counts</span><span class="p">)</span>
+
+
+<span class="c1"># Visualisasi hasil clustering</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Plot titik data dalam ruang 2D yang sudah direduksi, dengan warna berdasarkan cluster</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_cluster</span><span class="p">[</span><span class="n">cluster_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">data_cluster</span><span class="p">[</span><span class="n">cluster_labels</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot centroid</span>
+<span class="n">cluster_centers</span> <span class="o">=</span> <span class="n">fcm</span><span class="o">.</span><span class="n">centers</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">cluster_centers</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">cluster_centers</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centroids&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Fuzzy C-Means Clustering of Text Data with SVD (n_clusters=</span><span class="si">{</span><span class="n">n_clusters</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;SVD Component 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;SVD Component 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score: 0.3258
+Jumlah data pada setiap cluster:
+Cluster
+1    68
+0    32
+Name: count, dtype: int64
+</pre></div>
+</div>
+<img alt="../_images/1b1481fe51851162e434a2c8aeb47a503111b74e028d39280a3f300d57fec175.png" src="../_images/1b1481fe51851162e434a2c8aeb47a503111b74e028d39280a3f300d57fec175.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menambahkan hasil klasterisasi ke dalam DataFrame</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_labels</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-7cd598ce-b985-49dc-ad2c-b956eb1d2ec8" class="colab-df-container">
+    <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>judul</th>
+      <th>tanggal</th>
+      <th>isi</th>
+      <th>kategori</th>
+      <th>cleansing</th>
+      <th>case_folding</th>
+      <th>tokenize</th>
+      <th>stopword_removal</th>
+      <th>kategori_encoded</th>
+      <th>Cluster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Iran Serukan Negara Muslim Bersatu Hentikan Ke...</td>
+      <td>Kamis, 17 Okt 2024 10:01 WIB</td>
+      <td>Jakarta - Presiden Iran Masoud Pezeshkian mene...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Presiden Iran Masoud Pezeshkian menek...</td>
+      <td>jakarta  presiden iran masoud pezeshkian menek...</td>
+      <td>['jakarta', 'presiden', 'iran', 'masoud', 'pez...</td>
+      <td>jakarta presiden iran masoud pezeshkian meneka...</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bacaan Al-Qur'an Surah Asy-Syu'ara: Arab, Lati...</td>
+      <td>Kamis, 17 Okt 2024 09:30 WIB</td>
+      <td>NaN</td>
+      <td>Keislaman</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>['nan']</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rukun Iman Ke-2, Setiap Muslim Wajib Mengimani...</td>
+      <td>Kamis, 17 Okt 2024 08:45 WIB</td>
+      <td>Jakarta - Malaikat adalah makhluk ciptaan Alla...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Malaikat adalah makhluk ciptaan Allah...</td>
+      <td>jakarta  malaikat adalah makhluk ciptaan allah...</td>
+      <td>['jakarta', 'malaikat', 'adalah', 'makhluk', '...</td>
+      <td>jakarta malaikat makhluk ciptaan allah swt mus...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kalender Ramadhan 2025 Muhammadiyah dan Predik...</td>
+      <td>Kamis, 17 Okt 2024 08:00 WIB</td>
+      <td>Jakarta - Kalender Ramadhan 2025 versi Muhamma...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Kalender Ramadhan  versi Muhammadiyah...</td>
+      <td>jakarta  kalender ramadhan  versi muhammadiyah...</td>
+      <td>['jakarta', 'kalender', 'ramadhan', 'versi', '...</td>
+      <td>jakarta kalender ramadhan versi muhammadiyah t...</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20 Gambaran Kehidupan di Neraka Menurut Al-Qur...</td>
+      <td>Kamis, 17 Okt 2024 07:15 WIB</td>
+      <td>Jakarta - Gambaran kehidupan di neraka selalu ...</td>
+      <td>Keislaman</td>
+      <td>Jakarta  Gambaran kehidupan di neraka selalu m...</td>
+      <td>jakarta  gambaran kehidupan di neraka selalu m...</td>
+      <td>['jakarta', 'gambaran', 'kehidupan', 'di', 'ne...</td>
+      <td>jakarta gambaran kehidupan neraka pengingat ke...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>Praha Incar Turis-Turis Kaya, 'Wisata Pub Jala...</td>
+      <td>Rabu, 16 Okt 2024 06:13 WIB</td>
+      <td>Praha - Praha ingin mengganti imej dari kota s...</td>
+      <td>Pariwisata</td>
+      <td>Praha  Praha ingin mengganti imej dari kota se...</td>
+      <td>praha  praha ingin mengganti imej dari kota se...</td>
+      <td>['praha', 'praha', 'ingin', 'mengganti', 'imej...</td>
+      <td>praha praha mengganti imej kota tujuan wisata ...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>Usai Festival Vegetarian, Phuket Pusing dengan...</td>
+      <td>Rabu, 16 Okt 2024 05:39 WIB</td>
+      <td>Phuket - Festival Vegetarian menjadi salah sat...</td>
+      <td>Pariwisata</td>
+      <td>Phuket  Festival Vegetarian menjadi salah satu...</td>
+      <td>phuket  festival vegetarian menjadi salah satu...</td>
+      <td>['phuket', 'festival', 'vegetarian', 'menjadi'...</td>
+      <td>phuket festival vegetarian salah daya tarik pa...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>Ngeri! Turis Inggris Tewas Saat Memanjat Jemba...</td>
+      <td>Rabu, 16 Okt 2024 05:01 WIB</td>
+      <td>Jakarta - Seorang turis yang juga kreator kont...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  Seorang turis yang juga kreator konte...</td>
+      <td>jakarta  seorang turis yang juga kreator konte...</td>
+      <td>['jakarta', 'seorang', 'turis', 'yang', 'juga'...</td>
+      <td>jakarta turis kreator konten inggris berusia t...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Info Loker: Lion Group Buka Lowongan Mekanik Nih!</td>
+      <td>Selasa, 15 Okt 2024 23:04 WIB</td>
+      <td>Jakarta - Traveler yang ingin bekerja di dunia...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  Traveler yang ingin bekerja di dunia ...</td>
+      <td>jakarta  traveler yang ingin bekerja di dunia ...</td>
+      <td>['jakarta', 'traveler', 'yang', 'ingin', 'beke...</td>
+      <td>jakarta traveler dunia aviasi baiknya simak in...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Pengumuman! KA Brantas dan KA Dharmawangsa Pak...</td>
+      <td>Selasa, 15 Okt 2024 22:35 WIB</td>
+      <td>Jakarta - PT Kereta Api Indonesia (Persero) ak...</td>
+      <td>Pariwisata</td>
+      <td>Jakarta  PT Kereta Api Indonesia Persero akan ...</td>
+      <td>jakarta  pt kereta api indonesia persero akan ...</td>
+      <td>['jakarta', 'pt', 'kereta', 'api', 'indonesia'...</td>
+      <td>jakarta pt kereta api indonesia persero mengop...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 10 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-7cd598ce-b985-49dc-ad2c-b956eb1d2ec8')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-7cd598ce-b985-49dc-ad2c-b956eb1d2ec8 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-7cd598ce-b985-49dc-ad2c-b956eb1d2ec8');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-0e6da5e6-0986-4950-ab79-a4fa388912ec">
+  <button class="colab-df-quickchart" onclick="quickchart('df-0e6da5e6-0986-4950-ab79-a4fa388912ec')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-0e6da5e6-0986-4950-ab79-a4fa388912ec button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
+  <div id="id_2ace32db-57ae-4e02-aefd-855b6f179601">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('df')"
+            title="Generate code using this dataframe."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"/>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_2ace32db-57ae-4e02-aefd-855b6f179601 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('df');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Ambil kolom kategori dari dataframe sebagai label asli (true labels)</span>
+<span class="n">true_labels</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span>  <span class="c1"># Ganti &#39;kategori&#39; dengan nama kolom kategori di DataFrame Anda</span>
+
+<span class="c1"># Gunakan LabelEncoder untuk mengubah kategori menjadi angka</span>
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">true_labels_encoded</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">true_labels</span><span class="p">)</span>
+
+<span class="c1"># Hitung confusion matrix antara true labels dan hasil clustering</span>
+<span class="n">conf_matrix</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">true_labels_encoded</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+
+<span class="c1"># Tampilkan confusion matrix menggunakan heatmap untuk visualisasi</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix (Contingency Matrix) between True Labels and Clustering&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Cluster Labels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Labels&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Cetak confusion matrix secara numerik</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix (Contingency Matrix):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conf_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d7a078a8b4eb8f2bd15a5d026c3718d6bf6533267e00a377775f567c0375c698.png" src="../_images/d7a078a8b4eb8f2bd15a5d026c3718d6bf6533267e00a377775f567c0375c698.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confusion Matrix (Contingency Matrix):
+[[25 25]
+ [ 7 43]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tambahkan kolom ID jika belum ada</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># Ambil kolom id, kategori_encoded, dan Cluster</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kategori_encoded&#39;</span><span class="p">,</span> <span class="s1">&#39;Cluster&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Tampilkan DataFrame yang hanya berisi kolom yang dipilih</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">selected_columns</span><span class="p">)</span>
+
+<span class="c1"># Ambil semua anggota Cluster 0</span>
+<span class="n">cluster_0</span> <span class="o">=</span> <span class="n">selected_columns</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Ambil semua anggota Cluster 1</span>
+<span class="n">cluster_1</span> <span class="o">=</span> <span class="n">selected_columns</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Tampilkan hasil dalam bentuk list</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Anggota Cluster 0:&quot;</span><span class="p">,</span> <span class="n">cluster_0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Anggota Cluster 1:&quot;</span><span class="p">,</span> <span class="n">cluster_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    id  kategori_encoded  Cluster
+0    0                 0        1
+1    1                 0        1
+2    2                 0        0
+3    3                 0        1
+4    4                 0        0
+..  ..               ...      ...
+95  95                 1        1
+96  96                 1        1
+97  97                 1        1
+98  98                 1        1
+99  99                 1        0
+
+[100 rows x 3 columns]
+Anggota Cluster 0: [2, 4, 6, 7, 8, 9, 10, 12, 15, 16, 20, 22, 24, 25, 26, 28, 29, 30, 33, 35, 37, 39, 41, 42, 44, 50, 68, 71, 76, 80, 94, 99]
+Anggota Cluster 1: [0, 1, 3, 5, 11, 13, 14, 17, 18, 19, 21, 23, 27, 31, 32, 34, 36, 38, 40, 43, 45, 46, 47, 48, 49, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 70, 72, 73, 74, 75, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 95, 96, 97, 98]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Mengonversi keanggotaan fuzzy menjadi label cluster dengan memilih cluster dengan membership tertinggi</span>
+<span class="n">fuzzy_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">membership</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Menghitung Silhouette Score</span>
+<span class="n">silhouette_avg</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">data_cluster</span><span class="p">,</span> <span class="n">fuzzy_labels</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan Silhouette Score</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Silhouette Score: </span><span class="si">{</span><span class="n">silhouette_avg</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette Score: 0.3258
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">FunctionTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Membaca data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_Preprocessing_Hasan_encoded.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># Pastikan data berupa string</span>
+
+<span class="c1"># Fungsi untuk menerapkan FCM dalam pipeline</span>
+<span class="k">def</span> <span class="nf">fit_fcm</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">fcm</span> <span class="o">=</span> <span class="n">FCM</span><span class="p">(</span>
+        <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>         <span class="c1"># Jumlah cluster yang diinginkan</span>
+        <span class="n">m</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>                <span class="c1"># Fuzziness coefficient</span>
+        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>        <span class="c1"># Maksimal iterasi</span>
+        <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span>        <span class="c1"># Toleransi konvergensi</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>       <span class="c1"># Menetapkan seed untuk random state</span>
+    <span class="p">)</span>
+    <span class="n">fcm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fcm</span>
+
+<span class="c1"># Fungsi pembungkus untuk FCM (untuk FunctionTransformer)</span>
+<span class="k">def</span> <span class="nf">fit_fcm_wrapper</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">fit_fcm</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># Tuning parameter TfidfVectorizer</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_df</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span>
+    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;svd&#39;</span><span class="p">,</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;fcm&#39;</span><span class="p">,</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">fit_fcm_wrapper</span><span class="p">))</span>
+<span class="p">])</span>
+
+<span class="c1"># Fit pipeline pada data pelatihan</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Simpan pipeline yang telah dilatih</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="s1">&#39;svd_tfidf_scaler_fcm_pipeline.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;svd_tfidf_scaler_fcm_pipeline.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">fcmeans</span> <span class="kn">import</span> <span class="n">FCM</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># 1. Memuat pipeline yang sudah dilatih sebelumnya</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;svd_tfidf_scaler_fcm_pipeline.pkl&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Melakukan FCM pada data pelatihan (sudah dilabeli Games dan Sepakbola)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPWA/report/Tugas_PPWA/Hasil_Preprocessing_Hasan_encoded.csv&quot;</span><span class="p">)</span>
+<span class="c1"># Replace NaN values with an empty string before transforming</span>
+<span class="n">data_pelatihan</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1"># Transformasi data pelatihan menggunakan pipeline</span>
+<span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data_pelatihan</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="s1">&#39;toarray&#39;</span><span class="p">):</span>
+    <span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">X_train_transformed</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+<span class="c1"># 3. Melakukan clustering FCM pada data pelatihan</span>
+<span class="n">fcm_model</span> <span class="o">=</span> <span class="n">FCM</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">fcm_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">)</span>
+
+<span class="c1"># 4. Menyelaraskan cluster dengan label yang diketahui</span>
+<span class="n">labels_train</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span>
+
+<span class="c1"># Menyelaraskan cluster dengan label</span>
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">fcm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">)</span>
+<span class="n">cluster_to_label</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Keislaman&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;Pariwisata&#39;</span><span class="p">}</span> <span class="c1">#0: &#39;Otomotif&#39;, 1: &#39;Keuangan&#39; dan #0: &#39;Keuangan&#39;, 1: &#39;Otomotif&#39;</span>
+
+<span class="c1"># Menyelaraskan prediksi cluster dengan label</span>
+<span class="n">predicted_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">cluster_to_label</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">cluster_labels</span><span class="p">]</span>
+
+<span class="c1"># 5. Memuat data baru untuk prediksi</span>
+<span class="n">teks_baru</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Jakarta  Mimpi buruk adalah hal yang lumrah terjadi dan tidak bisa dihindari manusia Mimpi buruk membuat yang mengalaminya merasakan cemas dan takut yang berlebihan Islam merupakan agama yang sempurna dan selalu mendahulukan setiap aktivitas dengan berdoa Agar terhindar dari mimpi buruk ada doa dan amalan yang bisa dilakukan umat Islam Rasulullah SAW telah memberikan teladan kepada umatnya tentang cara menghindari mimpi buruk Rasulullah SAW bersabda Apabila seorang dari kalian bermimpi yang ia sukai berarti itu dari Allah dan hendaknya dia mengucapkan hamdalah karenanya serta menceritakannya Tapi bila dia mendapat mimpi yang tidak disukai berarti itu dari setan maka hendaklah dia berlindung dari kejahatannya dan jangan menceritakannya kepada siapapun niscaya hal itu tidak akan berdampak buruk baginya HR AlBukhari Dari hadits di atas jika kita bermimpi yang menyenangkan hendaknya memuji Allah SWT dan boleh menceritakannya karena mimpi yang baik itu akan menjadi kenyataan Sebaliknya hendaknya kita tidak memberitahukan mimpi buruk kepada orang lain dan memohon perlindungan kepada Allah dari gangguan setan Doa agar Tidak Mimpi Buruk Berikut ini beberapa doa yang dapat diamalkan agar tidak bermimpi buruk Doa agar Tidak Mimpi Buruk  Mengutip dari buku Tuntunan Doa dan Dzikir untuk Segala Situasi dan Kebutuhan karya Ali Akbar bin Aqil berikut adalah doa yang dimaksud          Bacaan latin Allohumma inniazubika min amalis syaithoni wa sayyiatil ahlam Artinya Ya Allah aku berlindung kepadaMu dari perbuatan setan dan buruknya mimpi Doa agar Tidak Mimpi Buruk  Masih menukil dari buku yang sama seperti sebelumnya berikut doa agar tidak mimpi buruk versi                     Bacaan latin Auudzu bikalimaatillaahittaammaati minghodhobihi wa iqoobihi wasyarri ibaadihi wamin hamazaatisysyayaathiini wa an yahdhuruu wa min hamajaatisysyayaatiini wa an yahduruun Artinya Aku berlindung dengan kalimat Allah yang sempurna dari kemarahan dan siksaanNya serta kejahatan hambahambaNya dan dari godaan setan bisikannya serta jangan sampai mereka hadir kepadaku  Doa Mengharap Mimpi Baik Menukil buku Tiket ke Surga DoaDoa Mustajab karya Abdul Majid dan Isfaudin berikut doa mengharap mimpi baik            Bacaan latin Allahumma arinal haqqa haqqan warzuqnat tibaaahu Wa arinal baathila baathilan warzuqnajtina bahu Artinya Ya Allah tunjukkanlah kepada kami kebenaran sehingga kami bisa mengikutinya dan tunjukkanlah kepada kami kejelekan sehingga kami dapat menjauhinya Amalan Sebelum Tidur Agar tidak mimpi buruk ada amalan yang dapat umat Islam kerjakan sebelum tidur Berikut ini amalanamalannya yang dikerjakan Rasulullah sebelum tidur dikutip dari buku Sunnah Rasulullah SehariHari karya Syaikh Abdullah bin Hamoud Al Furaih  Wudhu Sebelum Tidur Wudhu merupakan salah satu amalan sunnah yang dicontohkan Rasulullah sebelum tidur Hal tersebut sebagaimana yang termaktub dalam hadits Al Bara bin Azib Nabi Muhammad SAW bersabda             Artinya Jika hendak mendatangi tempat tidurmu berwudhulah seperti wudhu untuk sholat lalu berbaringlah ke sisi kanan badanmu HR AlBukhari no  dan Muslim no   Membaca Doa Sebelum Tidur Amalan selanjutnya adalah membaca doa sebelum tidur Hal ini termaktub dalam hadits yang diriwayatkan oleh Hudzaifah beliau berkata                                      Artinya Apabila Nabi Muhammad SAW hendak tidur beliau membaca doa Bismika allahumma amutu waahya Dengan namaMu Ya Allah aku mati dan aku hidup Dan apabila bangun tidur Beliau berdoa Alhamdulillahilladzi ahyana bada maa amatana wailaihinnusyur Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami dan kepadaNya lah tempat kembali HR Bukhari no   Mengibas Kasur Sebelum tidur hendaknya seorang muslim mengibas kasurnya terlebih dahulu Cara ini dijelaskan dalam hadits Abu Hurairah Rasulullah SAW bersabda Jika di antara kamu ingin mendatangi tempat tidur hendaklah untuk mengibas kasurnya dengan bagian dalam sarungnya Karena ia tidak mengetahui apa yang ada padanya lalu ucapkan     Latin Bismika rabbi wadhatu janbii Artinya Dengan namaMu Wahai Tuhanku aku baringkan punggungku HR Bukhari no  dan Muslim no   Membaca Ayat Kursi Selanjutnya kaum muslim dianjurkan membaca Ayat Kursi sebelum tidur Keutamaan membaca Ayat Kursi sebelum tidur adalah mendapatkan perlindungan dari Allah SWT dari gangguan setan hingga pagi hari Diriwayatkan oleh Abu Hurairah Nabi Muhammad SAW membenarkan pernyataan berikut                       Artinya Jika kamu hendak berbaring di atas tempat tidurmu bacalah ayat Kursi Karena dengannya kamu selalu dijaga oleh Allah dan setan tidak akan dapat mendekatimu hingga pagi HR Bukhari  Dianjurkan untuk Menunda Tidur Sebelum Isya Rasulullah SAW mencontohkan agar tidak tidur sebelum waktu Isya dengan maksud agar sahabat tidak melewatkan ibadah utama yakni sholat Isya Anjuran ini berdasarkan hadits yang diriwayatkan oleh Abu Barzah ia berkata Bahwa Nabi Muhammad SAW tidak suka tidur sebelum sholat Isya dan berbincangbincang setelahnya HR Bukhari no  dan Muslim no   Berbaring Miring ke Kanan Amalan terakhir yang dilakukan Rasulullah SAW sebelum tidur adalah berbaring miring ke kanan Ketika hendak tidur Rasulullah SAW akan berbaring di sisi kanannya dan mengucapkan Ya Allah Aku telah menyerahkan diriku kepadaMu dan mempercayakan urusanku kepadaMu Dan aku memalingkan wajahku kepadaMu mengharapkan pahalaMu dan takut hukumanMu dan mengandalkanMu Tidak mungkin lari dariMu dan berlindung pada orang lain kami berlindung hanya padaMu Aku percaya pada Kitab yang Engkau turunkan dan Nabi yang Engkau kirim HR Bukhari hnhkri&quot;&quot;&quot;</span>
+
+<span class="c1">#contohberitaKeislaman: Jakarta  Mimpi buruk adalah hal yang lumrah terjadi dan tidak bisa dihindari manusia Mimpi buruk membuat yang mengalaminya merasakan cemas dan takut yang berlebihan Islam merupakan agama yang sempurna dan selalu mendahulukan setiap aktivitas dengan berdoa Agar terhindar dari mimpi buruk ada doa dan amalan yang bisa dilakukan umat Islam Rasulullah SAW telah memberikan teladan kepada umatnya tentang cara menghindari mimpi buruk Rasulullah SAW bersabda Apabila seorang dari kalian bermimpi yang ia sukai berarti itu dari Allah dan hendaknya dia mengucapkan hamdalah karenanya serta menceritakannya Tapi bila dia mendapat mimpi yang tidak disukai berarti itu dari setan maka hendaklah dia berlindung dari kejahatannya dan jangan menceritakannya kepada siapapun niscaya hal itu tidak akan berdampak buruk baginya HR AlBukhari Dari hadits di atas jika kita bermimpi yang menyenangkan hendaknya memuji Allah SWT dan boleh menceritakannya karena mimpi yang baik itu akan menjadi kenyataan Sebaliknya hendaknya kita tidak memberitahukan mimpi buruk kepada orang lain dan memohon perlindungan kepada Allah dari gangguan setan Doa agar Tidak Mimpi Buruk Berikut ini beberapa doa yang dapat diamalkan agar tidak bermimpi buruk Doa agar Tidak Mimpi Buruk  Mengutip dari buku Tuntunan Doa dan Dzikir untuk Segala Situasi dan Kebutuhan karya Ali Akbar bin Aqil berikut adalah doa yang dimaksud          Bacaan latin Allohumma inniazubika min amalis syaithoni wa sayyiatil ahlam Artinya Ya Allah aku berlindung kepadaMu dari perbuatan setan dan buruknya mimpi Doa agar Tidak Mimpi Buruk  Masih menukil dari buku yang sama seperti sebelumnya berikut doa agar tidak mimpi buruk versi                     Bacaan latin Auudzu bikalimaatillaahittaammaati minghodhobihi wa iqoobihi wasyarri ibaadihi wamin hamazaatisysyayaathiini wa an yahdhuruu wa min hamajaatisysyayaatiini wa an yahduruun Artinya Aku berlindung dengan kalimat Allah yang sempurna dari kemarahan dan siksaanNya serta kejahatan hambahambaNya dan dari godaan setan bisikannya serta jangan sampai mereka hadir kepadaku  Doa Mengharap Mimpi Baik Menukil buku Tiket ke Surga DoaDoa Mustajab karya Abdul Majid dan Isfaudin berikut doa mengharap mimpi baik            Bacaan latin Allahumma arinal haqqa haqqan warzuqnat tibaaahu Wa arinal baathila baathilan warzuqnajtina bahu Artinya Ya Allah tunjukkanlah kepada kami kebenaran sehingga kami bisa mengikutinya dan tunjukkanlah kepada kami kejelekan sehingga kami dapat menjauhinya Amalan Sebelum Tidur Agar tidak mimpi buruk ada amalan yang dapat umat Islam kerjakan sebelum tidur Berikut ini amalanamalannya yang dikerjakan Rasulullah sebelum tidur dikutip dari buku Sunnah Rasulullah SehariHari karya Syaikh Abdullah bin Hamoud Al Furaih  Wudhu Sebelum Tidur Wudhu merupakan salah satu amalan sunnah yang dicontohkan Rasulullah sebelum tidur Hal tersebut sebagaimana yang termaktub dalam hadits Al Bara bin Azib Nabi Muhammad SAW bersabda             Artinya Jika hendak mendatangi tempat tidurmu berwudhulah seperti wudhu untuk sholat lalu berbaringlah ke sisi kanan badanmu HR AlBukhari no  dan Muslim no   Membaca Doa Sebelum Tidur Amalan selanjutnya adalah membaca doa sebelum tidur Hal ini termaktub dalam hadits yang diriwayatkan oleh Hudzaifah beliau berkata                                      Artinya Apabila Nabi Muhammad SAW hendak tidur beliau membaca doa Bismika allahumma amutu waahya Dengan namaMu Ya Allah aku mati dan aku hidup Dan apabila bangun tidur Beliau berdoa Alhamdulillahilladzi ahyana bada maa amatana wailaihinnusyur Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami dan kepadaNya lah tempat kembali HR Bukhari no   Mengibas Kasur Sebelum tidur hendaknya seorang muslim mengibas kasurnya terlebih dahulu Cara ini dijelaskan dalam hadits Abu Hurairah Rasulullah SAW bersabda Jika di antara kamu ingin mendatangi tempat tidur hendaklah untuk mengibas kasurnya dengan bagian dalam sarungnya Karena ia tidak mengetahui apa yang ada padanya lalu ucapkan     Latin Bismika rabbi wadhatu janbii Artinya Dengan namaMu Wahai Tuhanku aku baringkan punggungku HR Bukhari no  dan Muslim no   Membaca Ayat Kursi Selanjutnya kaum muslim dianjurkan membaca Ayat Kursi sebelum tidur Keutamaan membaca Ayat Kursi sebelum tidur adalah mendapatkan perlindungan dari Allah SWT dari gangguan setan hingga pagi hari Diriwayatkan oleh Abu Hurairah Nabi Muhammad SAW membenarkan pernyataan berikut                       Artinya Jika kamu hendak berbaring di atas tempat tidurmu bacalah ayat Kursi Karena dengannya kamu selalu dijaga oleh Allah dan setan tidak akan dapat mendekatimu hingga pagi HR Bukhari  Dianjurkan untuk Menunda Tidur Sebelum Isya Rasulullah SAW mencontohkan agar tidak tidur sebelum waktu Isya dengan maksud agar sahabat tidak melewatkan ibadah utama yakni sholat Isya Anjuran ini berdasarkan hadits yang diriwayatkan oleh Abu Barzah ia berkata Bahwa Nabi Muhammad SAW tidak suka tidur sebelum sholat Isya dan berbincangbincang setelahnya HR Bukhari no  dan Muslim no   Berbaring Miring ke Kanan Amalan terakhir yang dilakukan Rasulullah SAW sebelum tidur adalah berbaring miring ke kanan Ketika hendak tidur Rasulullah SAW akan berbaring di sisi kanannya dan mengucapkan Ya Allah Aku telah menyerahkan diriku kepadaMu dan mempercayakan urusanku kepadaMu Dan aku memalingkan wajahku kepadaMu mengharapkan pahalaMu dan takut hukumanMu dan mengandalkanMu Tidak mungkin lari dariMu dan berlindung pada orang lain kami berlindung hanya padaMu Aku percaya pada Kitab yang Engkau turunkan dan Nabi yang Engkau kirim HR Bukhari hnhkri</span>
+<span class="c1">#contohberitaPariwisata: jakarta zaman traveling sekedar hobi gaya hidup orang tujuan liburan bisnis konteks memilih online travel agency ota perjalanan dilaksanakan sesuai rencana bookcabin hadir pilihan ota ideal program loyalitas cabinclub bookcabin memenuhi kebutuhan traveling menawarkan keuntungan pelanggannya konsep traveling healing berdasarkan data badan pusat statistik bps perjalanan wisatawan domestik mencapai juta perjalanan juli peningkatan persen dibandingkan kelas menengah generasi z indonesia menganggap traveling salah prioritas kebutuhan sekunder insight tool google healing tren traveling dicari traveler pandemi meningkatnya konsep traveling healing memilih ota kenyamanan proses persiapan perjalanan bookcabin hadir pelayanan platform aplikasi mudah kenyamanan penggunanya itinerary traveling ota bernaung lion air group menawarkan pilihan penerbangan akomodasi mudah diakses bookcabin menawarkan harga kompetitif promo menarik perjalanan hemat cabinclub membership salah keunggulan utama bookcabin program loyalitasnya cabinclub program bertujuan apresiasi anggota pemberian manfaat eksklusif pengumpulan poin pemesanan tiket bookcabin poin khusus oktober november promo khusus anggota cabinclub mendaftar aplikasi bookcabin pemesanan tiket salah maskapai lion air group lion air batik air super air jet wings air batik air malaysia thai lion poinpoin terkumpul ditukarkan merchandise menarik laptop ponsel tiket pesawat smartwatch anggota bonus poin kali kesempatan mengumpulkan poin cepat khusus mendaftar anggota cabinclub periode promo langsung poin pengguna hemat perjalanan poinpoin terkumpul pembelian tiket penerbangan kesempatan upgrade anggota cabinclub memiliki peluang upgrade kelas penerbangan biaya tambahan periode promo oktobernovember salah orang online checkin penerbangan batik air kesempatan upgrade gratis kelas ekonomi kelas bisnis layanan pelanggan prioritas anggota cabinclub disesuaikan tier masingmasing silver gold platinum pengguna akses layanan pelanggan pengalaman perjalanan lancar nyaman keterkaitan kebutuhan pilihan meningkatkan kebutuhan travelling kesadaran perjalanan berkualitas bookcabin ota menawarkan program loyalitas cabinclub pilihan program membantu traveler menghemat uang meningkatkan kualitas pengalaman perjalanan prfega</span>
+
+<span class="c1"># Transformasi data baru menggunakan pipeline</span>
+<span class="n">X_new_transformed</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="n">teks_baru</span><span class="p">])</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">X_new_transformed</span><span class="p">,</span> <span class="s1">&#39;toarray&#39;</span><span class="p">):</span>
+    <span class="n">X_new_transformed</span> <span class="o">=</span> <span class="n">X_new_transformed</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+<span class="c1"># 6. Prediksi cluster untuk data baru</span>
+<span class="n">cluster_new</span> <span class="o">=</span> <span class="n">fcm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new_transformed</span><span class="p">)</span>
+
+<span class="c1"># Menyelaraskan prediksi cluster dengan label</span>
+<span class="n">predicted_label_new</span> <span class="o">=</span> <span class="n">cluster_to_label</span><span class="p">[</span><span class="n">cluster_new</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># 7. Menampilkan hasil</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Teks baru ini diprediksi ke dalam cluster: </span><span class="si">{</span><span class="n">predicted_label_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Teks baru ini diprediksi ke dalam cluster: Keislaman
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fcmeans</span> <span class="kn">import</span> <span class="n">FCM</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+
+<span class="c1"># Fungsi untuk menerapkan FCM</span>
+<span class="k">def</span> <span class="nf">fit_fcm</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">fcm</span> <span class="o">=</span> <span class="n">FCM</span><span class="p">(</span>
+        <span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">m</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+        <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+    <span class="p">)</span>
+    <span class="n">fcm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fcm</span>
+
+<span class="c1"># Pipeline tanpa FCM</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">()),</span>  <span class="c1"># TF-IDF untuk teks</span>
+    <span class="p">(</span><span class="s1">&#39;scaler&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_mean</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>  <span class="c1"># Normalisasi data</span>
+    <span class="p">(</span><span class="s1">&#39;svd&#39;</span><span class="p">,</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Reduksi Dimensi</span>
+<span class="p">])</span>
+
+<span class="c1"># Fit pipeline pada data</span>
+<span class="n">transformed_data</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Pastikan &#39;data&#39; sudah diproses sebelumnya</span>
+
+<span class="c1"># Jalankan FCM pada data yang sudah diproses</span>
+<span class="n">fcm_result</span> <span class="o">=</span> <span class="n">fit_fcm</span><span class="p">(</span><span class="n">transformed_data</span><span class="p">)</span>
+
+<span class="c1"># Simpan pipeline dan hasil FCM dalam satu file (tuple)</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">((</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">fcm_result</span><span class="p">),</span> <span class="s1">&#39;fcm_pipeline.pkl&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;fcm_pipeline.pkl&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tugas_PPWA"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Tugas-07.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 7 : Klasifikasi Berita Metode Logistic Regression dengan reduksi dimensi deploy reduksi dimensi berita</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas - 8 Clustering menggunakan Fuzzy C Means</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 210411100169 - Mohammad Hasan Basri
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
